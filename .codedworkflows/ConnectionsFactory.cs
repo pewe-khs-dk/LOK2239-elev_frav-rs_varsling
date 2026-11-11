@@ -1,0 +1,3 @@
+namespace fraværs_varsling
+{
+}

@@ -1,0 +1,21 @@
+{
+  "version": "2.0",
+  "resources": [
+    {
+      "activityDisplayName": "Get config asset JSON",
+      "activityId": "GetRobotAsset_1",
+      "resource": "asset",
+      "key": "LOK9999 Config",
+      "id": "assetLOK9999 ConfigLOK9999 ConfigFalse",
+      "value": {
+        "name": {
+          "defaultValue": "LOK9999 Config",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "BindingsVersion": "2.2"
+      }
+    }
+  ]
+}
