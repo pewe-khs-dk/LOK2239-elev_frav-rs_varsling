@@ -2,9 +2,10 @@
   "name": "fraværs_varsling",
   "projectId": "fa34f808-7553-42b2-9aaa-98b272a2cde9",
   "description": "Blank Process",
-  "main": "Main\\MainFlowChart.xaml",
+  "main": "Main\\Main.xaml",
   "dependencies": {
-    "UiPath.System.Activities": "[26.10.0]"
+    "UiPath.System.Activities": "[26.10.0]",
+    "UiPath.UIAutomation.Activities": "26.10.4"
   },
   "webServices": [],
   "entitiesStores": [],
@@ -50,8 +51,8 @@
       "output": []
     },
     {
-      "filePath": "Main\\MainFlowChart.xaml",
-      "uniqueId": "3ae01a80-a9f5-4a44-a3d5-a8e46254a4af",
+      "filePath": "Main\\Main.xaml",
+      "uniqueId": "c2bc35f1-91d8-42ef-b15f-a3049c44a9b5",
       "input": [],
       "output": []
     }

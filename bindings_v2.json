@@ -2,6 +2,22 @@
   "version": "2.0",
   "resources": [
     {
+      "activityDisplayName": "Get Credential",
+      "activityId": "GetRobotCredential_1",
+      "resource": "asset",
+      "key": "LOK9999 LectioCredentials",
+      "id": "assetLOK9999 LectioCredentialsLOK9999 LectioCredentialsFalse",
+      "value": {
+        "name": {
+          "defaultValue": "LOK9999 LectioCredentials",
+          "isExpression": false
+        }
+      },
+      "metadata": {
+        "BindingsVersion": "2.2"
+      }
+    },
+    {
       "activityDisplayName": "Get config asset JSON",
       "activityId": "GetRobotAsset_1",
       "resource": "asset",

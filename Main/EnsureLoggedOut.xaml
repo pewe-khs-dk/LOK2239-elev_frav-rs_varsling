@@ -1,0 +1,214 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="lOGIN" VisualBasic.Settings="{x:Null}" sap2010:WorkflowViewState.IdRef="lOGIN_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>LOK9999</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Login" sap:VirtualizedContainerService.HintSize="1817,1292" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="loginPageUrl" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="[UiPath.UIAutomationNext.Enums.NAppCloseMode.Never]" DisplayName="Chrome Log ind - Lectio - Køge Handelsskole" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="488,156" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[global_browser]" InteractionMode="DebuggerApi" OpenMode="[UiPath.UIAutomationNext.Enums.NAppOpenMode.Never]" ScopeGuid="ef195c47-fa60-4640-9c45-15cc34cc088a" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,25" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="2552, -8, 2576, 1408" BrowserType="Chrome" ContentHash="rXmS7j7Oz0Ce5pC6Kd0XOA" IconBase64="iVBORw0KGgoAAAANSUhEUgAAADkAAAA5CAIAAAADehTSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAAE6klEQVRoQ+3W6W/aZhzA8ec/3eu92qtq0tppk7ZJ67Et69SkbZakzdG16ZWqWZo2B7m4wmXAQMxhAwYfXAaML0ykyZDRyM8eYmPyAmnS5wUK/vn39ROEAG1JnRagLWvT4v/W6wFERZsWU9XaUbrTAnRUfVqM0ypZAE85B+A1VshaT+4iaD34+okAkqbbImt6S1IwnBiIJi5eYDgRxPC9I28Aw/vF5kHngPlULKDZyvPXmyi7hx4FGpkI261Kv/XZy/con1xuRTdPTcQ4rfWWuPriHcrHvRNVP7+Oox2nVdV7y3+9Rfmwe6TqxmXwrENA6a+3Re2dLz17jbK1czhonTgg6z1bFN1oXVx9hbL56cD4DECDzgGlv94WtXc+/3Qd5f22S+0ZrRM3ZuujJ89R/OH4dbXCRz3aoHVu8RmKLxQbtMKzDtlu7eeezy6soXiD0esINVolrWeL8bWln/8xv4LiCWCDLyx41iH7rZrxMbj/aBnFfRq5jlCjtaPpthg/X7q9mYdPUI794X6redA5IEI/E68kd3u/zi6hHPlCRig0NR5R1VtKV5C1uqSBWketd1RBUpuy1la6ono1SdPvPVhAOfQG+zvMU9a1lW5T1gTJCKtdAiptxaQqGhc1JE2QtabSNWkr3Y6q37k/j+JyBy72WSbIWkPSjDJRrUI9Q4BryaPxFw9w8QyCpLWU7s+/P0bZd5/+ezBm9f7/sN5Rq6Kh0lb4tgJvRAGMINnCNeWqqHzx1c2hL7/+4bJXW3s1UeFbMtc0wHcYGyg1OrYwQqfSli+3mqy9+8i15LJgHnQOFGttW0p1kRUkOPFz68Y20+jQNRGedQhQlaYthWqr3BDhxKGVt9ulertQbcGzDoEs27CF4pt0rQUnDi2/+VCstkhegGcdAkS5bl26XM+yjUKlCScOPX2zRfFChjEuhu/gBEjRVVuIcp3kBDhx6MnrrSzbOCvV4FmHAF7grUsU+BRdzTB1OHFo6eXfRLmWLFbgcYdAlGSti1FsIs8TpSqcOLSwvnlGV+J5LgaNOwSwHGNdNMfEKe6MvqI1VazESA4edwiEs4x1kSwTJblkcVTrn+ubiUIFy7ERaNwhEMqUbcFybKJQgRNNrVHSaP0vbMR4jIsnge8/AggQJeuC6VIkyyTyPJw41P+8VvE8H6c4E5zi8DyPUzxOcTGSi/Rb4S0o4PSMti5AlEIZBqdGtX73y8OF9c35F+9N7j1e+/be3NCNH2ewHBtMl08J8xYU4EvR1vnP6GC6HCc5OHEMsRwXJMr+M/MWFOBN0tb5UsbRRnMTaL3x00w0xwWIki9l3oIC3ImidZ5E0Z8qYVkW3m3XrbtzWJb1p0oeaAsKOMEL1rnxgi9JRzIMvNuuW3fnwhnGmyzCW1DAUSxv3XEs70kUQ+kyvNuuW3dng0TZgxePoS0o4DBK2XISL5ymSvBuu2YW1/1J+iSeh1eggAOMtOUoSnnwwve/zX9z+8HNO7MDt+dW5tbeWbMxu7rxYHXjza7f3Q+FV6CA/XDOFleEHJyuJ1H0Joq+BO1L0t7+6yt58AvueOEolj/AqP2I+f4jgN1Qzpa9UG7PmCRdEdIVoQ4w6iBCuQyDv1iyHyb3w8at4PuPAHaC2bHthj7bCZnfnTjwMZCdFmD7NDMtwAd/elqALV96WoBNLzEt/gFSdVNmWJ9HHAAAAABJRU5ErkJggg==" InformativeScreenshot="9906d477c592d0df734d8902be4ef88d.jpg" Reference="NUbU06k9zkCovTu0v1CPmA/5inoANt9PkitI6bea7kT6A" Selector="&lt;html app='chrome.exe' title='Log ind - Lectio - Køge Handelsskole' /&gt;" Url="https://www.lectio.dk/lectio/138/login.aspx?type=brugernavn" Version="V3">
+          <uix:TargetApp.Arguments>
+            <InArgument x:TypeArguments="x:String" />
+          </uix:TargetApp.Arguments>
+          <uix:TargetApp.WorkingDirectory>
+            <InArgument x:TypeArguments="x:String" />
+          </uix:TargetApp.WorkingDirectory>
+        </uix:TargetApp>
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <uix:NCheckState DisplayName="Look for login box" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="488,1113" sap2010:WorkflowViewState.IdRef="NCheckState_1" Version="V5">
+      <uix:NCheckState.IfExists>
+        <Sequence DisplayName="Login box exists" sap:VirtualizedContainerService.HintSize="486,226" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log not logged in" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;User is not logged in&quot;]" />
+        </Sequence>
+      </uix:NCheckState.IfExists>
+      <uix:NCheckState.IfNotExists>
+        <Sequence DisplayName="Login box does not exist" sap:VirtualizedContainerService.HintSize="486,602" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log is logged in" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Message="[&quot;User is already logged in, logging out&quot;]" />
+          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application/Browser" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="452,367" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InUiElement="[global_browser]" IsDisplayNameAuto="True" OpenMode="[UiPath.UIAutomationNext.Enums.NAppOpenMode.Never]" ScopeGuid="5c179b56-4f1c-4f98-8235-c61b908c2575" Version="V2">
+            <uix:NApplicationCard.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,245" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Log ud'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,185" sap2010:WorkflowViewState.IdRef="NClick_2" InteractionMode="DebuggerApi" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5c179b56-4f1c-4f98-8235-c61b908c2575" Version="V5">
+                    <uix:NClick.Target>
+                      <uix:TargetAnchorable BrowserURL="lectio.dk/lectio/138/forside.aspx" ContentHash="yEuRfIDeiEeD7zIUTPJPrQ" DesignTimeRectangle="1103, 178, 65, 30" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='s_m_ctl25' tag='A' /&gt;" Guid="83890870-7f33-470b-81e5-4d521ddfa5c1" InformativeScreenshot="a0ab6dbff1a5c9655489f351c8eab0f8.jpg" Reference="NUbU06k9zkCovTu0v1CPmA/X4saq_Uub0-aIIDLzTE1iw" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Læreren robot001 - robot 001 - Forside - Lectio - Køge Handelsskole' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+                    </uix:NClick.Target>
+                  </uix:NClick>
+                </Sequence>
+              </ActivityAction>
+            </uix:NApplicationCard.Body>
+            <uix:NApplicationCard.OCREngine>
+              <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                <ActivityFunc.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                </ActivityFunc.Argument>
+              </ActivityFunc>
+            </uix:NApplicationCard.OCREngine>
+            <uix:NApplicationCard.TargetApp>
+              <uix:TargetApp Area="0, 0, 0, 0" Version="V3" />
+            </uix:NApplicationCard.TargetApp>
+          </uix:NApplicationCard>
+        </Sequence>
+      </uix:NCheckState.IfNotExists>
+      <uix:NCheckState.Target>
+        <uix:TargetAnchorable BrowserURL="lectio.dk/lectio/138/login.aspx" ContentHash="CluEXgtpaU219y5hPizGHQ" DesignTimeRectangle="647, 320, 325, 199" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl tag='SECTION' /&gt;" Guid="194deeed-a6e8-4f70-aaf6-7af18b99405d" InformativeScreenshot="24241a1fcb5514ef029408731e4bf002.jpg" Reference="NUbU06k9zkCovTu0v1CPmA/YjUnq1Erf0KjXv1w9leZ_A" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Log ind - Lectio - Køge Handelsskole' /&gt;" SearchSteps="Selector" Version="V6" />
+      </uix:NCheckState.Target>
+    </uix:NCheckState>
+  </Sequence>
+</Activity>

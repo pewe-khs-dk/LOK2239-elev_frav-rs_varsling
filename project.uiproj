@@ -2,5 +2,5 @@
   "Name": "fraværs_varsling",
   "ProjectType": "Process",
   "Description": "Blank Process",
-  "MainFile": "Main\\MainFlowChart.xaml"
+  "MainFile": "Main\\Main.xaml"
 }
