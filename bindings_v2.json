@@ -5,11 +5,11 @@
       "activityDisplayName": "Get Credential",
       "activityId": "GetRobotCredential_1",
       "resource": "asset",
-      "key": "LOK9999 LectioCredentials",
-      "id": "assetLOK9999 LectioCredentialsLOK9999 LectioCredentialsFalse",
+      "key": "LOK2239 LectioCredentials",
+      "id": "assetLOK2239 LectioCredentialsLOK2239 LectioCredentialsFalse",
       "value": {
         "name": {
-          "defaultValue": "LOK9999 LectioCredentials",
+          "defaultValue": "LOK2239 LectioCredentials",
           "isExpression": false
         }
       },
@@ -21,11 +21,11 @@
       "activityDisplayName": "Get config asset JSON",
       "activityId": "GetRobotAsset_1",
       "resource": "asset",
-      "key": "LOK9999 Config",
-      "id": "assetLOK9999 ConfigLOK9999 ConfigFalse",
+      "key": "LOK2239 Config",
+      "id": "assetLOK2239 ConfigLOK2239 ConfigFalse",
       "value": {
         "name": {
-          "defaultValue": "LOK9999 Config",
+          "defaultValue": "LOK2239 Config",
           "isExpression": false
         }
       },

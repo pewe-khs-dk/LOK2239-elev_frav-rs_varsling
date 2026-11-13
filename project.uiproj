@@ -1,5 +1,5 @@
 {
-  "Name": "fraværs_varsling",
+  "Name": "LOK2239 elev_fraværs_varsling",
   "ProjectType": "Process",
   "Description": "Blank Process",
   "MainFile": "Main\\Main.xaml"

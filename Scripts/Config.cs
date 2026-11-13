@@ -1,6 +1,6 @@
 using System.Security;
 
-namespace LOK9999
+namespace LOK2239
 {
     /// <summary>
     /// Config values read from assets. Lectio credentials are read from a Credential asset.
