@@ -1,0 +1,18 @@
+<Activity mc:Ignorable="sap2010" x:Class="_work_HierarchySmoke" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_InstitutionId" Type="InArgument(x:String)" />
+  </x:Members>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String"><x:String>System</x:String><x:String>System.Linq</x:String><x:String>LOK2239</x:String></sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference"><AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference><AssemblyReference>System.Activities</AssemblyReference><AssemblyReference>System.Private.CoreLib</AssemblyReference><AssemblyReference>System.Collections</AssemblyReference><AssemblyReference>System.Linq</AssemblyReference><AssemblyReference>UiPath.System.Activities</AssemblyReference></sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Read-only hierarchy smoke test" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <ui:InvokeCode DisplayName="Set the smoke-test institution" Language="VBNet" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Code="If String.IsNullOrWhiteSpace(in_InstitutionId) Then Throw New ArgumentException(&quot;Institution ID is required.&quot;)&#xA;LOK2239.Config.Values = New LOK2239.Values With {.InstitutionId = in_InstitutionId}">
+      <ui:InvokeCode.Arguments><InArgument x:TypeArguments="x:String" x:Key="in_InstitutionId">[in_InstitutionId]</InArgument></ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:InvokeWorkflowFile DisplayName="Read subjects and classes without login" WorkflowFileName="Main\GetSubjects.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" />
+    <ui:InvokeCode DisplayName="Verify the completed hierarchy" Language="VBNet" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Code="If LOK2239.Root.Subjects.Count = 0 Then Throw New InvalidOperationException(&quot;The hierarchy has no subjects.&quot;)&#xA;For Each subject As LOK2239.Subject In LOK2239.Root.Subjects&#xA;    If String.IsNullOrWhiteSpace(subject.Id) OrElse String.IsNullOrWhiteSpace(subject.Url) OrElse String.IsNullOrWhiteSpace(subject.ShortName) OrElse String.IsNullOrWhiteSpace(subject.LongName) OrElse subject.Classes Is Nothing Then Throw New InvalidOperationException(&quot;An incomplete subject was returned.&quot;)&#xA;    For Each item As LOK2239.Class In subject.Classes&#xA;        If Not Object.ReferenceEquals(item.Subject, subject) OrElse String.IsNullOrWhiteSpace(item.Url) OrElse String.IsNullOrWhiteSpace(item.ClassAbsenceUrl) Then Throw New InvalidOperationException(&quot;An incomplete class was returned.&quot;)&#xA;        If Not New Uri(item.ClassAbsenceUrl).AbsolutePath.StartsWith(&quot;/lectio/&quot; &amp; LOK2239.Config.Values.InstitutionId &amp; &quot;/&quot;) Then Throw New InvalidOperationException(&quot;Unexpected absence URL institution.&quot;)&#xA;    Next&#xA;Next" />
+  </Sequence>
+</Activity>

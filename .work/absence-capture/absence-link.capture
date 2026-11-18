@@ -1,0 +1,5 @@
+<uix:TargetAnchorable DesignTimeRectangle="1273, 124, 51, 21" DesignTimeScaleFactor="1" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl parentid='s_m_HeaderContent_subnavigator_generic_tr' tag='A' aaname='Fravær' /&gt;" Guid="3810fc82-0e2e-4695-80ec-3ae27ac631a1" InformativeScreenshot="5c99bd87c644e58780da3f9c87b90ed1.jpg" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='*Skema - Lectio - Køge Handelsskole*' url='{0}' /&gt;&quot;, classUrl)]" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+        <uix:TargetAnchorable.Anchors>
+          <scg:List x:TypeArguments="uix:ITarget" Capacity="0" />
+        </uix:TargetAnchorable.Anchors>
+      </uix:TargetAnchorable>

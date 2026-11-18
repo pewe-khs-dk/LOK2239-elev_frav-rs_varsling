@@ -1,0 +1,97 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_GetClassAbsenceUrl" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Class" Type="InArgument(l:Class)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Read the class Fravær link" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="classUrl" />
+      <Variable x:TypeArguments="x:String" Name="absenceHref" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log class URL preparation" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Preparing to read the Fravær link for class &quot; &amp; in_Class.Name &amp; &quot; (ID &quot; &amp; in_Class.Id &amp; &quot;).&quot;]" />
+    <Assign DisplayName="Use the extracted class URL" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[classUrl]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_Class.Url]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log class-page browser attachment" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Attaching to Lectio for class &quot; &amp; in_Class.Name &amp; &quot;.&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Lectio class page" HealingAgentBehavior="Job" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[GlobalVariablesNamespace.GlobalVariables.global_browser]" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="6c008d89-ad75-41eb-8f55-872c74ffcc89" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Open class and read absence href" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <ui:LogMessage DisplayName="Log individual class navigation" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Navigating to class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; classUrl]" />
+            <uix:NGoToUrl DisplayName="Navigate to the class page" sap2010:WorkflowViewState.IdRef="NGoToUrl_1" ScopeIdentifier="6c008d89-ad75-41eb-8f55-872c74ffcc89" Url="[classUrl]" Version="V5" />
+            <ui:LogMessage DisplayName="Log Fravær href extraction" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Reading the Fravær link href for class &quot; &amp; in_Class.Name &amp; &quot;.&quot;]" />
+            <uix:NGetAttributeGeneric x:TypeArguments="x:String" Attribute="href" DisplayName="Read Fravær link href" HealingAgentBehavior="SameAsCard" sap2010:WorkflowViewState.IdRef="NGetAttributeGeneric`1_1" Result="[absenceHref]" ScopeIdentifier="6c008d89-ad75-41eb-8f55-872c74ffcc89" Version="V5">
+              <uix:NGetAttributeGeneric.Target>
+                <uix:TargetAnchorable ContentHash="b7oualamWk-oUakaFAR4sQ" DesignTimeRectangle="1273, 124, 51, 21" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl parentid='s_m_HeaderContent_subnavigator_generic_tr' tag='A' aaname='Fravær' /&gt;" Guid="3810fc82-0e2e-4695-80ec-3ae27ac631a1" InformativeScreenshot="5c99bd87c644e58780da3f9c87b90ed1.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/vymAjZQd3E6JBBzn8vVyaA" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='*Skema - Lectio - Køge Handelsskole*' url='{0}' /&gt;&quot;, classUrl)]" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+              </uix:NGetAttributeGeneric.Target>
+            </uix:NGetAttributeGeneric>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="2552, -8, 2576, 1408" BrowserType="Chrome" ContentHash="ny2CJYBFb0KaEtq00rCacg" InformativeScreenshot="2548b7cd32e6ae5aedb443a9042c1ce3.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/ulmOu-VsVkO73qDXXgqx3Q" Selector="&lt;html app='chrome.exe' title='*Skema - Lectio - Køge Handelsskole*' url='https://www.lectio.dk/lectio*' /&gt;" Url="[classUrl]" Version="V3" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <ui:LogMessage DisplayName="Log absence URL storage" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Resolving and storing ClassAbsenceUrl for class &quot; &amp; in_Class.Name &amp; &quot;.&quot;]" />
+    <ui:InvokeCode Code="If String.IsNullOrWhiteSpace(in_Href) Then Throw New InvalidOperationException(&quot;The Fravær link has no href for class &quot; &amp; in_Class.Name)&#xA;Dim pageUri As New Uri(in_Class.Url, UriKind.Absolute)&#xA;Dim absenceUri As New Uri(pageUri, System.Net.WebUtility.HtmlDecode(in_Href).Trim())&#xA;If absenceUri.Scheme &lt;&gt; Uri.UriSchemeHttps OrElse Not absenceUri.Host.Equals(pageUri.Host, StringComparison.OrdinalIgnoreCase) OrElse Not absenceUri.AbsolutePath.StartsWith(&quot;/lectio/&quot; &amp; in_InstitutionId &amp; &quot;/&quot;, StringComparison.OrdinalIgnoreCase) Then Throw New InvalidOperationException(&quot;Unexpected Fravær link for class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; in_Href)&#xA;in_Class.ClassAbsenceUrl = absenceUri.AbsoluteUri" ContinueOnError="False" DisplayName="Store the actual class absence URL" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Href">[absenceHref]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InstitutionId">[LOK2239.Config.Values.InstitutionId]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:LogMessage DisplayName="Log class absence URL loaded" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Loaded ClassAbsenceUrl for class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; in_Class.ClassAbsenceUrl]" />
+  </Sequence>
+</Activity>

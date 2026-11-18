@@ -1,0 +1,5 @@
+[
+  ["rpa","uia","target-app","resolve-defaults","--refs","[{\"ref\":\"b1036\",\"definitionFilePath\":\"C:/UiPath/Projects/LOK2239 elev_fraværs_varsling/.work/absence-capture/window.xaml\"}]","--name","Lectio Class"],
+  ["rpa","uia","snapshot","capture","b1036","--folder-path","C:/UiPath/Projects/LOK2239 elev_fraværs_varsling/.work/absence-capture"],
+  ["rpa","uia","object-repository","get-screens","--definition-file-path","C:/UiPath/Projects/LOK2239 elev_fraværs_varsling/.work/absence-capture/window.xaml"]
+]

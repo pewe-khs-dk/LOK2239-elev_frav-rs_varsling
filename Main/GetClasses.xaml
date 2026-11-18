@@ -1,0 +1,148 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_GetClasses" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:sd2="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Get classes for a subject" sap:VirtualizedContainerService.HintSize="1717,2950" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd2:DataTable" Name="classesTable" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log class browser attachment" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Attaching to Lectio to read classes for subject &quot; &amp; in_Subject.ShortName &amp; &quot;.&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Lectio for classes" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="488,798" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[GlobalVariablesNamespace.GlobalVariables.global_browser]" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="8e4eb8dc-5d8c-4d34-b8de-77e8381e6f00" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Read class list" sap:VirtualizedContainerService.HintSize="450,667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log class navigation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Navigating to the class table for subject &quot; &amp; in_Subject.ShortName &amp; &quot;: &quot; &amp; in_Subject.Url]" />
+            <uix:NGoToUrl DisplayName="Navigate to subject classes" sap:VirtualizedContainerService.HintSize="416,123" sap2010:WorkflowViewState.IdRef="NGoToUrl_1" ScopeIdentifier="8e4eb8dc-5d8c-4d34-b8de-77e8381e6f00" Url="[in_Subject.Url]" Version="V5" />
+            <ui:LogMessage DisplayName="Log class extraction" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Extracting class names and links for subject &quot; &amp; in_Subject.ShortName &amp; &quot; into a DataTable.&quot;]" />
+            <uix:NExtractDataGeneric x:TypeArguments="sd2:DataTable" ExtractDataSettings="{x:Null}" DisplayName="Extract class names and links" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='ul' /&gt;&lt;webctrl tag='li' /&gt;&lt;/row&gt;&lt;column exact='1' name='Name' attr='fulltext' name2='Link' attr2='href'&gt;&lt;webctrl tag='ul' /&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' /&gt;&lt;/column&gt;&lt;/extract&gt;" ExtractedData="[classesTable]" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,134" sap2010:WorkflowViewState.IdRef="NExtractDataGeneric`1_1" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="8e4eb8dc-5d8c-4d34-b8de-77e8381e6f00" Version="V5">
+              <uix:NExtractDataGeneric.Target>
+                <uix:TargetAnchorable BrowserURL="lectio.dk/lectio/138/FindSkema.aspx" ContentHash="UIfeGGcJC0CAk14q3DiY-Q" DesignTimeRectangle="369, 284, 864, 173" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='m_Content_listecontainer' tag='DIV' /&gt;" Guid="3e16bb68-f087-4613-9c9b-64a530df42f6" InformativeScreenshot="2f0137069b6c976a0acbc0a896a29c9d.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/s7uZCYV69EqBuruUi3fqfA" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Vis Hold - Lectio - Køge Handelsskole' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+              </uix:NExtractDataGeneric.Target>
+            </uix:NExtractDataGeneric>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="2552, -8, 2576, 1408" BrowserType="Chrome" ContentHash="YhhiFnWA8kSYNhF6hMJSVA" InformativeScreenshot="60f82308b83ecf3eabcec50aee3ab8eb.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/1lBbXWkdJkae_l-wiojE6Q" Selector="&lt;html app='chrome.exe' title='Vis Hold - Lectio - Køge Handelsskole' /&gt;" Url="[in_Subject.Url]" Version="V3" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <ui:LogMessage DisplayName="Log class mapping" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Creating Class objects for subject &quot; &amp; in_Subject.ShortName &amp; &quot;; an empty table will leave an empty class list.&quot;]" />
+    <ui:InvokeCode Code="If in_Subject Is Nothing Then Throw New ArgumentNullException(NameOf(in_Subject))&#xA;If in_Table Is Nothing OrElse in_Table.Rows.Count = 0 Then&#xA;    in_Subject.Classes = New List(Of LOK2239.Class)()&#xA;    Return&#xA;End If&#xA;For Each columnName As String In New String() {&quot;Name&quot;, &quot;Link&quot;}&#xA;    If Not in_Table.Columns.Contains(columnName) Then Throw New InvalidOperationException(&quot;Class extraction is missing column: &quot; &amp; columnName)&#xA;Next&#xA;Dim institutionPath = &quot;/lectio/&quot; &amp; in_InstitutionId &amp; &quot;/&quot;&#xA;Dim baseUri As New Uri(&quot;https://www.lectio.dk&quot; &amp; institutionPath)&#xA;Dim classes As New List(Of LOK2239.Class)()&#xA;Dim seen As New HashSet(Of String)(StringComparer.Ordinal)&#xA;For Each row As System.Data.DataRow In in_Table.Rows&#xA;    Dim name = System.Net.WebUtility.HtmlDecode(row(&quot;Name&quot;).ToString()).Trim()&#xA;    Dim rawLink = System.Net.WebUtility.HtmlDecode(row(&quot;Link&quot;).ToString()).Trim()&#xA;    If name.Length = 0 OrElse rawLink.Length = 0 Then Throw New InvalidOperationException(&quot;A class row has an empty name or link for &quot; &amp; in_Subject.ShortName)&#xA;    Dim link As New Uri(baseUri, rawLink)&#xA;    Dim idMatch = System.Text.RegularExpressions.Regex.Match(link.Query, &quot;[?&amp;]holdelementid=(\d+)(&amp;|$)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;    If link.Host &lt;&gt; baseUri.Host OrElse Not link.AbsolutePath.StartsWith(institutionPath, StringComparison.OrdinalIgnoreCase) OrElse Not idMatch.Success Then Throw New InvalidOperationException(&quot;Unexpected class link: &quot; &amp; rawLink)&#xA;    Dim classId = idMatch.Groups(1).Value&#xA;    If seen.Add(classId) Then classes.Add(New LOK2239.Class With {.Id = classId, .Name = name, .Url = link.AbsoluteUri, .Subject = in_Subject})&#xA;Next&#xA;in_Subject.Classes = classes" ContinueOnError="False" DisplayName="Create classes from extracted rows" sap:VirtualizedContainerService.HintSize="488,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd2:DataTable" x:Key="in_Table">[classesTable]</InArgument>
+        <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InstitutionId">[LOK2239.Config.Values.InstitutionId]</InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:ForEach x:TypeArguments="l:Class" CurrentIndex="{x:Null}" DisplayName="Read the absence link for each class" sap:VirtualizedContainerService.HintSize="488,1210" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_Subject.Classes]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="l:Class">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="l:Class" Name="currentClass" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Load class absence link" sap:VirtualizedContainerService.HintSize="486,1079" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log class absence workflow invocation" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Reading the Fravær link for class &quot; &amp; currentClass.Name &amp; &quot; (subject &quot; &amp; in_Subject.ShortName &amp; &quot;).&quot;]" />
+            <TryCatch DisplayName="Try get class absence URL" sap:VirtualizedContainerService.HintSize="452,844" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Get class absence URL" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\GetClassAbsenceUrl.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[currentClass]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Catch" sap:VirtualizedContainerService.HintSize="450,394" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log class error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Error" Message="[&quot;Failed to get absence URL for class &quot; &amp; in_Subject.ShortName &amp; &quot;/&quot; &amp; currentClass.Name &amp; &quot;. Continuing with next class. &quot; &amp; exception.ToString()]" />
+                      <InvokeMethod DisplayName="Add class error to Messages" sap:VirtualizedContainerService.HintSize="416,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
+                        <InArgument x:TypeArguments="x:String">["Class " &amp; in_Subject.ShortName &amp; "/" &amp; currentClass.Name &amp; " failed: " &amp; exception.Message]</InArgument>
+                      </InvokeMethod>
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log subject class count" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Loaded &quot; &amp; in_Subject.Classes.Count.ToString() &amp; &quot; classes for &quot; &amp; in_Subject.ShortName &amp; &quot;.&quot;]" />
+  </Sequence>
+</Activity>

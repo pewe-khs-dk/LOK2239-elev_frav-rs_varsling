@@ -1,0 +1,406 @@
+- None [ref=e2]:
+  - Container [ref=e4]:
+    - Container [ref=e5] [invisible]
+    - Container [ref=e6] [invisible]:
+      - Container [ref=e10] [invisible]:
+        - Text [ref=e12] [invisible]: Køge Handelsskole - EUD/EUX/AMU/HF/SKP
+        - Container [ref=e13] [invisible]
+      - Container [ref=e11] [invisible]:
+        - Container [ref=e14] [invisible]:
+          - Link "homeForside" [ref=e32] [invisible]:
+            - /url: /lectio/138/forside.aspx
+            - /data-role: button
+            - Text "home" [ref=e33] [invisible]
+        - Container [ref=e15] [invisible]:
+          - Link "calendar_monthSkema" [ref=e34] [invisible]:
+            - /url: /lectio/138/Skema/Skema1dag.aspx
+            - /data-role: button
+            - Text "calendar_month" [ref=e35] [invisible]
+        - Container [ref=e16] [invisible]:
+          - Link "calendar_monthSkema" [ref=e36] [invisible]:
+            - /url: /lectio/138/SkemaNy.aspx
+            - /data-role: button
+            - Text "calendar_month" [ref=e37] [invisible]
+        - Container [ref=e17] [invisible]:
+          - Link "list_altStudieplan" [ref=e38] [invisible]:
+            - /url: /lectio/138/studieplan.aspx?displaytype=ugeteksttabel
+            - /data-role: button
+            - Text "list_alt" [ref=e39] [invisible]
+        - Container [ref=e18] [invisible]:
+          - Link "overviewÅrsopgørelse" [ref=e40] [invisible]:
+            - /url: /lectio/138/laerer_aarsopgoerelse.aspx
+            - /data-role: button
+            - Text "overview" [ref=e41] [invisible]
+        - Container [ref=e19] [invisible]:
+          - Link [ref=e42] [invisible]: event_availableFravær
+            - /url: /lectio/138/subnav/fravaerlaerer.aspx
+            - /data-role: button
+            - Text "event_available" [ref=e43] [invisible]
+        - Container [ref=e20] [invisible]:
+          - Link "folder_openOpgaver" [ref=e44] [invisible]:
+            - /url: /lectio/138/OpgaveListe.aspx
+            - /data-role: button
+            - Text "folder_open" [ref=e45] [invisible]
+        - Container [ref=e21] [invisible]:
+          - Link "bookmarkLektier" [ref=e46] [invisible]:
+            - /url: /lectio/138/material_lektieoversigt.aspx
+            - /data-role: button
+            - Text "bookmark" [ref=e47] [invisible]
+        - Container [ref=e22] [invisible]:
+          - Link "starKarakterer" [ref=e48] [invisible]:
+            - /url: /lectio/138/Grades/teacher_listgrades.aspx
+            - /data-role: button
+            - Text "star" [ref=e49] [invisible]
+        - Container [ref=e23] [invisible]:
+          - Link "import_contactsBøger" [ref=e50] [invisible]:
+            - /url: /lectio/138/BD/UserReservations.aspx
+            - /data-role: button
+            - Text "import_contacts" [ref=e51] [invisible]
+        - Container [ref=e24] [invisible]:
+          - Link "checklistSpørgeskema" [ref=e52] [invisible]:
+            - /url: /lectio/138/spoergeskema/spoergeskema_rapport.aspx
+            - /data-role: button
+            - Text "checklist" [ref=e53] [invisible]
+        - Container [ref=e25] [invisible]:
+          - Link [ref=e54] [invisible]: descriptionDokumenter
+            - /url: /lectio/138/DokumentOversigt.aspx
+            - /data-role: button
+            - Text "description" [ref=e55] [invisible]
+        - Container [ref=e26] [invisible]:
+          - Link "mailBeskeder" [ref=e56] [invisible]:
+            - /url: /lectio/138/beskeder2.aspx
+            - /data-role: button
+            - Text "mail" [ref=e57] [invisible]
+        - Container [ref=e27] [invisible]:
+          - Link "account_circleProfil" [ref=e58] [invisible]:
+            - /url: /lectio/138/indstillinger/laerer_indstillinger.aspx
+            - /data-role: button
+            - Text "account_circle" [ref=e59] [invisible]
+        - Container [ref=e28] [invisible]:
+          - Link "lanHovedmenu" [ref=e60] [invisible]:
+            - /url: /lectio/138/default.aspx
+            - /data-role: button
+            - Text "lan" [ref=e61] [invisible]
+        - Container [ref=e29] [invisible]:
+          - Link [ref=e62] [invisible]: timerTidsregistrering
+            - /url: /lectio/138/laerer_aarsopgoerelse.aspx?lectab=tidsreg
+            - /data-role: button
+            - Text "timer" [ref=e63] [invisible]
+        - Container [ref=e30] [invisible]:
+          - Link "data_tableStamdata" [ref=e64] [invisible]:
+            - /url: /lectio/138/stamdata/stamdata_rediger.aspx
+            - /data-role: button
+            - Text "data_table" [ref=e65] [invisible]
+        - Container [ref=e31] [invisible]:
+          - Link "logoutLog ud" [ref=e66] [invisible]:
+            - /url: /lectio/138/logout.aspx?dummyid=909272
+            - /data-role: button
+            - Text "logout" [ref=e67] [invisible]
+    - Container [ref=e9]:
+      - Container "search" [ref=e68] [invisible]:
+        - InputBox "query" [ref=e70] [invisible]
+      - Container [ref=e69]:
+        - Container [ref=e71] [invisible]:
+          - InputBox "time" [ref=e87] [invisible]: 0
+          - InputBox "__EVENTTARGET" [ref=e88] [invisible]
+          - InputBox "__EVENTARGUMENT" [ref=e89] [invisible]
+          - InputBox "__LASTFOCUS" [ref=e90] [invisible]
+          - InputBox "__SCROLLPOSITION" [ref=e91] [invisible]
+          - InputBox "__VIEWSTATEX" [ref=e92] [invisible]: 4QIAAGlpZQstMTM4MjcxMTU1MWlsBGsAZQhWaXMgSG9sZGsBgWwCaGlkbAJnA2lsAmsCZQNvZmZsBmcDaWRsBIFpZGwCgWlpbARrA3FrBHzqD2RkZwNpbAJrBWURaHR0cHM6Ly9sZWN0aW8uZGtkZwVpZGwCZwlpZGwCgWlsAmsGcWRnB2lkbAaBaWRsAoFpZGwCaGlsAmsGcWRnAmlkbAJnA2lkbARoaWppbAJrB3FkZGRkZwJpamlsAmsHcWRkZGRnBGlkbARoaWlkbARrCGWeAkF1dG9jb21wbGV0ZS5hdXRvY29tcGxldGVDdHJsKCJtX3F1aWNrTmF2aWdhdGVfaW5wIiwgWydEcm9wZG93bkFkbWluXzE4MjQ4ODk0Nzc4J10se3RhcmdldFZhbHVlOiJtX3F1aWNrTmF2aWdhdGVfaW5waWQiLGVtcHR5VGV4dDoiU8O4ZyBlZnRlciBlbGV2LCBsw6ZyZXIgZWxsZXIgaG9sZCIsYXV0b1Bv*
+          - InputBox "__VIEWSTATEY_KEY" [ref=e93] [invisible]
+          - InputBox "__VIEWSTATE" [ref=e94] [invisible]
+        - InputBox [ref=e80] [invisible]:
+          - InputBox "__EVENTVALIDATION" [ref=e95] [invisible]: CLHF8fbtvZ1G+HCWqGVz0NQTebCs2HsV46OsO6TqRXQD4AtsLPCxcuZt5jWTX5gulrYlggk1mjCxYifZfzfO1C5tgORn6V5OhLPtQLLXDXerHQ875S+kWdE7GtwKF1xXp4recjttC4r3MB+lWIlTIgU30G4C0R9GTDJkqtM/LDlyXLLQBBY0IIy+oPu8Sg3zJGQfLWKJK+dSUeN4CJaEpJbHtOW92dRNvEHCkZb6Kqlcn/QRPd6JeLd9Tv/3bRcpPnzMdokl45VXa0F3mEyw/m6+pDpwrJnKnkOhNJqAAZGquPbhPMZVG5YRptf6erezoH+FFSlZT8xjeEG+ZxDt9oVr+mvZbLyh47N1uyBckZo9wmiaIeq45omkXKy26aqZtp9ne6l3PI3Dz5XZEefWpnLFKnVxIBAuJhhtrk+uNwwUQgltQlKTiGK6PynZewCWpKAKkriiYbblJdm3xzLDX8nrc9yhiCtcAFoAdHEAdjsuo2QwzC2ZBPm5K5dL+shr*
+        - Button "m$defaultformbtn" [ref=e81]
+        - Container [ref=e82]:
+          - Container [ref=e96]:
+            - Container [ref=e99]:
+              - Text [ref=e101]: Køge Handelsskole - EUD/EUX/AMU/HF/SKP
+              - DropDown "m$ChooseTerm$term" [ref=e102]: 2026/27
+                - ListItem "2029/30" [ref=e103] [invisible]
+                - ListItem "2028/29" [ref=e104] [invisible]
+                - ListItem "2027/28" [ref=e105] [invisible]
+                - ListItem "2026/27" [ref=e106] [invisible] [selected]
+                - ListItem "2025/26" [ref=e107] [invisible]
+                - ListItem "2024/25" [ref=e108] [invisible]
+                - ListItem "2023/24" [ref=e109] [invisible]
+                - ListItem "2022/23" [ref=e110] [invisible]
+                - ListItem "2021/22" [ref=e111] [invisible]
+                - ListItem "2020/21" [ref=e112] [invisible]
+                - ListItem "2019/20" [ref=e113] [invisible]
+                - ListItem "2018/19" [ref=e114] [invisible]
+                - ListItem "2017/18" [ref=e115] [invisible]
+                - ListItem "2016/17" [ref=e116] [invisible]
+                - ListItem "2015/16" [ref=e117] [invisible]
+                - ListItem "2014/15" [ref=e118] [invisible]
+                - ListItem "2013/14" [ref=e119] [invisible]
+                - ListItem "2012/13" [ref=e120] [invisible]
+                - ListItem "2011/12" [ref=e121] [invisible]
+                - ListItem "2010/11" [ref=e122] [invisible]
+                - ListItem "2009/10" [ref=e123] [invisible]
+                - ListItem "2008/09" [ref=e124] [invisible]
+            - None [ref=e100]:
+              - /url: https://lectio.dk
+          - Container [ref=e98]:
+            - Container [ref=e125]:
+              - Container [ref=e127]:
+                - Link "Forside" [ref=e135]:
+                  - /url: /lectio/138/forside.aspx
+                  - /data-role: button
+              - Container [ref=e128]:
+                - Link "Skema" [ref=e136]:
+                  - /url: /lectio/138/SkemaNy.aspx
+                  - /data-role: button
+              - Container [ref=e129]:
+                - Link "Hovedmenu" [ref=e137]:
+                  - /url: /lectio/138/default.aspx
+                  - /data-role: button
+              - Container [ref=e130]:
+                - Container [ref=e138]:
+                  - Link "Tidsregistrering" [ref=e141]:
+                    - /url: /lectio/138/laerer_aarsopgoerelse.aspx?lectab=tidsreg
+                    - /data-role: button
+                - Container [ref=e139]
+                - Container [ref=e140]:
+                  - Link "radio_button_checked" [ref=e142]:
+                    - /url: javascript:__doPostBack('m$ctl23','')
+                    - Text "radio_button_checked" [ref=e143]
+              - Container [ref=e131]:
+                - Link "Stamdata" [ref=e144]:
+                  - /url: /lectio/138/stamdata/stamdata_rediger.aspx
+                  - /data-role: button
+              - Container [ref=e132]:
+                - Link "Log ud" [ref=e145]:
+                  - /url: /lectio/138/logout.aspx?dummyid=909271
+                  - /data-role: button
+              - Container [ref=e133]:
+                - Link "Kontakt" [ref=e146]:
+                  - /url: /lectio/138/default.aspx?menu=kontakt
+                  - /data-role: button
+              - Container [ref=e134]:
+                - Container [ref=e147]:
+                  - Link "Hjælp" [ref=e148]:
+                    - /url: /lectio/138/help/mainhelp.aspx
+                    - /data-role: button
+            - Container [ref=e126]:
+              - Container [ref=e149]:
+                - Container [ref=e150]:
+                  - Link "searchSøg" [ref=e151]:
+                    - /url: #
+                    - /data-role: button
+                    - Text "search" [ref=e152]
+        - Container [ref=e83]:
+          - Container [ref=e153]:
+            - Container [ref=e157]:
+              - Container [ref=e158]:
+                - Link [ref=e160]: Åbn hjælp til dette skærmbillede
+                  - /url: /lectio/138/help/helptip2.aspx?articleid=1190&prevurl=FindSkema.aspx%3ftype%3dhold
+                  - Text "Hjælp" [ref=e161]
+              - Container [ref=e159] [invisible]:
+                - Container [ref=e162] [invisible]:
+                  - Container [ref=e164] [invisible]:
+                    - Container [ref=e165] [invisible]
+                    - Container [ref=e166] [invisible]:
+                      - Container [ref=e167] [invisible]
+                - None [ref=e163] [invisible]:
+                  - None [ref=e170] [invisible]:
+                    - Container [ref=e172] [invisible]
+          - Container [ref=e154]:
+            - Container [ref=e174]:
+              - Container [ref=e177] [invisible]
+              - Text "Vis Hold" [ref=e178]
+            - Container [ref=e175]:
+              - /data-pull-to-refresh-installed: true
+              - Container [ref=e179]:
+                - Text "refresh" [ref=e183]
+              - Container [ref=e181] [invisible]
+              - Container [ref=e182]:
+                - Container [ref=e184]:
+                  - Container [ref=e186]:
+                    - Container [ref=e188]:
+                      - CheckBox "Vis kun aktuelle" [ref=e190] [selected]: checked
+                      - Text "Vis kun aktuelle" [ref=e191] [selected]: checked
+                      - CheckBox "Vis kun aktuel afdeling" [ref=e192] [selected]: checked
+                      - Text "Vis kun aktuel afdeling" [ref=e193] [selected]: checked
+                    - Container [ref=e189] [invisible]
+                  - Container [ref=e187]:
+                    - Container [ref=e194]:
+                      - Container [ref=e195]:
+                        - Link "menu" [ref=e197]:
+                          - /url: #
+                          - /data-command: LbgShow
+                          - /data-role: button
+                          - Text "menu" [ref=e198]
+                      - Container [ref=e196] [invisible]:
+                        - List [ref=e199] [invisible]:
+                          - ListItem [ref=e200] [invisible]:
+                            - Container [ref=e204] [invisible]:
+                              - Link [ref=e205] [invisible]: content_copyKopier til Excel
+                                - /url: #
+                                - /data-command: CopyToExcel
+                                - /data-command-argument: m_Content_listecontainer
+                                - /data-role: button
+                                - Text "content_copy" [ref=e206] [invisible]
+                          - ListItem [ref=e201] [invisible]:
+                            - Container [ref=e207] [invisible]:
+                              - Link [ref=e208] [invisible]: document_scannerVis udskrift
+                                - /url: #
+                                - /data-command: PrintPreview
+                                - /data-command-argument: {"CtrlToPrint":"copyprintarea","IncludeDateTimeTag":false,"TitleForPrint":null}
+                                - /data-role: button
+                                - Text "document_scanner" [ref=e209] [invisible]
+                          - ListItem [ref=e202] [invisible]:
+                            - Container [ref=e210] [invisible]:
+                              - Link [ref=e211] [invisible]: printUdskriv i A3-format
+                                - /url: #
+                                - /data-command: PrintA3
+                                - /data-command-argument: {"CtrlToPrint":"copyprintarea","IncludeDateTimeTag":false,"TitleForPrint":null}
+                                - /data-role: button
+                                - Text "print" [ref=e212] [invisible]
+                          - ListItem [ref=e203] [invisible]:
+                            - Container [ref=e213] [invisible]:
+                              - Link [ref=e214] [invisible]: printUdskriv i A4-format
+                                - /url: #
+                                - /data-command: PrintA4
+                                - /data-command-argument: {"CtrlToPrint":"copyprintarea","IncludeDateTimeTag":false,"TitleForPrint":null}
+                                - /data-role: button
+                                - Text "print" [ref=e215] [invisible]
+                - Container [ref=e185]:
+                  - List [ref=e216]:
+                    - ListItem [ref=e217]:
+                      - Link "AFAfsætning" [ref=e237]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=602&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "AF" [ref=e238]
+                    - ListItem [ref=e218]:
+                      - Link [ref=e239]: AMUArbejdsmarkedsuddannelser
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=616&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "AMU" [ref=e240]
+                    - ListItem [ref=e219]:
+                      - Link "BROBrobygning" [ref=e241]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=1452164871&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "BRO" [ref=e242]
+                    - ListItem [ref=e220]:
+                      - Link "DADansk" [ref=e243]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=507&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "DA" [ref=e244]
+                    - ListItem [ref=e221]:
+                      - Link "ENEngelsk" [ref=e245]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=508&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "EN" [ref=e246]
+                    - ListItem [ref=e222]:
+                      - Link "ERErhvervsjura" [ref=e247]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=604&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "ER" [ref=e248]
+                    - ListItem [ref=e223]:
+                      - Link [ref=e249]: FINFinansuddannelsen (1922)
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=1452164937&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "FIN" [ref=e250]
+                    - ListItem [ref=e224]:
+                      - Link [ref=e251]: IDVIndtægtsdækket virksomhed
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=1452164941&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "IDV" [ref=e252]
+                    - ListItem [ref=e225]:
+                      - Link "IFInformatik" [ref=e253]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=1452164874&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "IF" [ref=e254]
+                    - ListItem [ref=e226]:
+                      - Link [ref=e255]: KHFKontor, handel og forretningsservice
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=104&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "KHF" [ref=e256]
+                    - ListItem [ref=e227]:
+                      - Link [ref=e257]: KONKontoruddannelse (1912)
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=132&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "KON" [ref=e258]
+                    - ListItem [ref=e228]:
+                      - Link "MAMatematik" [ref=e259]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=524&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "MA" [ref=e260]
+                    - ListItem [ref=e229]:
+                      - Link "OROrganisation" [ref=e261]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=572&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "OR" [ref=e262]
+                    - ListItem [ref=e230]:
+                      - Link "SASamfundsfag" [ref=e263]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=519&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "SA" [ref=e264]
+                    - ListItem [ref=e231]:
+                      - Link [ref=e265]: SKRSkriftlige opgaver
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=1452164889&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "SKR" [ref=e266]
+                    - ListItem [ref=e232]:
+                      - Link "SOPSkoleoplæring" [ref=e267]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=1452164935&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "SOP" [ref=e268]
+                    - ListItem [ref=e233]:
+                      - Link "SPSpansk" [ref=e269]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=512&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "SP" [ref=e270]
+                    - ListItem [ref=e234]:
+                      - Link "TYTysk" [ref=e271]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=509&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "TY" [ref=e272]
+                    - ListItem [ref=e235]:
+                      - Link "VØVirksomhedsøkonomi" [ref=e273]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=601&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "VØ" [ref=e274]
+                    - ListItem [ref=e236]:
+                      - Link "ØHØvrige hold" [ref=e275]:
+                        - /url: /lectio/138/FindSkema.aspx?type=hold&fag=562&prevurl=FindSkema.aspx%3ftype%3dhold
+                        - Text "ØH" [ref=e276]
+            - Container [ref=e176] [invisible]:
+              - Container [ref=e277] [invisible]:
+                - Link "homeForside" [ref=e283] [invisible]:
+                  - /url: /lectio/138/forside.aspx
+                  - /data-role: button
+                  - Text "home" [ref=e284] [invisible]
+              - Container [ref=e278] [invisible]:
+                - Link "calendar_monthSkema" [ref=e285] [invisible]:
+                  - /url: /lectio/138/Skema/Skema1dag.aspx
+                  - /data-role: button
+                  - Text "calendar_month" [ref=e286] [invisible]
+              - Container [ref=e279] [invisible]:
+                - Link "calendar_monthSkema" [ref=e287] [invisible]:
+                  - /url: /lectio/138/SkemaNy.aspx
+                  - /data-role: button
+                  - Text "calendar_month" [ref=e288] [invisible]
+              - Container [ref=e280] [invisible]:
+                - Link "mailBeskeder" [ref=e289] [invisible]:
+                  - /url: /lectio/138/beskeder2.aspx
+                  - /data-role: button
+                  - Text "mail" [ref=e290] [invisible]
+              - Container [ref=e281] [invisible]:
+                - Link [ref=e291] [invisible]: radio_button_checkedTidsreg.
+                  - /url: javascript:__doPostBack('m$ctl31','')
+                  - Text "radio_button_checked" [ref=e292] [invisible]
+              - Container [ref=e282] [invisible]:
+                - Link "more_horizMere" [ref=e293] [invisible]:
+                  - /url: #
+                  - /data-role: button
+                  - Text "more_horiz" [ref=e294] [invisible]
+          - Container [ref=e155] [invisible]:
+            - Container [ref=e295] [invisible]:
+              - Container [ref=e296] [invisible]:
+                - InputBox "m$quickNavigate$inp" [ref=e298] [invisible]:
+                  - /placeholder: Søg efter elev, lærer eller hold
+                  - /data-dropdowninit: Autocomplete.autocompleteCtrl("m_quickNavigate_inp", ['DropdownAdmin_18248894778'],{targetValue:"m_quickNavigate_inpid",emptyText:"Søg efter elev, lærer eller hold",autoPostBackId:'m$quickNavigate$inpid',resultsWidth:400, favoriteVariable: 'favorites', groupSeparatorNumber: "10"});\n
+                  - /data-lpignore: true
+                - InputBox [ref=e299] [invisible]: m$quickNavigate$inpid
+              - Text [ref=e297] [invisible]: {   "S": "/lectio/138/stamdata/stamdata_edit_student.aspx?id=666\u0026prevurl=FindSkema.aspx%3ftype%3dhold",   "T": "/lectio/138/stamdata/stamdata_edit_teacher.aspx?teacherid=666\u0026prevurl=FindSkema.aspx%3ftype%3dhold",   "H": "/lectio/138/stamdata/stamdata_edit_hold.aspx?id=666\u0026prevurl=FindSkema.aspx%3ftype%3dhold" }
+                - /data-role: link-templates
+        - Container [ref=e84]:
+          - Container [ref=e300]:
+            - Link "© MaCom A/S" [ref=e304]:
+              - /url: http://www.macom.dk
+          - Container [ref=e301]:
+            - Link "E-mail" [ref=e305]:
+              - /url: mailto:LectioSupport@macom.dk?subject=Lectio
+          - Container [ref=e302]:
+            - Link [ref=e306]: Lectio version 24.077
+              - /url: /lectio/138/VersionInfo.aspx
+          - Container [ref=e303]:
+            - Text [ref=e307]: 16/11-2026  kl. 08:14
+            - Container [ref=e308]:
+              - Link "^" [ref=e309]:
+                - /url: #masterContent
+                - Text "^" [ref=e310]
+        - InputBox "masterfootervalue" [ref=e85] [invisible]: X1!ÆØÅ

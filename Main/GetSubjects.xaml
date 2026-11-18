@@ -1,0 +1,199 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_GetSubjects" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:sd2="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Numerics</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq.AsyncEnumerable</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>Microsoft.Extensions.DependencyModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Get subjects and their classes" sap:VirtualizedContainerService.HintSize="1717,4000" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd2:DataTable" Name="subjectsTable" />
+      <Variable x:TypeArguments="scg:List(l:Subject)" Name="subjects" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log hierarchy reset" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Clearing the previous subject hierarchy.&quot;]" />
+    <Assign DisplayName="Clear the previous hierarchy" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(l:Subject)">[LOK2239.Root.Subjects]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(l:Subject)">[New List(Of LOK2239.Subject)()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log subject browser attachment" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Attaching to Lectio to read subjects.&quot;]" />
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Lectio for subjects" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="488,798" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[GlobalVariablesNamespace.GlobalVariables.global_browser]" InteractionMode="DebuggerApi" OpenMode="Never" OutUiElement="[GlobalVariablesNamespace.GlobalVariables.global_browser]" ScopeGuid="8e4eb8dc-5d8c-4d34-b8de-77e8381e6f00" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Read subject list" sap:VirtualizedContainerService.HintSize="450,667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log subject navigation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Navigating to the subject list for institution &quot; &amp; LOK2239.Config.Values.InstitutionId &amp; &quot;.&quot;]" />
+            <uix:NGoToUrl DisplayName="Navigate to subjects" sap:VirtualizedContainerService.HintSize="416,123" sap2010:WorkflowViewState.IdRef="NGoToUrl_1" ScopeIdentifier="8e4eb8dc-5d8c-4d34-b8de-77e8381e6f00" Url="[&quot;https://www.lectio.dk/lectio/&quot; &amp; LOK2239.Config.Values.InstitutionId &amp; &quot;/FindSkema.aspx?type=hold&quot;]" Version="V5" />
+            <ui:LogMessage DisplayName="Log subject extraction" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Extracting subject names and class-list links into a DataTable.&quot;]" />
+            <uix:NExtractDataGeneric x:TypeArguments="sd2:DataTable" ExtractDataSettings="{x:Null}" DisplayName="Extract subject names and links" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='ul' /&gt;&lt;webctrl tag='li' /&gt;&lt;/row&gt;&lt;column exact='1' name='LongName' attr='fulltext' name2='LinkToClasses' attr2='href'&gt;&lt;webctrl tag='ul' /&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' /&gt;&lt;/column&gt;&lt;column exact='1' name='ShortName' attr='fulltext'&gt;&lt;webctrl tag='ul' /&gt;&lt;webctrl tag='li' /&gt;&lt;webctrl tag='a' /&gt;&lt;webctrl tag='span' /&gt;&lt;/column&gt;&lt;/extract&gt;" ExtractedData="[subjectsTable]" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,134" sap2010:WorkflowViewState.IdRef="NExtractDataGeneric`1_1" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="8e4eb8dc-5d8c-4d34-b8de-77e8381e6f00" Version="V5">
+              <uix:NExtractDataGeneric.Target>
+                <uix:TargetAnchorable BrowserURL="lectio.dk/lectio/138/FindSkema.aspx" ContentHash="UIfeGGcJC0CAk14q3DiY-Q" DesignTimeRectangle="369, 284, 864, 173" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='m_Content_listecontainer' tag='DIV' /&gt;" Guid="3e16bb68-f087-4613-9c9b-64a530df42f6" InformativeScreenshot="2f0137069b6c976a0acbc0a896a29c9d.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/s7uZCYV69EqBuruUi3fqfA" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Vis Hold - Lectio - Køge Handelsskole' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+              </uix:NExtractDataGeneric.Target>
+            </uix:NExtractDataGeneric>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="2552, -8, 2576, 1408" BrowserType="Chrome" ContentHash="YhhiFnWA8kSYNhF6hMJSVA" InformativeScreenshot="60f82308b83ecf3eabcec50aee3ab8eb.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/1lBbXWkdJkae_l-wiojE6Q" Selector="&lt;html app='chrome.exe' title='Vis Hold - Lectio - Køge Handelsskole' /&gt;" Url="[&quot;https://www.lectio.dk/lectio/&quot; &amp; LOK2239.Config.Values.InstitutionId &amp; &quot;/FindSkema.aspx?type=hold&quot;]" Version="V3" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <ui:LogMessage DisplayName="Log subject mapping" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Creating Subject objects from the extracted subject table.&quot;]" />
+    <ui:InvokeCode Code="If in_Table Is Nothing OrElse in_Table.Rows.Count = 0 Then Throw New InvalidOperationException(&quot;Lectio returned no subjects. Check login, filters and extraction configuration.&quot;)&#xA;For Each columnName As String In New String() {&quot;ShortName&quot;, &quot;LongName&quot;, &quot;LinkToClasses&quot;}&#xA;    If Not in_Table.Columns.Contains(columnName) Then Throw New InvalidOperationException(&quot;Subject extraction is missing column: &quot; &amp; columnName)&#xA;Next&#xA;Dim institutionPath = &quot;/lectio/&quot; &amp; in_InstitutionId &amp; &quot;/&quot;&#xA;Dim baseUri As New Uri(&quot;https://www.lectio.dk&quot; &amp; institutionPath)&#xA;Dim seen As New HashSet(Of String)(StringComparer.Ordinal)&#xA;out_Subjects = New List(Of LOK2239.Subject)()&#xA;For Each row As System.Data.DataRow In in_Table.Rows&#xA;    Dim shortName = System.Net.WebUtility.HtmlDecode(row(&quot;ShortName&quot;).ToString()).Trim()&#xA;    Dim longName = System.Net.WebUtility.HtmlDecode(row(&quot;LongName&quot;).ToString()).Trim()&#xA;    Dim rawLink = System.Net.WebUtility.HtmlDecode(row(&quot;LinkToClasses&quot;).ToString()).Trim()&#xA;    If shortName.Length = 0 OrElse longName.Length = 0 OrElse rawLink.Length = 0 Then Throw New InvalidOperationException(&quot;A subject row has an empty name or subject link.&quot;)&#xA;    Dim link As New Uri(baseUri, rawLink)&#xA;    Dim idMatch = System.Text.RegularExpressions.Regex.Match(link.Query, &quot;[?&amp;]fag=(\d+)(&amp;|$)&quot;)&#xA;    If link.Host &lt;&gt; baseUri.Host OrElse Not link.AbsolutePath.Equals(institutionPath &amp; &quot;FindSkema.aspx&quot;, StringComparison.OrdinalIgnoreCase) OrElse Not idMatch.Success Then Throw New InvalidOperationException(&quot;Unexpected subject link: &quot; &amp; rawLink)&#xA;    If longName.StartsWith(shortName, StringComparison.Ordinal) AndAlso longName.Length &gt; shortName.Length Then longName = longName.Substring(shortName.Length).Trim()&#xA;    Dim subjectId = idMatch.Groups(1).Value&#xA;    If seen.Add(subjectId) Then out_Subjects.Add(New LOK2239.Subject With {.Id = subjectId, .ShortName = shortName, .LongName = longName, .Url = link.AbsoluteUri})&#xA;Next" ContinueOnError="False" DisplayName="Create subjects from extracted rows" sap:VirtualizedContainerService.HintSize="488,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd2:DataTable" x:Key="in_Table">[subjectsTable]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InstitutionId">[LOK2239.Config.Values.InstitutionId]</InArgument>
+        <OutArgument x:TypeArguments="scg:List(l:Subject)" x:Key="out_Subjects">[subjects]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <Assign DisplayName="DEBUG: remove most subjects for fast test" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(l:Subject)">[subjects]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(l:Subject)">[subjects.Where(Function(s) s.ShortName = "ER").ToList()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Warn" Message="[&quot;DEBUG: most subjects removed for faster testing&quot;]" />
+    <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" DisplayName="Get classes for each subject" sap:VirtualizedContainerService.HintSize="488,1210" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[subjects]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="l:Subject">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="l:Subject" Name="subject" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Load subject classes" sap:VirtualizedContainerService.HintSize="486,1079" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log class workflow invocation" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Getting classes for subject &quot; &amp; subject.ShortName &amp; &quot; - &quot; &amp; subject.LongName &amp; &quot;.&quot;]" />
+            <TryCatch DisplayName="Try get classes for subject" sap:VirtualizedContainerService.HintSize="452,844" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Get classes" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\GetClasses.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[subject]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                </Sequence>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Catch" sap:VirtualizedContainerService.HintSize="450,394" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log subject error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Error" Message="[&quot;Failed to get classes for subject &quot; &amp; subject.ShortName &amp; &quot; - &quot; &amp; subject.LongName &amp; &quot;. Continuing with next subject. &quot; &amp; exception.ToString()]" />
+                      <InvokeMethod DisplayName="Add subject error to Messages" sap:VirtualizedContainerService.HintSize="416,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
+                        <InArgument x:TypeArguments="x:String">["Subject " &amp; subject.ShortName &amp; " - " &amp; subject.LongName &amp; " failed: " &amp; exception.Message]</InArgument>
+                      </InvokeMethod>
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log hierarchy publication" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Storing the completed subject and class hierarchy in Root.Subjects.&quot;]" />
+    <Assign DisplayName="Store the completed hierarchy in Root" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(l:Subject)">[LOK2239.Root.Subjects]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(l:Subject)">[subjects]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log hierarchy totals" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Found &quot; &amp; LOK2239.Root.Subjects.Count.ToString() &amp; &quot; subjects and &quot; &amp; LOK2239.Root.Subjects.Sum(Function(item) item.Classes.Count).ToString() &amp; &quot; classes.&quot;]" />
+  </Sequence>
+</Activity>
