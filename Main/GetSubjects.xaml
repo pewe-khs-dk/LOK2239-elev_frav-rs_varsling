@@ -61,7 +61,7 @@
       <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Get subjects and their classes" sap:VirtualizedContainerService.HintSize="1717,4057" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get subjects and their classes" sap:VirtualizedContainerService.HintSize="1717,3930" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd2:DataTable" Name="subjectsTable" />
       <Variable x:TypeArguments="scg:List(l:Subject)" Name="subjects" />
@@ -128,32 +128,32 @@
         <OutArgument x:TypeArguments="scg:List(l:Subject)">[subjects]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="scg:List(l:Subject)">[subjects.Where(Function(s) s.ShortName = "ER").ToList()]</InArgument>
+        <InArgument x:TypeArguments="scg:List(l:Subject)">[subjects.Where(Function(s) s.ShortName = "MA" Or s.ShortName = "FIN" Or s.ShortName = "IDV").ToList()]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Warn" Message="[&quot;DEBUG: most subjects removed for faster testing&quot;]" />
-    <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" DisplayName="Get classes for each subject" sap:VirtualizedContainerService.HintSize="488,1267" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[subjects]">
+    <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" DisplayName="Get classes for each subject" sap:VirtualizedContainerService.HintSize="488,1140" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[subjects]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="l:Subject">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="l:Subject" Name="subject" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Load subject classes" sap:VirtualizedContainerService.HintSize="486,1136" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Load subject classes" sap:VirtualizedContainerService.HintSize="486,1009" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:LogMessage DisplayName="Log class workflow invocation" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Getting classes for subject &quot; &amp; subject.ShortName &amp; &quot; - &quot; &amp; subject.LongName &amp; &quot;.&quot;]" />
-            <TryCatch DisplayName="Try get classes for subject" sap:VirtualizedContainerService.HintSize="452,901" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+            <TryCatch DisplayName="Try get classes for subject" sap:VirtualizedContainerService.HintSize="452,774" sap2010:WorkflowViewState.IdRef="TryCatch_1">
               <TryCatch.Try>
-                <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,285" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,228" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Get classes" sap:VirtualizedContainerService.HintSize="416,225" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\GetClasses.xaml">
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Get classes" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\GetClasses.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[subject]</InArgument>
                     </ui:InvokeWorkflowFile.Arguments>

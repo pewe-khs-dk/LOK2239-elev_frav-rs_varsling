@@ -55,6 +55,8 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.IO.FileSystem</AssemblyReference>
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>Microsoft.Extensions.DependencyModel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="MainFlowChart" sap:VirtualizedContainerService.HintSize="1723,827" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -67,9 +69,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID6</x:Reference>
+      <x:Reference>__ReferenceID7</x:Reference>
     </Flowchart.StartNode>
-    <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+    <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">245,155</av:Point>
@@ -96,7 +98,7 @@
         </ui:InvokeWorkflowFile>
       </Sequence>
       <FlowStep.Next>
-        <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+        <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_5">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <av:Point x:Key="ShapeLocation">465,155</av:Point>
@@ -118,7 +120,7 @@
             </ui:InvokeCode>
           </Sequence>
           <FlowStep.Next>
-            <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+            <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">245,295</av:Point>
@@ -155,7 +157,7 @@
                 </uix:NApplicationCard>
               </Sequence>
               <FlowStep.Next>
-                <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+                <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <av:Point x:Key="ShapeLocation">245,435</av:Point>
@@ -177,7 +179,7 @@
                     </ui:InvokeWorkflowFile>
                   </Sequence>
                   <FlowStep.Next>
-                    <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                    <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_4">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <av:Point x:Key="ShapeLocation">245,575</av:Point>
@@ -199,7 +201,7 @@
                         </ui:InvokeWorkflowFile>
                       </Sequence>
                       <FlowStep.Next>
-                        <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                        <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_6">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <av:Point x:Key="ShapeLocation">465,575</av:Point>
@@ -207,7 +209,7 @@
                               <av:PointCollection x:Key="ConnectorLocation">575,610 725,610</av:PointCollection>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Sequence DisplayName="Load subject hierarchy" sap:VirtualizedContainerService.HintSize="650,2211" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                          <Sequence DisplayName="Load subject hierarchy" sap:VirtualizedContainerService.HintSize="650,2357" sap2010:WorkflowViewState.IdRef="Sequence_7">
                             <Sequence.Variables>
                               <Variable x:TypeArguments="x:String" Default="[System.IO.Path.Combine(LOK2239.Config.Values.PersistenceFolder, &quot;Subjects.json&quot;)]" Name="subjectsJsonPath" />
                             </Sequence.Variables>
@@ -217,7 +219,7 @@
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                             <ui:LogMessage DisplayName="Log hierarchy file check" sap:VirtualizedContainerService.HintSize="616,175" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Checking for an existing subject hierarchy at &quot; &amp; subjectsJsonPath]" />
-                            <If Condition="[System.IO.File.Exists(subjectsJsonPath)]" DisplayName="Use existing Subjects.json if present" sap:VirtualizedContainerService.HintSize="616,1976" sap2010:WorkflowViewState.IdRef="If_1">
+                            <If Condition="[System.IO.File.Exists(subjectsJsonPath)]" DisplayName="Use existing Subjects.json if present" sap:VirtualizedContainerService.HintSize="616,2122" sap2010:WorkflowViewState.IdRef="If_1">
                               <If.Then>
                                 <Sequence DisplayName="Load hierarchy from JSON" sap:VirtualizedContainerService.HintSize="450,804" sap2010:WorkflowViewState.IdRef="Sequence_8">
                                   <sap:WorkflowViewStateService.ViewState>
@@ -225,7 +227,7 @@
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <ui:LogMessage DisplayName="Log Subjects.json read" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;--- Loading the subject hierarchy from existing file &quot; &amp; subjectsJsonPath]" />
+                                  <ui:LogMessage DisplayName="Log Subjects.json read" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Loading the subject hierarchy from existing file &quot; &amp; subjectsJsonPath]" />
                                   <ui:InvokeCode Code="Dim loadedSubjects = Newtonsoft.Json.JsonConvert.DeserializeObject(Of System.Collections.Generic.List(Of LOK2239.Subject))(System.IO.File.ReadAllText(in_FilePath))&#xA;If loadedSubjects Is Nothing Then Throw New InvalidOperationException(&quot;Subjects.json does not contain a subject list: &quot; &amp; in_FilePath)&#xA;For Each subject As LOK2239.Subject In loadedSubjects&#xA;    If subject Is Nothing Then Throw New InvalidOperationException(&quot;Subjects.json contains a null subject: &quot; &amp; in_FilePath)&#xA;    If subject.Classes Is Nothing Then subject.Classes = New System.Collections.Generic.List(Of LOK2239.Class)()&#xA;    If subject.Classes.Any(Function(item) item Is Nothing) Then Throw New InvalidOperationException(&quot;Subjects.json contains a null class: &quot; &amp; in_FilePath)&#xA;Next&#xA;LOK2239.Root.Subjects = loadedSubjects" ContinueOnError="False" DisplayName="Read Subjects.json into Root.Subjects" sap:VirtualizedContainerService.HintSize="416,403" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
                                     <ui:InvokeCode.Arguments>
                                       <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[subjectsJsonPath]</InArgument>
@@ -235,7 +237,7 @@
                                 </Sequence>
                               </If.Then>
                               <If.Else>
-                                <Sequence DisplayName="Extract and save hierarchy" sap:VirtualizedContainerService.HintSize="450,1010" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                <Sequence DisplayName="Extract and save hierarchy" sap:VirtualizedContainerService.HintSize="450,1156" sap2010:WorkflowViewState.IdRef="Sequence_9">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -253,20 +255,21 @@
                                       <InArgument x:TypeArguments="x:String" x:Key="in_FilePath">[subjectsJsonPath]</InArgument>
                                     </ui:InvokeCode.Arguments>
                                   </ui:InvokeCode>
-                                  <ui:LogMessage DisplayName="Log Subjects.json written" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Wrote subject hierarchy to &quot; &amp; subjectsJsonPath]" />
+                                  <ui:LogMessage DisplayName="Log Subjects.json written" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Wrote subject hierarchy to &quot; &amp; subjectsJsonPath]" />
                                 </Sequence>
                               </If.Else>
                             </If>
                           </Sequence>
                           <FlowStep.Next>
-                            <FlowStep x:Name="__ReferenceID5">
+                            <FlowStep x:Name="__ReferenceID6">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <av:Point x:Key="ShapeLocation">725,575</av:Point>
                                   <av:Size x:Key="ShapeSize">110,70</av:Size>
+                                  <av:PointCollection x:Key="ConnectorLocation">835,610 945,610</av:PointCollection>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:LogMessage DisplayName="Log subjects debug info" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[String.Join(Environment.NewLine, LOK2239.Root.Subjects.Select(Function(subject) &quot;Subject: &quot; &amp; subject.ShortName &amp; &quot; - &quot; &amp; subject.LongName &amp; &quot; [&quot; &amp; String.Join(&quot;, &quot;, subject.Classes.Select(Function(classItem) classItem.Name)) &amp; &quot;]&quot;))]">
+                              <ui:LogMessage DisplayName="Log subjects debug info" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="LogMessage_1" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN: LIST SUBJECTS TO PROCESS &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot; &amp; Environment.NewLine &amp;&#xD;&#xA;String.Join(Environment.NewLine, LOK2239.Root.Subjects.Select(Function(subject) &quot;Subject: &quot; &amp; subject.ShortName &amp; &quot; - &quot; &amp; subject.LongName &amp; &quot; [&quot; &amp; String.Join(&quot;, &quot;, subject.Classes.Select(Function(classItem) classItem.Name)) &amp; &quot;]&quot;)) &amp;&#xD;&#xA;Environment.NewLine &amp; &quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END: LIST SUBJECTS To PROCESS &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot; &amp; Environment.NewLine]">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -274,7 +277,67 @@
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:LogMessage>
                               <FlowStep.Next>
-                                <x:Reference>__ReferenceID7</x:Reference>
+                                <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <av:Point x:Key="ShapeLocation">945,575</av:Point>
+                                      <av:Size x:Key="ShapeSize">110,70</av:Size>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:ForEach x:TypeArguments="l:Class" CurrentIndex="{x:Null}" DisplayName="Process every class" sap:VirtualizedContainerService.HintSize="488,1178" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[LOK2239.Root.Subjects.SelectMany(Function(subject) subject.Classes)]">
+                                    <ui:ForEach.Body>
+                                      <ActivityAction x:TypeArguments="l:Class">
+                                        <ActivityAction.Argument>
+                                          <DelegateInArgument x:TypeArguments="l:Class" Name="currentClass" />
+                                        </ActivityAction.Argument>
+                                        <Sequence DisplayName="Process a single class" sap:VirtualizedContainerService.HintSize="486,1079" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <TryCatch DisplayName="Try process class" sap:VirtualizedContainerService.HintSize="452,1019" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                                            <TryCatch.Try>
+                                              <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,403" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                                <sap:WorkflowViewStateService.ViewState>
+                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                  </scg:Dictionary>
+                                                </sap:WorkflowViewStateService.ViewState>
+                                                <ui:LogMessage DisplayName="Log ProcessClassMain invocation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Invoking ProcessClassMain for class &quot; &amp; currentClass.Name &amp; &quot;.&quot;]" />
+                                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process class" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Main\ProcessClass\ProcessClassMain.xaml">
+                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                    <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[currentClass]</InArgument>
+                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                </ui:InvokeWorkflowFile>
+                                              </Sequence>
+                                            </TryCatch.Try>
+                                            <TryCatch.Catches>
+                                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                                <ActivityAction x:TypeArguments="s:Exception">
+                                                  <ActivityAction.Argument>
+                                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                  </ActivityAction.Argument>
+                                                  <Sequence DisplayName="Catch" sap:VirtualizedContainerService.HintSize="450,394" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                                    <sap:WorkflowViewStateService.ViewState>
+                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                      </scg:Dictionary>
+                                                    </sap:WorkflowViewStateService.ViewState>
+                                                    <ui:LogMessage DisplayName="Log class error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Error" Message="[&quot;Failed to process class &quot; &amp; currentClass.Name &amp; &quot;. Continuing with next class. &quot; &amp; exception.ToString()]" />
+                                                    <InvokeMethod DisplayName="Add class error to Messages" sap:VirtualizedContainerService.HintSize="416,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
+                                                      <InArgument x:TypeArguments="x:String">["Class " &amp; currentClass.Name &amp; " failed: " &amp; exception.Message]</InArgument>
+                                                    </InvokeMethod>
+                                                  </Sequence>
+                                                </ActivityAction>
+                                              </Catch>
+                                            </TryCatch.Catches>
+                                          </TryCatch>
+                                        </Sequence>
+                                      </ActivityAction>
+                                    </ui:ForEach.Body>
+                                  </ui:ForEach>
+                                </FlowStep>
                               </FlowStep.Next>
                             </FlowStep>
                           </FlowStep.Next>
@@ -289,57 +352,12 @@
         </FlowStep>
       </FlowStep.Next>
     </FlowStep>
-    <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_7">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">945,575</av:Point>
-          <av:Size x:Key="ShapeSize">110,70</av:Size>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <ui:ForEach x:TypeArguments="l:Class" DisplayName="Process every class" Values="[LOK2239.Root.Subjects.SelectMany(Function(subject) subject.Classes)]" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
-        <ui:ForEach.Body>
-          <ActivityAction x:TypeArguments="l:Class">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="l:Class" Name="currentClass" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Process a single class" sap2010:WorkflowViewState.IdRef="Sequence_10">
-              <TryCatch DisplayName="Try process class" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-                <TryCatch.Try>
-                  <Sequence DisplayName="Try" sap2010:WorkflowViewState.IdRef="Sequence_11">
-                    <ui:LogMessage DisplayName="Log ProcessClassMain invocation" Level="Info" Message="[&quot;Invoking ProcessClassMain for class &quot; &amp; currentClass.Name &amp; &quot;.&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_13" />
-                    <ui:InvokeWorkflowFile DisplayName="Process class" WorkflowFileName="Main\ProcessClass\ProcessClassMain.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5">
-                      <ui:InvokeWorkflowFile.Arguments>
-                        <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[currentClass]</InArgument>
-                      </ui:InvokeWorkflowFile.Arguments>
-                    </ui:InvokeWorkflowFile>
-                  </Sequence>
-                </TryCatch.Try>
-                <TryCatch.Catches>
-                  <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-                    <ActivityAction x:TypeArguments="s:Exception">
-                      <ActivityAction.Argument>
-                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                      </ActivityAction.Argument>
-                      <Sequence DisplayName="Catch" sap2010:WorkflowViewState.IdRef="Sequence_15">
-                        <ui:LogMessage DisplayName="Log class error" Level="Error" Message="[&quot;Failed to process class &quot; &amp; currentClass.Name &amp; &quot;. Continuing with next class. &quot; &amp; exception.ToString()]" sap2010:WorkflowViewState.IdRef="LogMessage_17" />
-                        <InvokeMethod DisplayName="Add class error to Messages" MethodName="Add" TargetType="{x:Type l:Messages}" sap2010:WorkflowViewState.IdRef="InvokeMethod_1">
-                          <InArgument x:TypeArguments="x:String">[&quot;Class &quot; &amp; currentClass.Name &amp; &quot; failed: &quot; &amp; exception.Message]</InArgument>
-                        </InvokeMethod>
-                      </Sequence>
-                    </ActivityAction>
-                  </Catch>
-                </TryCatch.Catches>
-              </TryCatch>
-            </Sequence>
-          </ActivityAction>
-        </ui:ForEach.Body>
-      </ui:ForEach>
-    </FlowStep>
     <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
     <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
     <x:Reference>__ReferenceID4</x:Reference>
     <x:Reference>__ReferenceID5</x:Reference>
+    <x:Reference>__ReferenceID6</x:Reference>
   </Flowchart>
 </Activity>

@@ -12,5 +12,7 @@ namespace LOK2239
         Letter2Sent,
         Letter3Pending,
         Letter3Sent,
+        StudievejlederMailPending,
+        StudievejlederMailSent,
     };
 }

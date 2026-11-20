@@ -33,6 +33,8 @@
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>LOK2239</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -60,6 +62,18 @@
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
       <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="ProcessClassMain" sap:VirtualizedContainerService.HintSize="1723,827" sap2010:WorkflowViewState.IdRef="Flowchart_1">
@@ -76,9 +90,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID2</x:Reference>
+      <x:Reference>__ReferenceID3</x:Reference>
     </Flowchart.StartNode>
-    <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+    <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">815,185</av:Point>
@@ -86,7 +100,7 @@
           <av:PointCollection x:Key="ConnectorLocation">870,255 870,325</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log class processing" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Processing class &quot; &amp; in_Class.Name]" />
+      <ui:LogMessage DisplayName="Log class processing" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; Processing class &quot; &amp; in_Class.Name &amp; &quot; &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;]" />
       <FlowStep.Next>
         <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_2">
           <sap:WorkflowViewStateService.ViewState>
@@ -108,6 +122,7 @@
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <av:Point x:Key="ShapeLocation">815,465</av:Point>
                   <av:Size x:Key="ShapeSize">110,70</av:Size>
+                  <av:PointCollection x:Key="ConnectorLocation">870,535 870,605</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Select students for first letter" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Main\ProcessClass\SelectStudentsForLetter1.xaml">
@@ -118,7 +133,47 @@
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
               <FlowStep.Next>
-                <x:Reference>__ReferenceID3</x:Reference>
+                <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <av:Point x:Key="ShapeLocation">815,605</av:Point>
+                      <av:Size x:Key="ShapeSize">110,70</av:Size>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ForEach x:TypeArguments="l:ClassStudent" CurrentIndex="{x:Null}" DisplayName="Process every selected student" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[students]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="l:ClassStudent">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="l:ClassStudent" Name="currentStudent" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Process a single student" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                          <TryCatch DisplayName="Try process student" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                            <TryCatch.Try>
+                              <Sequence DisplayName="Try" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                                <ui:LogMessage DisplayName="TODO process student" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Processing student &quot; &amp; currentStudent.Name &amp; &quot; (&quot; &amp; currentStudent.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot;, state &quot; &amp; currentStudent.State.ToString() &amp; &quot;.&quot;]" />
+                              </Sequence>
+                            </TryCatch.Try>
+                            <TryCatch.Catches>
+                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                <ActivityAction x:TypeArguments="s:Exception">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Catch" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                                    <ui:LogMessage DisplayName="Log student error" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;Failed to process student &quot; &amp; currentStudent.Name &amp; &quot; (&quot; &amp; currentStudent.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot;. Continuing with next student. &quot; &amp; exception.ToString()]" />
+                                    <InvokeMethod DisplayName="Add student error to Messages" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
+                                      <InArgument x:TypeArguments="x:String">["Student " &amp; currentStudent.Name &amp; " (" &amp; currentStudent.Id &amp; ") in class " &amp; in_Class.Name &amp; " failed: " &amp; exception.Message]</InArgument>
+                                    </InvokeMethod>
+                                  </Sequence>
+                                </ActivityAction>
+                              </Catch>
+                            </TryCatch.Catches>
+                          </TryCatch>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                </FlowStep>
               </FlowStep.Next>
             </FlowStep>
           </FlowStep.Next>
@@ -127,46 +182,6 @@
     </FlowStep>
     <x:Reference>__ReferenceID0</x:Reference>
     <x:Reference>__ReferenceID1</x:Reference>
-    <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_4">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">815,605</av:Point>
-          <av:Size x:Key="ShapeSize">110,70</av:Size>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <ui:ForEach x:TypeArguments="l:ClassStudent" DisplayName="Process every selected student" Values="[students]" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
-        <ui:ForEach.Body>
-          <ActivityAction x:TypeArguments="l:ClassStudent">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="l:ClassStudent" Name="currentStudent" />
-            </ActivityAction.Argument>
-            <Sequence DisplayName="Process a single student" sap2010:WorkflowViewState.IdRef="Sequence_1">
-              <TryCatch DisplayName="Try process student" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-                <TryCatch.Try>
-                  <Sequence DisplayName="Try" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                    <ui:LogMessage DisplayName="TODO process student" Level="Info" Message="[&quot;Processing student &quot; &amp; currentStudent.Name &amp; &quot; (&quot; &amp; currentStudent.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot;, state &quot; &amp; currentStudent.State.ToString() &amp; &quot;.&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_2" />
-                  </Sequence>
-                </TryCatch.Try>
-                <TryCatch.Catches>
-                  <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-                    <ActivityAction x:TypeArguments="s:Exception">
-                      <ActivityAction.Argument>
-                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                      </ActivityAction.Argument>
-                      <Sequence DisplayName="Catch" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                        <ui:LogMessage DisplayName="Log student error" Level="Error" Message="[&quot;Failed to process student &quot; &amp; currentStudent.Name &amp; &quot; (&quot; &amp; currentStudent.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot;. Continuing with next student. &quot; &amp; exception.ToString()]" sap2010:WorkflowViewState.IdRef="LogMessage_3" />
-                        <InvokeMethod DisplayName="Add student error to Messages" MethodName="Add" TargetType="{x:Type l:Messages}" sap2010:WorkflowViewState.IdRef="InvokeMethod_1">
-                          <InArgument x:TypeArguments="x:String">[&quot;Student &quot; &amp; currentStudent.Name &amp; &quot; (&quot; &amp; currentStudent.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot; failed: &quot; &amp; exception.Message]</InArgument>
-                        </InvokeMethod>
-                      </Sequence>
-                    </ActivityAction>
-                  </Catch>
-                </TryCatch.Catches>
-              </TryCatch>
-            </Sequence>
-          </ActivityAction>
-        </ui:ForEach.Body>
-      </ui:ForEach>
-    </FlowStep>
+    <x:Reference>__ReferenceID2</x:Reference>
   </Flowchart>
 </Activity>
