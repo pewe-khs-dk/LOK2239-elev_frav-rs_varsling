@@ -8,5 +8,6 @@ namespace LOK2239
         public string Name { get; set; }
         public StudentState State { get; set; } = StudentState.NoRemarks;
         public DateOnly? DateLatestletter { get; set; }
+        public DateOnly? DateAbsenceCheckStartDate { get; set; }
     }
 }

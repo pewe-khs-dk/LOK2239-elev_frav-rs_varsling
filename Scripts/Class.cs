@@ -7,7 +7,6 @@ namespace LOK2239
         public string Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public Subject Subject { get; set; }
         public string ClassAbsenceUrl { get; set; }
     }
 }
