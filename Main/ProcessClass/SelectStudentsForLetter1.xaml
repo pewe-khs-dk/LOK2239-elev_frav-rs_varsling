@@ -1,0 +1,77 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_SelectStudentsForLetter1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Class" Type="InArgument(l:Class)" />
+    <x:Property Name="in_AbsenceTable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_Students" Type="OutArgument(scg:List(l:ClassStudent))" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Globalization</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Select students above 25 percent total absence" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:List(s:Exception)" Name="studentErrors" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log total absence evaluation" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Checking Opgjort Procent since the first module for class &quot; &amp; in_Class.Name &amp; &quot;; selecting students strictly above 25%.&quot;]" />
+    <ui:InvokeCode Code="If in_Class Is Nothing Then Throw New ArgumentNullException(NameOf(in_Class))&#xA;Dim selected As New System.Collections.Generic.List(Of LOK2239.ClassStudent)()&#xA;out_StudentErrors = New System.Collections.Generic.List(Of Exception)()&#xA;If in_Table Is Nothing OrElse in_Table.Rows.Count = 0 Then&#xA;    out_Students = selected&#xA;    Return&#xA;End If&#xA;For Each columnName As String In New String() {&quot;StudentName&quot;, &quot;StudentUrl&quot;, &quot;OpgjortProcent&quot;, &quot;OpgjortModuler&quot;}&#xA;    If Not in_Table.Columns.Contains(columnName) Then Throw New InvalidOperationException(&quot;Absence extraction is missing column &quot; &amp; columnName &amp; &quot; for class &quot; &amp; in_Class.Name)&#xA;Next&#xA;Dim seen As New System.Collections.Generic.HashSet(Of String)(StringComparer.Ordinal)&#xA;For Each row As System.Data.DataRow In in_Table.Rows&#xA;  Dim studentLabel As String = &quot;(unknown)&quot;&#xA;  Try&#xA;    Dim studentUrl = System.Net.WebUtility.HtmlDecode(row(&quot;StudentUrl&quot;).ToString()).Trim()&#xA;    If studentUrl.Length = 0 Then Continue For&#xA;    Dim studentName = System.Net.WebUtility.HtmlDecode(row(&quot;StudentName&quot;).ToString()).Trim()&#xA;    If studentName.Length &gt; 0 Then studentLabel = studentName&#xA;    Dim idMatch = System.Text.RegularExpressions.Regex.Match(studentUrl, &quot;[?&amp;]elevid=(\d+)(&amp;|$)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;    If studentName.Length = 0 OrElse Not idMatch.Success Then Throw New InvalidOperationException(&quot;Invalid student identity in the absence table for class &quot; &amp; in_Class.Name)&#xA;    Dim percentText = row(&quot;OpgjortProcent&quot;).ToString().Replace(&quot;%&quot;, &quot;&quot;).Trim()&#xA;    Dim modulesText = row(&quot;OpgjortModuler&quot;).ToString().Trim()&#xA;    Dim zeroModules = System.Text.RegularExpressions.Regex.IsMatch(modulesText, &quot;/\s*0(?:[,.]0+)?\s*$&quot;)&#xA;    If zeroModules Then Continue For&#xA;    If percentText.Length = 0 OrElse percentText = &quot;-&quot; OrElse percentText = &quot;—&quot; Then&#xA;        If modulesText.Length = 0 Then Continue For&#xA;        Throw New InvalidOperationException(&quot;Missing Opgjort Procent for student &quot; &amp; idMatch.Groups(1).Value &amp; &quot; in class &quot; &amp; in_Class.Name)&#xA;    End If&#xA;    Dim percent As Decimal&#xA;    If Not Decimal.TryParse(percentText.Replace(&quot;,&quot;, &quot;.&quot;), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, percent) OrElse percent &lt; 0D OrElse percent &gt; 100D Then Throw New InvalidOperationException(&quot;Invalid Opgjort Procent for student &quot; &amp; idMatch.Groups(1).Value &amp; &quot; in class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; percentText)&#xA;    Dim studentId = idMatch.Groups(1).Value&#xA;    If percent &gt; 25D AndAlso seen.Add(studentId) Then selected.Add(New LOK2239.ClassStudent With {.Id = studentId, .Name = studentName, .State = LOK2239.StudentState.Letter1Pending})&#xA;  Catch ex As Exception&#xA;    out_StudentErrors.Add(New Exception(&quot;Student &quot; &amp; studentLabel &amp; &quot; in class &quot; &amp; in_Class.Name &amp; &quot; failed: &quot; &amp; ex.Message, ex))&#xA;  End Try&#xA;Next&#xA;out_Students = selected" ContinueOnError="False" DisplayName="Create class students with Letter1Pending" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_Table">[in_AbsenceTable]</InArgument>
+        <OutArgument x:TypeArguments="scg:List(l:ClassStudent)" x:Key="out_Students">[out_Students]</OutArgument>
+        <OutArgument x:TypeArguments="scg:List(s:Exception)" x:Key="out_StudentErrors">[studentErrors]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <ui:ForEach x:TypeArguments="s:Exception" DisplayName="Report each failed student" Values="[studentErrors]" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="s:Exception">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="s:Exception" Name="studentError" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Report student error" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <ui:LogMessage DisplayName="Log student error" Level="Error" Message="[studentError.ToString()]" sap2010:WorkflowViewState.IdRef="LogMessage_3" />
+            <InvokeMethod DisplayName="Add student error to Messages" MethodName="Add" TargetType="{x:Type l:Messages}" sap2010:WorkflowViewState.IdRef="InvokeMethod_1">
+              <InArgument x:TypeArguments="x:String">[studentError.Message]</InArgument>
+            </InvokeMethod>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log Letter1Pending student count" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; out_Students.Count.ToString() &amp; &quot; students above 25% total absence set to Letter1Pending.&quot;]" />
+  </Sequence>
+</Activity>

@@ -7,5 +7,7 @@
 **/.local/**
 **/.settings/**
 **/.objects/**
+**/.screenshots/**
 **/.tmh/**
 **/*.log
+**/.work/**

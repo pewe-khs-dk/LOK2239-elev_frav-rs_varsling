@@ -20,7 +20,6 @@
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
       <AssemblyReference>System.Runtime</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
@@ -36,6 +35,7 @@
       <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
       <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Get classes for a subject" sap:VirtualizedContainerService.HintSize="1717,2950" sap2010:WorkflowViewState.IdRef="Sequence_1">

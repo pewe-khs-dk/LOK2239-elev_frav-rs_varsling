@@ -1,4 +1,0 @@
-[
-  ["rpa","uia","object-repository","link-screen","--workflow-file-path","Main/GetClassAbsenceUrl.xaml","--activity-id","NApplicationCard_1","--reference-id","WA5AsL_o2kScslpZlc7Txw/ulmOu-VsVkO73qDXXgqx3Q"],
-  ["rpa","uia","object-repository","link-elements","--elements","[{\"workflowFilePath\":\"Main/GetClassAbsenceUrl.xaml\",\"activityId\":\"NGetAttributeGeneric`1_1\",\"referenceId\":\"WA5AsL_o2kScslpZlc7Txw/vymAjZQd3E6JBBzn8vVyaA\"}]"]
-]

@@ -1,4 +1,0 @@
-[
-  ["rpa","uia","object-repository","create-screen","--definition-file-path","C:/UiPath/Projects/LOK2239 elev_fraværs_varsling/.work/absence-capture/window.xaml","--app-reference-id","WA5AsL_o2kScslpZlc7Txw/AvYCZucDd0ua7MwoUMt-Ow"],
-  ["rpa","uia","target-anchorable","resolve-defaults","--window-definition-file-path","C:/UiPath/Projects/LOK2239 elev_fraværs_varsling/.work/absence-capture/window.xaml","--window-ref","b1036","--refs","[{\"ref\":\"e208\",\"definitionFilePath\":\"C:/UiPath/Projects/LOK2239 elev_fraværs_varsling/.work/absence-capture/absence-link.xaml\",\"activityType\":\"GetAttribute\",\"name\":\"Class Fravær Link\",\"description\":\"Fravær navigation link on a class timetable; read its href\"}]"]
-]

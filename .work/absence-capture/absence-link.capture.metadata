@@ -1,9 +1,0 @@
-{
-  "ActivityType": "GetAttribute",
-  "Anchor0": null,
-  "Anchor1": null,
-  "Anchor2": null,
-  "Anchor3": null,
-  "Name": "Class Fravær Link",
-  "Description": "Fravær navigation link on a class timetable; read its href"
-}
