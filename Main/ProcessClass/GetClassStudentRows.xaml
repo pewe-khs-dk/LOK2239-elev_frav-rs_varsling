@@ -1,47 +1,60 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_GetClassStudentRows" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-<x:Members>
-<x:Property Name="in_AbsenceTable" Type="InArgument(sd:DataTable)" />
-<x:Property Name="out_StudentRows" Type="OutArgument(sd:DataTable)" />
-</x:Members>
-<sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
-<TextExpression.NamespacesForImplementation>
-<sco:Collection x:TypeArguments="x:String">
-<x:String>System</x:String>
-<x:String>System.IO</x:String>
-<x:String>System.Data</x:String>
-<x:String>System.Linq</x:String>
-<x:String>System.Collections.Generic</x:String>
-<x:String>System.Globalization</x:String>
-<x:String>System.Text.RegularExpressions</x:String>
-<x:String>LOK2239</x:String>
-<x:String>Newtonsoft.Json</x:String>
-</sco:Collection>
-</TextExpression.NamespacesForImplementation>
-<TextExpression.ReferencesForImplementation>
-<sco:Collection x:TypeArguments="AssemblyReference">
-<AssemblyReference>System.Private.CoreLib</AssemblyReference>
-<AssemblyReference>System.Runtime</AssemblyReference>
-<AssemblyReference>System.Activities</AssemblyReference>
-<AssemblyReference>System.Collections</AssemblyReference>
-<AssemblyReference>System.ObjectModel</AssemblyReference>
-<AssemblyReference>System.Data.Common</AssemblyReference>
-<AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-<AssemblyReference>System.Linq</AssemblyReference>
-<AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
-<AssemblyReference>System.Net.Primitives</AssemblyReference>
-<AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
-<AssemblyReference>UiPath.System.Activities</AssemblyReference>
-<AssemblyReference>Newtonsoft.Json</AssemblyReference>
-<AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
-</sco:Collection>
-</TextExpression.ReferencesForImplementation>
-<Sequence DisplayName="Identify all students in the class" sap2010:WorkflowViewState.IdRef="Sequence_1">
-<ui:LogMessage DisplayName="Log student identity extraction" Level="Info" Message="[&quot;Identifying all students in the extracted absence table.&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_1" />
-<ui:InvokeCode DisplayName="Build distinct student rows" Language="VBNet" Code="Dim result As New System.Data.DataTable()&#xA;For Each col In New String() {&quot;StudentId&quot;, &quot;StudentName&quot;, &quot;OpgjortProcent&quot;, &quot;OpgjortModuler&quot;}&#xA;    result.Columns.Add(col, GetType(String))&#xA;Next&#xA;out_StudentRows = result&#xA;If in_Table Is Nothing OrElse in_Table.Rows.Count = 0 Then Return&#xA;For Each col In New String() {&quot;StudentName&quot;, &quot;StudentUrl&quot;, &quot;OpgjortProcent&quot;, &quot;OpgjortModuler&quot;}&#xA;    If Not in_Table.Columns.Contains(col) Then Throw New InvalidOperationException(&quot;Absence extraction is missing column &quot; &amp; col)&#xA;Next&#xA;Dim seen As New System.Collections.Generic.HashSet(Of String)(StringComparer.Ordinal)&#xA;For Each row As System.Data.DataRow In in_Table.Rows&#xA;    Dim url = System.Net.WebUtility.HtmlDecode(row(&quot;StudentUrl&quot;).ToString()).Trim()&#xA;    If url.Length = 0 Then Continue For&#xA;    Dim name = System.Net.WebUtility.HtmlDecode(row(&quot;StudentName&quot;).ToString()).Trim()&#xA;    Dim match = System.Text.RegularExpressions.Regex.Match(url, &quot;[?&amp;]elevid=(\d+)(&amp;|$)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;    If Not match.Success OrElse name.Length = 0 Then Throw New InvalidOperationException(&quot;Invalid student identity in absence table: &quot; &amp; name)&#xA;    Dim studentId = match.Groups(1).Value&#xA;    If seen.Add(studentId) Then result.Rows.Add(studentId, name, row(&quot;OpgjortProcent&quot;).ToString(), row(&quot;OpgjortModuler&quot;).ToString())&#xA;Next" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
-<ui:InvokeCode.Arguments>
-<InArgument x:TypeArguments="sd:DataTable" x:Key="in_Table">[in_AbsenceTable]</InArgument>
-<OutArgument x:TypeArguments="sd:DataTable" x:Key="out_StudentRows">[out_StudentRows]</OutArgument>
-</ui:InvokeCode.Arguments>
-</ui:InvokeCode>
-</Sequence>
+<Activity xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_GetClassStudentRows" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
+    <x:Property Name="in_Class" Type="InArgument(l:Class)" />
+    <x:Property Name="in_AbsenceTable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="out_StudentRows" Type="OutArgument(sd:DataTable)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Identify all students in the class" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log student identity extraction" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Identifying all students in the extracted absence table.&quot;)]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim result As New System.Data.DataTable()&#xA;For Each col In New String() {&quot;StudentId&quot;, &quot;StudentName&quot;, &quot;OpgjortProcent&quot;, &quot;OpgjortModuler&quot;, &quot;PeriodeProcent&quot;, &quot;PeriodeModuler&quot;}&#xA;    result.Columns.Add(col, GetType(String))&#xA;Next&#xA;out_StudentRows = result&#xA;If in_Table Is Nothing OrElse in_Table.Rows.Count = 0 Then Return&#xA;For Each col In New String() {&quot;StudentName&quot;, &quot;StudentUrl&quot;, &quot;OpgjortProcent&quot;, &quot;OpgjortModuler&quot;, &quot;PeriodeProcent&quot;, &quot;PeriodeModuler&quot;}&#xA;    If Not in_Table.Columns.Contains(col) Then Throw New InvalidOperationException(&quot;Absence extraction is missing column &quot; &amp; col)&#xA;Next&#xA;Dim seen As New System.Collections.Generic.HashSet(Of String)(StringComparer.Ordinal)&#xA;For Each row As System.Data.DataRow In in_Table.Rows&#xA;    Dim url = System.Net.WebUtility.HtmlDecode(row(&quot;StudentUrl&quot;).ToString()).Trim()&#xA;    If url.Length = 0 Then Continue For&#xA;    Dim name = System.Net.WebUtility.HtmlDecode(row(&quot;StudentName&quot;).ToString()).Trim()&#xA;    Dim match = System.Text.RegularExpressions.Regex.Match(url, &quot;[?&amp;]elevid=(\d+)(&amp;|$)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;    If Not match.Success OrElse name.Length = 0 Then Throw New InvalidOperationException(&quot;Invalid student identity in absence table: &quot; &amp; name)&#xA;    Dim studentId = match.Groups(1).Value&#xA;    If seen.Add(studentId) Then result.Rows.Add(studentId, name, row(&quot;OpgjortProcent&quot;).ToString(), row(&quot;OpgjortModuler&quot;).ToString(), row(&quot;PeriodeProcent&quot;).ToString(), row(&quot;PeriodeModuler&quot;).ToString())&#xA;Next" DisplayName="Build distinct student rows" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_Table">[in_AbsenceTable]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_StudentRows">[out_StudentRows]</OutArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+  </Sequence>
 </Activity>

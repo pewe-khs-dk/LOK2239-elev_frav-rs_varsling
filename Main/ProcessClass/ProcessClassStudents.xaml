@@ -1,144 +1,141 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessClassStudents" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-<x:Members>
-<x:Property Name="in_Class" Type="InArgument(l:Class)" />
-<x:Property Name="in_AbsenceTable" Type="InArgument(sd:DataTable)" />
-<x:Property Name="in_PersistenceFolder" Type="InArgument(x:String)" />
-</x:Members>
-<sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
-<TextExpression.NamespacesForImplementation>
-<sco:Collection x:TypeArguments="x:String">
-<x:String>System</x:String>
-<x:String>System.IO</x:String>
-<x:String>System.Data</x:String>
-<x:String>System.Linq</x:String>
-<x:String>System.Collections.Generic</x:String>
-<x:String>System.Globalization</x:String>
-<x:String>System.Text.RegularExpressions</x:String>
-<x:String>LOK2239</x:String>
-<x:String>Newtonsoft.Json</x:String>
-</sco:Collection>
-</TextExpression.NamespacesForImplementation>
-<TextExpression.ReferencesForImplementation>
-<sco:Collection x:TypeArguments="AssemblyReference">
-<AssemblyReference>System.Private.CoreLib</AssemblyReference>
-<AssemblyReference>System.Runtime</AssemblyReference>
-<AssemblyReference>System.Activities</AssemblyReference>
-<AssemblyReference>System.Collections</AssemblyReference>
-<AssemblyReference>System.ObjectModel</AssemblyReference>
-<AssemblyReference>System.Data.Common</AssemblyReference>
-<AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-<AssemblyReference>System.Linq</AssemblyReference>
-<AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
-<AssemblyReference>System.Net.Primitives</AssemblyReference>
-<AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
-<AssemblyReference>UiPath.System.Activities</AssemblyReference>
-<AssemblyReference>Newtonsoft.Json</AssemblyReference>
-<AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
-</sco:Collection>
-</TextExpression.ReferencesForImplementation>
-<Sequence DisplayName="Initialize all class students, then process each persisted student" sap2010:WorkflowViewState.IdRef="Sequence_6">
-<Sequence.Variables>
-<Variable x:TypeArguments="sd:DataTable" Name="studentRows" />
-<Variable x:TypeArguments="x:Boolean" Name="above25" />
-<Variable x:TypeArguments="x:Boolean" Name="deferred" />
-<Variable x:TypeArguments="x:Int32" Name="aboveCount" />
-<Variable x:TypeArguments="x:Int32" Name="deferredCount" />
-<Variable x:TypeArguments="x:Int32" Name="errorCount" />
-</Sequence.Variables>
-<ui:InvokeWorkflowFile DisplayName="Identify distinct class students" WorkflowFileName="Main\ProcessClass\GetClassStudentRows.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2">
-<ui:InvokeWorkflowFile.Arguments>
-<InArgument x:TypeArguments="sd:DataTable" x:Key="in_AbsenceTable">[in_AbsenceTable]</InArgument>
-<OutArgument x:TypeArguments="sd:DataTable" x:Key="out_StudentRows">[studentRows]</OutArgument>
-</ui:InvokeWorkflowFile.Arguments>
-</ui:InvokeWorkflowFile>
-<If DisplayName="Class has students" Condition="[studentRows.Rows.Count = 0]" sap2010:WorkflowViewState.IdRef="If_1">
-<If.Then>
-<Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_4">
-<ui:LogMessage DisplayName="Log empty class" Level="Info" Message="[&quot;Class is empty, no students found&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_2" />
-</Sequence>
-</If.Then>
-<If.Else>
-<Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_5">
-<ui:InvokeWorkflowFile DisplayName="Initialize all missing student files first" WorkflowFileName="Main\ProcessClass\InitializeClassStudents.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3">
-<ui:InvokeWorkflowFile.Arguments>
-<InArgument x:TypeArguments="x:String" x:Key="in_ClassShortName">[in_Class.Name]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
-<InArgument x:TypeArguments="sd:DataTable" x:Key="in_StudentRows">[studentRows]</InArgument>
-</ui:InvokeWorkflowFile.Arguments>
-</ui:InvokeWorkflowFile>
-<ui:LogMessage DisplayName="Log start of per-student processing" Level="Info" Message="[&quot;Processing persisted JSON for all &quot; &amp; studentRows.Rows.Count.ToString() &amp; &quot; students in class &quot; &amp; in_Class.Name &amp; &quot;.&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_3" />
-<ui:ForEach x:TypeArguments="sd:DataRow" DisplayName="Process each saved student" Values="[studentRows.Rows]" sap2010:WorkflowViewState.IdRef="ForEach`1_1">
-<ui:ForEach.Body>
-<ActivityAction x:TypeArguments="sd:DataRow">
-<ActivityAction.Argument>
-<DelegateInArgument x:TypeArguments="sd:DataRow" Name="studentRow" />
-</ActivityAction.Argument>
-<Sequence DisplayName="Process one student" sap2010:WorkflowViewState.IdRef="Sequence_3">
-<TryCatch DisplayName="Process student and continue on student error" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-<TryCatch.Try>
-<Sequence DisplayName="Try processing student" sap2010:WorkflowViewState.IdRef="Sequence_1">
-<ui:InvokeWorkflowFile DisplayName="Read and process one saved student" WorkflowFileName="Main\ProcessClass\ProcessStudent.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1">
-<ui:InvokeWorkflowFile.Arguments>
-<InArgument x:TypeArguments="x:String" x:Key="in_ClassShortName">[in_Class.Name]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
-<InArgument x:TypeArguments="sd:DataRow" x:Key="in_StudentRow">[studentRow]</InArgument>
-<OutArgument x:TypeArguments="x:Boolean" x:Key="out_Above25">[above25]</OutArgument>
-<OutArgument x:TypeArguments="x:Boolean" x:Key="out_Deferred">[deferred]</OutArgument>
-</ui:InvokeWorkflowFile.Arguments>
-</ui:InvokeWorkflowFile>
-<Assign DisplayName="Count students newly above 25 percent" sap2010:WorkflowViewState.IdRef="Assign_1">
-<Assign.To>
-<OutArgument x:TypeArguments="x:Int32">[aboveCount]</OutArgument>
-</Assign.To>
-<Assign.Value>
-<InArgument x:TypeArguments="x:Int32">[aboveCount + If(above25, 1, 0)]</InArgument>
-</Assign.Value>
-</Assign>
-<Assign DisplayName="Count students deferred by state" sap2010:WorkflowViewState.IdRef="Assign_2">
-<Assign.To>
-<OutArgument x:TypeArguments="x:Int32">[deferredCount]</OutArgument>
-</Assign.To>
-<Assign.Value>
-<InArgument x:TypeArguments="x:Int32">[deferredCount + If(deferred, 1, 0)]</InArgument>
-</Assign.Value>
-</Assign>
-</Sequence>
-</TryCatch.Try>
-<TryCatch.Catches>
-<Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-<ActivityAction x:TypeArguments="s:Exception">
-<ActivityAction.Argument>
-<DelegateInArgument x:TypeArguments="s:Exception" Name="studentError" />
-</ActivityAction.Argument>
-<Sequence DisplayName="Report student error" sap2010:WorkflowViewState.IdRef="Sequence_2">
-<ui:LogMessage DisplayName="Log student processing error" Level="Error" Message="[&quot;Student &quot; &amp; studentRow(&quot;StudentId&quot;).ToString() &amp; &quot; in class &quot; &amp; in_Class.Name &amp; &quot; failed: &quot; &amp; studentError.ToString()]" sap2010:WorkflowViewState.IdRef="LogMessage_1" />
-<ui:InvokeCode DisplayName="Record student error and continue" Language="VBNet" Code="LOK2239.Messages.Add(&quot;Student &quot; &amp; in_Id &amp; &quot; in class &quot; &amp; in_ClassName &amp; &quot; failed: &quot; &amp; in_Error.Message)" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
-<ui:InvokeCode.Arguments>
-<InArgument x:TypeArguments="x:String" x:Key="in_Id">[studentRow(&quot;StudentId&quot;).ToString()]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_ClassName">[in_Class.Name]</InArgument>
-<InArgument x:TypeArguments="s:Exception" x:Key="in_Error">[studentError]</InArgument>
-</ui:InvokeCode.Arguments>
-</ui:InvokeCode>
-<Assign DisplayName="Count failed students" sap2010:WorkflowViewState.IdRef="Assign_3">
-<Assign.To>
-<OutArgument x:TypeArguments="x:Int32">[errorCount]</OutArgument>
-</Assign.To>
-<Assign.Value>
-<InArgument x:TypeArguments="x:Int32">[errorCount + 1]</InArgument>
-</Assign.Value>
-</Assign>
-</Sequence>
-</ActivityAction>
-</Catch>
-</TryCatch.Catches>
-</TryCatch>
-</Sequence>
-</ActivityAction>
-</ui:ForEach.Body>
-</ui:ForEach>
-<ui:LogMessage DisplayName="Log detailed student processing totals" Level="Info" Message="[&quot;Class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; studentRows.Rows.Count.ToString() &amp; &quot; students total; &quot; &amp; aboveCount.ToString() &amp; &quot; of &quot; &amp; (studentRows.Rows.Count - deferredCount - errorCount).ToString() &amp; &quot; NoRemarks students had absence &gt; 25%. Deferred other states: &quot; &amp; deferredCount.ToString() &amp; &quot;. Student errors: &quot; &amp; errorCount.ToString() &amp; &quot;.&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_4" />
-</Sequence>
-</If.Else>
-</If>
-</Sequence>
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessClassStudents" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
+    <x:Property Name="in_Class" Type="InArgument(l:Class)" />
+    <x:Property Name="in_AbsenceTable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_PersistenceFolder" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Process each student in the class" sap2010:WorkflowViewState.IdRef="Sequence_6">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="studentRows" />
+      <Variable x:TypeArguments="x:Boolean" Name="saved" />
+      <Variable x:TypeArguments="x:Int32" Name="savedCount" />
+      <Variable x:TypeArguments="x:Int32" Name="errorCount" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Identify distinct class students" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Main\ProcessClass\GetClassStudentRows.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+<InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
+<InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable" x:Key="in_AbsenceTable">[in_AbsenceTable]</InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_StudentRows">[studentRows]</OutArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[studentRows.Rows.Count = 0]" DisplayName="Class has students" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <ui:LogMessage DisplayName="Log empty class" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Class is empty, no students found&quot;)]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_5">
+          <ui:LogMessage DisplayName="Log start of per-student processing" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Processing all &quot; &amp; studentRows.Rows.Count.ToString() &amp; &quot; students in class &quot; &amp; in_Class.Name &amp; &quot;.&quot;)]" />
+          <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" DisplayName="Process each student" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[studentRows.Rows]">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="studentRow" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Process one student" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <TryCatch DisplayName="Process student and continue on student error" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                    <TryCatch.Try>
+                      <Sequence DisplayName="Try processing student" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                        <ui:LogMessage DisplayName="Log student processing start" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;START Student &quot; &amp; studentRow(&quot;StudentId&quot;).ToString() &amp; &quot; - &quot; &amp; studentRow(&quot;StudentName&quot;).ToString()]" sap2010:WorkflowViewState.IdRef="LogMessage_5" /><ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process one student" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\ProcessClass\ProcessStudent.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+<InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
+<InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
+                            <InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
+                            <InArgument x:TypeArguments="sd:DataRow" x:Key="in_StudentRow">[studentRow]</InArgument>
+                            <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Saved">[saved]</OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <Assign DisplayName="Count students written to disk" sap2010:WorkflowViewState.IdRef="Assign_1">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[savedCount]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[savedCount + If(saved, 1, 0)]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="studentError" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Report student error" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                            <ui:LogMessage DisplayName="Log student processing error" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Student &quot; &amp; studentRow(&quot;StudentId&quot;).ToString() &amp; &quot; in class &quot; &amp; in_Class.Name &amp; &quot; failed: &quot; &amp; studentError.ToString())]" />
+                            <ui:InvokeCode ContinueOnError="{x:Null}" Code="LOK2239.Messages.Add(&quot;Student &quot; &amp; in_Id &amp; &quot; in class &quot; &amp; in_ClassName &amp; &quot; failed: &quot; &amp; in_Error.Message)" DisplayName="Record student error and continue" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+                              <ui:InvokeCode.Arguments>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_Id">[studentRow("StudentId").ToString()]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_ClassName">[in_Subject.ShortName &amp; &quot;/&quot; &amp; in_Class.Name]</InArgument>
+                                <InArgument x:TypeArguments="s:Exception" x:Key="in_Error">[studentError]</InArgument>
+                              </ui:InvokeCode.Arguments>
+                            </ui:InvokeCode>
+                            <Assign DisplayName="Count failed students" sap2010:WorkflowViewState.IdRef="Assign_3">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:Int32">[errorCount]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:Int32">[errorCount + 1]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  <TryCatch.Finally><Sequence DisplayName="Log student processing end" sap2010:WorkflowViewState.IdRef="Sequence_7"><ui:LogMessage DisplayName="Log student processing end" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;END Student &quot; &amp; studentRow(&quot;StudentId&quot;).ToString() &amp; &quot; - &quot; &amp; studentRow(&quot;StudentName&quot;).ToString()]" sap2010:WorkflowViewState.IdRef="LogMessage_6" /></Sequence></TryCatch.Finally></TryCatch>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+          </ui:ForEach>
+          <ui:LogMessage DisplayName="Log detailed student processing totals" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; studentRows.Rows.Count.ToString() &amp; &quot; students total; &quot; &amp; savedCount.ToString() &amp; &quot; written to disk (new or repeat violation). Student errors: &quot; &amp; errorCount.ToString() &amp; &quot;.&quot;)]" />
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
 </Activity>

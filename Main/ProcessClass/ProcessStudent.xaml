@@ -1,90 +1,87 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessStudent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-<x:Members>
-<x:Property Name="in_ClassShortName" Type="InArgument(x:String)" />
-<x:Property Name="in_PersistenceFolder" Type="InArgument(x:String)" />
-<x:Property Name="in_StudentRow" Type="InArgument(sd:DataRow)" />
-<x:Property Name="out_Above25" Type="OutArgument(x:Boolean)" />
-<x:Property Name="out_Deferred" Type="OutArgument(x:Boolean)" />
-</x:Members>
-<sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
-<TextExpression.NamespacesForImplementation>
-<sco:Collection x:TypeArguments="x:String">
-<x:String>System</x:String>
-<x:String>System.IO</x:String>
-<x:String>System.Data</x:String>
-<x:String>System.Linq</x:String>
-<x:String>System.Collections.Generic</x:String>
-<x:String>System.Globalization</x:String>
-<x:String>System.Text.RegularExpressions</x:String>
-<x:String>LOK2239</x:String>
-<x:String>Newtonsoft.Json</x:String>
-</sco:Collection>
-</TextExpression.NamespacesForImplementation>
-<TextExpression.ReferencesForImplementation>
-<sco:Collection x:TypeArguments="AssemblyReference">
-<AssemblyReference>System.Private.CoreLib</AssemblyReference>
-<AssemblyReference>System.Runtime</AssemblyReference>
-<AssemblyReference>System.Activities</AssemblyReference>
-<AssemblyReference>System.Collections</AssemblyReference>
-<AssemblyReference>System.ObjectModel</AssemblyReference>
-<AssemblyReference>System.Data.Common</AssemblyReference>
-<AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
-<AssemblyReference>System.Linq</AssemblyReference>
-<AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
-<AssemblyReference>System.Net.Primitives</AssemblyReference>
-<AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
-<AssemblyReference>UiPath.System.Activities</AssemblyReference>
-<AssemblyReference>Newtonsoft.Json</AssemblyReference>
-<AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
-</sco:Collection>
-</TextExpression.ReferencesForImplementation>
-<Sequence DisplayName="Read saved student and route by its current state" sap2010:WorkflowViewState.IdRef="Sequence_3">
-<Sequence.Variables>
-<Variable x:TypeArguments="x:String" Name="studentJson" />
-<Variable x:TypeArguments="l:ClassStudent" Name="student" />
-</Sequence.Variables>
-<ui:LogMessage DisplayName="Log student JSON read" Level="Info" Message="[&quot;Reading student JSON: &quot; &amp; System.IO.Path.Combine(in_PersistenceFolder, in_ClassShortName, in_StudentRow(&quot;StudentId&quot;).ToString() &amp; &quot;.json&quot;)]" sap2010:WorkflowViewState.IdRef="LogMessage_1" />
-<ui:ReadTextFile DisplayName="Read saved ClassStudent JSON" FileName="[System.IO.Path.Combine(in_PersistenceFolder, in_ClassShortName, in_StudentRow(&quot;StudentId&quot;).ToString() &amp; &quot;.json&quot;)]" Content="[studentJson]" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-<ui:InvokeCode DisplayName="Deserialize and validate the saved student" Language="VBNet" Code="out_Student = Newtonsoft.Json.JsonConvert.DeserializeObject(Of LOK2239.ClassStudent)(in_Json)&#xA;If out_Student Is Nothing OrElse out_Student.Id &lt;&gt; in_ExpectedId Then Throw New InvalidOperationException(&quot;Saved student JSON does not match student ID &quot; &amp; in_ExpectedId)&#xA;If Not System.Enum.IsDefined(GetType(LOK2239.StudentState), out_Student.State) Then Throw New InvalidOperationException(&quot;Saved student JSON contains an unknown state.&quot;)" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
-<ui:InvokeCode.Arguments>
-<InArgument x:TypeArguments="x:String" x:Key="in_Json">[studentJson]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_ExpectedId">[in_StudentRow(&quot;StudentId&quot;).ToString()]</InArgument>
-<OutArgument x:TypeArguments="l:ClassStudent" x:Key="out_Student">[student]</OutArgument>
-</ui:InvokeCode.Arguments>
-</ui:InvokeCode>
-<If DisplayName="Route student according to persisted state" Condition="[student.State = LOK2239.StudentState.NoRemarks]" sap2010:WorkflowViewState.IdRef="If_1">
-<If.Then>
-<Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_1">
-<ui:InvokeWorkflowFile DisplayName="Process student with NoRemarks" WorkflowFileName="Main\ProcessClass\ProcessStudentNoRemarks.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1">
-<ui:InvokeWorkflowFile.Arguments>
-<InArgument x:TypeArguments="x:String" x:Key="in_ClassShortName">[in_ClassShortName]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
-<InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[student]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_OpgjortProcent">[in_StudentRow(&quot;OpgjortProcent&quot;).ToString()]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_OpgjortModuler">[in_StudentRow(&quot;OpgjortModuler&quot;).ToString()]</InArgument>
-<OutArgument x:TypeArguments="x:Boolean" x:Key="out_Above25">[out_Above25]</OutArgument>
-</ui:InvokeWorkflowFile.Arguments>
-</ui:InvokeWorkflowFile>
-</Sequence>
-</If.Then>
-<If.Else>
-<Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_2">
-<Assign DisplayName="Mark other state as deferred" sap2010:WorkflowViewState.IdRef="Assign_1">
-<Assign.To>
-<OutArgument x:TypeArguments="x:Boolean">[out_Deferred]</OutArgument>
-</Assign.To>
-<Assign.Value>
-<InArgument x:TypeArguments="x:Boolean">[True]</InArgument>
-</Assign.Value>
-</Assign>
-<ui:InvokeWorkflowFile DisplayName="Prepare other-state processing branch" WorkflowFileName="Main\ProcessClass\ProcessStudentOtherState.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2">
-<ui:InvokeWorkflowFile.Arguments>
-<InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[student]</InArgument>
-<InArgument x:TypeArguments="x:String" x:Key="in_ClassShortName">[in_ClassShortName]</InArgument>
-</ui:InvokeWorkflowFile.Arguments>
-</ui:InvokeWorkflowFile>
-</Sequence>
-</If.Else>
-</If>
-</Sequence>
+<Activity xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessStudent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
+    <x:Property Name="in_Class" Type="InArgument(l:Class)" />
+    <x:Property Name="in_PersistenceFolder" Type="InArgument(x:String)" />
+    <x:Property Name="in_StudentRow" Type="InArgument(sd:DataRow)" />
+    <x:Property Name="out_Saved" Type="OutArgument(x:Boolean)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Process a student: new or with prior history" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="studentFile" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign DisplayName="Path of the student's JSON file" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[studentFile]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[System.IO.Path.Combine(in_PersistenceFolder, in_Class.Name, in_StudentRow("StudentId").ToString() &amp; ".json")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <If Condition="[System.IO.File.Exists(studentFile)]" DisplayName="Student has prior history (file exists)?" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process student with prior history" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\ProcessClass\ProcessStudentWithHistory.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+<InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
+<InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[studentFile]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StudentId">[in_StudentRow("StudentId").ToString()]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Saved">[out_Saved]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process new student (no history)" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Main\ProcessClass\ProcessNewStudent.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+<InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
+<InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
+              <InArgument x:TypeArguments="sd:DataRow" x:Key="in_StudentRow">[in_StudentRow]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Saved">[out_Saved]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
 </Activity>
