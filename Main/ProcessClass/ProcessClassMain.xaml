@@ -36,6 +36,7 @@
       <x:String>LOK2239</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -61,7 +62,6 @@
       <AssemblyReference>System.Net.Mail</AssemblyReference>
       <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
-      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Console</AssemblyReference>
       <AssemblyReference>System.Security.Permissions</AssemblyReference>
@@ -75,11 +75,17 @@
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Flowchart DisplayName="ProcessClassMain" sap:VirtualizedContainerService.HintSize="1777,827" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="absenceTable" />
+      <Variable x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" Name="ClassAbsenceTable" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -99,11 +105,12 @@
           <av:Size x:Key="ShapeSize">110,70</av:Size>
           <av:PointCollection x:Key="ConnectorLocation">870,285 870,355</av:PointCollection>
           <av:Point x:Key="AnnotationLocation">950,128</av:Point>
-          <av:Size x:Key="AnnotationSize">180,60</av:Size>
+          <av:Size x:Key="AnnotationSize">350,60</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Read the two columns under 'Opgjort', Procent and Moduler." DisplayName="Read class 'Opgjort' table" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\ProcessClass\ReadClassAbsence.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Read the absence table under 'Fravær' and output is as List&lt;ClassAbsenceTableEntry&gt;" DisplayName="Read class absence table" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\ProcessClass\ReadClassAbsence.xaml">
         <ui:InvokeWorkflowFile.Arguments>
+          <InArgument x:TypeArguments="x:String" x:Key="out_ClassAbsenceTable" />
           <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
           <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
           <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_AbsenceTable">[absenceTable]</OutArgument>
