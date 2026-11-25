@@ -1,0 +1,153 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_RefreshAbsenceForPeriod" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:sd2="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_AbsenceTableList" Type="OutArgument(scg:List(l:ClassAbsenceTableEntry))" />
+    <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
+    <x:Property Name="in_Class" Type="InArgument(l:Class)" />
+    <x:Property Name="in_PeriodStart" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Globalization</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Show class absence from a period start date and extract it" sap:VirtualizedContainerService.HintSize="1771,2057" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Default="[in_Class.Name]" Name="className" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Lectio class absence page" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="452,2034" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="[GlobalVariablesNamespace.GlobalVariables.global_browser]" InteractionMode="DebuggerApi" OpenMode="Never" ScopeGuid="c6881a0a-f2ad-4cd3-be6d-cb971098cfee" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Set period start, click Vis, extract" sap:VirtualizedContainerService.HintSize="450,1912" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd2:DataTable" Name="AbsenceTable" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log period start entry" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;Setting absence period start to &quot; &amp; in_PeriodStart &amp; &quot;.&quot;]" />
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type period start date" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,246" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="c6881a0a-f2ad-4cd3-be6d-cb971098cfee" Text="[in_PeriodStart]" Version="V5">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable ContentHash="NeYmC8HcSkOLUAlxwLHQqw" DesignTimeRectangle="719, 356, 72, 21" ElementType="InputBox" ElementVisibilityArgument="Interactive" FuzzySelectorArgument="&lt;webctrl action='./fravaergroup.aspx?holdelementid=77739522045' parentid='masterContent' tag='FORM' matching:action='fuzzy' fuzzylevel:action='0.0' matching:parentid='fuzzy' fuzzylevel:parentid='0.0' /&gt;&lt;webctrl id='s_m_Content_Content_PeriodeVaegler_PeriodePicker_start__date_tb' tag='INPUT' type='text' class='datebox hasDatepicker' aaname='' matching:id='fuzzy' fuzzylevel:id='0.0' matching:class='fuzzy' fuzzylevel:class='0.0' matching:aaname='fuzzy' fuzzylevel:aaname='0.0' /&gt;" Guid="956d81a1-93fe-49b7-99a9-ee3d76b0c20d" InformativeScreenshot="8bd66e5daf1054df03ea7fa967f8f44c.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/dTPpJrC3GkGNHxNSeBMd8A" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Holdet * - Fravær - Lectio - Køge Handelsskole' /&gt;" SearchSteps="FuzzySelector" Version="V6" WaitForReadyArgument="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="669, 359, 47, 14" ElementType="Text" FuzzySelectorArgument="&lt;webctrl tag='LABEL' type='' class='' aaname='Periode:' matching:class='fuzzy' fuzzylevel:class='0.0' matching:aaname='fuzzy' fuzzylevel:aaname='0.0' check:text='Periode:' /&gt;" Guid="f56902f8-89fe-47d8-b1e7-131eec9f9892" SearchSteps="FuzzySelector" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <ui:LogMessage DisplayName="Log period refresh" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;Clicking Vis to refresh the absence period.&quot;]" />
+            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Vis'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,194" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="c6881a0a-f2ad-4cd3-be6d-cb971098cfee" Version="V5">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable ContentHash="tfho12UVwku6qYLbTtmO4g" DesignTimeRectangle="887, 351, 44, 30" ElementType="Text" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl id='s_m_Content_Content_ShowPeriodeBtn' tag='A' /&gt;" Guid="842ae5ad-4ae3-4471-94a0-98ac8343a2de" InformativeScreenshot="3c9f44e194e7582f9959037c7bc0c08a.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/rycndBSl_kSKlVxwEN7WYw" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Holdet * - Fravær - Lectio - Køge Handelsskole' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <ui:LogMessage DisplayName="Log period table extraction" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;Extracting Periode and Opgjort absence for the selected period.&quot;]" />
+            <uix:NExtractDataGeneric x:TypeArguments="sd2:DataTable" ExtractDataSettings="{x:Null}" DisplayName="Extract period student absence" ExtractMetadata="&lt;extract&gt;&lt;row css-selector='#s_m_Content_Content_fravaertbl &gt; tbody &gt; tr' /&gt;&lt;column name='StudentName' attr='text' name2='StudentUrl' attr2='href' css-selector='#s_m_Content_Content_fravaertbl &gt; tbody &gt; tr &gt; td:nth-child(2) &gt; a' /&gt;&lt;column name='OpgjortProcent' attr='text' css-selector='#s_m_Content_Content_fravaertbl &gt; tbody &gt; tr &gt; td:nth-child(5)' /&gt;&lt;column name='OpgjortModuler' attr='text' css-selector='#s_m_Content_Content_fravaertbl &gt; tbody &gt; tr &gt; td:nth-child(6)' /&gt;&lt;column name='PeriodeProcent' attr='text' css-selector='#s_m_Content_Content_fravaertbl &gt; tbody &gt; tr &gt; td:nth-child(3)' /&gt;&lt;column name='PeriodeModuler' attr='text' css-selector='#s_m_Content_Content_fravaertbl &gt; tbody &gt; tr &gt; td:nth-child(4)' /&gt;&lt;/extract&gt;" ExtractedData="[AbsenceTable]" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,143" sap2010:WorkflowViewState.IdRef="NExtractDataGeneric`1_1" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="c6881a0a-f2ad-4cd3-be6d-cb971098cfee" Version="V5">
+              <uix:NExtractDataGeneric.Target>
+                <uix:TargetAnchorable BrowserURL="lectio.dk/lectio/138/subnav/fravaergroup.aspx" ContentHash="eNLZQwfFW0avHuYBpEDs2A" DesignTimeRectangle="647, 302, 790, 749" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl tag='SECTION' /&gt;" Guid="3f70cf36-4604-49c9-8123-9091ab568f1e" InformativeScreenshot="73eac042493352b2b63a2dd908945198.jpg" Reference="WA5AsL_o2kScslpZlc7Txw/hGtHxJ3Cz0KeL-Fuy-4yIQ" ScopeSelectorArgument="[string.Format(&quot;&lt;html app='chrome.exe' title='Holdet {0} - Fravær - Lectio - Køge Handelsskole' /&gt;&quot;, className)]" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="0" />
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NExtractDataGeneric.Target>
+            </uix:NExtractDataGeneric>
+            <ui:LogMessage DisplayName="Log period entry mapping" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;Mapping refreshed absence rows to ClassAbsenceTableEntry objects.&quot;]" />
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_Entries = New System.Collections.Generic.List(Of LOK2239.ClassAbsenceTableEntry)()&#xA;If in_Table Is Nothing Then Return&#xA;If in_Table.Rows.Count &gt; 0 Then&#xA;    For Each name As String In New String() {&quot;StudentName&quot;, &quot;StudentUrl&quot;, &quot;PeriodeProcent&quot;, &quot;PeriodeModuler&quot;, &quot;OpgjortProcent&quot;, &quot;OpgjortModuler&quot;}&#xA;        If Not in_Table.Columns.Contains(name) Then Throw New InvalidOperationException(&quot;Absence extraction is missing column &quot; &amp; name)&#xA;    Next&#xA;End If&#xA;For Each prop As System.Reflection.PropertyInfo In GetType(LOK2239.ClassAbsenceTableEntry).GetProperties()&#xA;    If Not in_Table.Columns.Contains(prop.Name) Then&#xA;        in_Table.Columns.Add(prop.Name, prop.PropertyType)&#xA;    ElseIf in_Table.Columns(prop.Name).DataType &lt;&gt; prop.PropertyType Then&#xA;        Throw New InvalidOperationException(&quot;Absence column &quot; &amp; prop.Name &amp; &quot; has an unexpected data type.&quot;)&#xA;    End If&#xA;Next&#xA;If in_Table.Rows.Count = 0 Then Return&#xA;Dim classUri As New Uri(in_ClassAbsenceUrl, UriKind.Absolute)&#xA;Dim parseNumber As Func(Of String, String, Single) =&#xA;    Function(raw As String, label As String) As Single&#xA;        Dim value As Decimal&#xA;        If Not Decimal.TryParse(raw.Trim().Replace(&quot;,&quot;, &quot;.&quot;), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, value) OrElse value &lt; 0D Then Throw New FormatException(&quot;Invalid &quot; &amp; label &amp; &quot;: &quot; &amp; raw)&#xA;        Return CSng(value)&#xA;    End Function&#xA;Dim parseModules As Func(Of String, String, Single()) =&#xA;    Function(raw As String, label As String) As Single()&#xA;        Dim clean = raw.Trim()&#xA;        If clean.Length = 0 OrElse clean = &quot;-&quot; OrElse clean = &quot;—&quot; Then Return New Single() {0F, 0F}&#xA;        Dim parts = clean.Split(&quot;/&quot;c)&#xA;        If parts.Length &lt;&gt; 2 Then Throw New FormatException(&quot;Invalid &quot; &amp; label &amp; &quot;, expected absence/total: &quot; &amp; raw)&#xA;        Return New Single() {parseNumber(parts(0), label &amp; &quot; absent modules&quot;), parseNumber(parts(1), label &amp; &quot; total modules&quot;)}&#xA;    End Function&#xA;Dim parsePercent As Func(Of String, Single, String, Single) =&#xA;    Function(raw As String, moduleTotal As Single, label As String) As Single&#xA;        Dim clean = raw.Replace(&quot;%&quot;, &quot;&quot;).Trim()&#xA;        If moduleTotal = 0F AndAlso (clean.Length = 0 OrElse clean = &quot;-&quot; OrElse clean = &quot;—&quot;) Then Return 0F&#xA;        Dim value = parseNumber(clean, label)&#xA;        If value &gt; 100F Then Throw New FormatException(&quot;Invalid &quot; &amp; label &amp; &quot;: &quot; &amp; raw)&#xA;        Return value&#xA;    End Function&#xA;Dim seen As New System.Collections.Generic.HashSet(Of String)(StringComparer.Ordinal)&#xA;For Each row As System.Data.DataRow In in_Table.Rows&#xA;    Dim rawUrl = System.Net.WebUtility.HtmlDecode(row(&quot;StudentUrl&quot;).ToString()).Trim()&#xA;    If rawUrl.Length = 0 Then Continue For&#xA;    Dim studentLabel = System.Net.WebUtility.HtmlDecode(row(&quot;StudentName&quot;).ToString()).Trim()&#xA;    Try&#xA;        Dim studentUri As New Uri(classUri, rawUrl)&#xA;        Dim idMatch = System.Text.RegularExpressions.Regex.Match(studentUri.Query, &quot;[?&amp;]elevid=(\d+)(&amp;|$)&quot;, System.Text.RegularExpressions.RegexOptions.IgnoreCase)&#xA;        If studentLabel.Length = 0 OrElse Not idMatch.Success Then Throw New InvalidOperationException(&quot;Student identity is missing or invalid.&quot;)&#xA;        Dim periode = parseModules(row(&quot;PeriodeModuler&quot;).ToString(), &quot;Periode Moduler&quot;)&#xA;        Dim opgjort = parseModules(row(&quot;OpgjortModuler&quot;).ToString(), &quot;Opgjort Moduler&quot;)&#xA;        Dim entry As New LOK2239.ClassAbsenceTableEntry With {&#xA;            .StudentId = idMatch.Groups(1).Value,&#xA;            .StudentName = studentLabel,&#xA;            .StudentUrl = studentUri.AbsoluteUri,&#xA;            .ClassAbsenceUrl = classUri.AbsoluteUri,&#xA;            .PeriodeAbsencePercentage = parsePercent(row(&quot;PeriodeProcent&quot;).ToString(), periode(1), &quot;Periode Procent&quot;),&#xA;            .PeriodeAbsenceModuleCount = periode(0),&#xA;            .PeriodeModuleCount = periode(1),&#xA;            .OpgjortAbsencePercentage = parsePercent(row(&quot;OpgjortProcent&quot;).ToString(), opgjort(1), &quot;Opgjort Procent&quot;),&#xA;            .OpgjortAbsenceModuleCount = opgjort(0),&#xA;            .OpgjortModuleCount = opgjort(1)&#xA;        }&#xA;        For Each prop As System.Reflection.PropertyInfo In GetType(LOK2239.ClassAbsenceTableEntry).GetProperties()&#xA;            row(prop.Name) = prop.GetValue(entry)&#xA;        Next&#xA;        If seen.Add(entry.StudentId) Then out_Entries.Add(entry)&#xA;    Catch ex As Exception&#xA;        Throw New InvalidOperationException(&quot;Could not map absence for student &quot; &amp; studentLabel &amp; &quot; on &quot; &amp; in_ClassAbsenceUrl &amp; &quot;: &quot; &amp; ex.Message, ex)&#xA;    End Try&#xA;Next" DisplayName="Map period table to absence entries" sap:VirtualizedContainerService.HintSize="416,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+              <ui:InvokeCode.Arguments>
+                <InArgument x:TypeArguments="sd2:DataTable" x:Key="in_Table">[AbsenceTable]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="in_ClassAbsenceUrl">[in_Class.ClassAbsenceUrl]</InArgument>
+                <OutArgument x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" x:Key="out_Entries">[out_AbsenceTableList]</OutArgument>
+              </ui:InvokeCode.Arguments>
+            </ui:InvokeCode>
+            <ui:LogMessage DisplayName="Log refreshed absence entry total" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;Returning &quot; &amp; out_AbsenceTableList.Count.ToString() &amp; &quot; ClassAbsenceTableEntry objects for the refreshed period.&quot;]" />
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="0, 0, 0, 0" Version="V3" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+  </Sequence>
+</Activity>

@@ -17,6 +17,15 @@
       <x:String>System.Collections</x:String>
       <x:String>System.Numerics</x:String>
       <x:String>LOK2239</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -57,9 +66,23 @@
       <AssemblyReference>System.Memory.Data</AssemblyReference>
       <AssemblyReference>Microsoft.Extensions.DependencyModel</AssemblyReference>
       <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Windows.GdiPlus</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart sap2010:Annotation.AnnotationText="This is the starting point of the process.&#xA;1) Login.&#xA;2) Get hierarchy of Subjects/Classes, loaded into Global.Subjects.&#xA;3) Loop through every subject and process it." DisplayName="MainFlowChart" sap:VirtualizedContainerService.HintSize="1777,827" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart sap2010:Annotation.AnnotationText="This is the starting point of the process.&#xA;1) Login.&#xA;2) Get hierarchy of Subjects/Classes, loaded into Global.Subjects.&#xA;3) Loop through every subject and process it." DisplayName="MainFlowChart" sap:VirtualizedContainerService.HintSize="1811,843" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -70,9 +93,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
-      <x:Reference>__ReferenceID7</x:Reference>
+      <x:Reference>__ReferenceID9</x:Reference>
     </Flowchart.StartNode>
-    <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+    <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <av:Point x:Key="ShapeLocation">245,155</av:Point>
@@ -105,12 +128,15 @@
               <av:Point x:Key="ShapeLocation">465,155</av:Point>
               <av:Size x:Key="ShapeSize">110,70</av:Size>
               <av:PointCollection x:Key="ConnectorLocation">520,225 520,330 355,330</av:PointCollection>
+              <av:Point x:Key="AnnotationLocation">570,60</av:Point>
+              <av:Size x:Key="AnnotationSize">230,60</av:Size>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Check persistence folder" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence sap2010:Annotation.AnnotationText="Verify the current user has write access to the persistence folder." DisplayName="Check persistence folder" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:LogMessage DisplayName="Log persistence check" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Verifying write access to the persistence folder.&quot;]" />
@@ -166,7 +192,7 @@
                       <av:PointCollection x:Key="ConnectorLocation">300,505 300,575</av:PointCollection>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="Ensure logout" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                  <Sequence DisplayName="Ensure logged out" sap2010:WorkflowViewState.IdRef="Sequence_5">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -286,11 +312,12 @@
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <av:Point x:Key="ShapeLocation">945,575</av:Point>
                                       <av:Size x:Key="ShapeSize">110,70</av:Size>
-                                      <av:Point x:Key="AnnotationLocation">1075,455</av:Point>
+                                      <av:Point x:Key="AnnotationLocation">915,445</av:Point>
                                       <av:Size x:Key="AnnotationSize">230,90</av:Size>
+                                      <av:PointCollection x:Key="ConnectorLocation">1000,645 1000,770 1135,770</av:PointCollection>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loop through every Subject / Class.&#xD;&#xA;Call ProcessClassMain for each Class.&#xD;&#xA;&#xD;&#xA;Try/catch every Class so we continue on error." DisplayName="Process every subject" sap:VirtualizedContainerService.HintSize="560,2476" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[LOK2239.Root.Subjects]">
+                                  <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loop through every Subject / Class.&#xA;Call ProcessClassMain for each Class.&#xA;&#xA;Try/catch every Class so we continue on error." DisplayName="Process every subject" sap:VirtualizedContainerService.HintSize="560,2492" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[LOK2239.Root.Subjects]">
                                     <ui:ForEach.Body>
                                       <ActivityAction x:TypeArguments="l:Subject">
                                         <ActivityAction.Argument>
@@ -419,6 +446,58 @@
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
                                   </ui:ForEach>
+                                  <FlowStep.Next>
+                                    <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <av:Point x:Key="ShapeLocation">1135,735</av:Point>
+                                          <av:Size x:Key="ShapeSize">110,70</av:Size>
+                                          <av:PointCollection x:Key="ConnectorLocation">1190,735 1190,645</av:PointCollection>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="[UiPath.UIAutomationNext.Enums.NAppCloseMode.Always]" DisplayName="Close browser" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InUiElement="[global_browser]" OpenMode="[UiPath.UIAutomationNext.Enums.NAppOpenMode.Never]" ScopeGuid="ec34f5b5-b531-4642-9425-064bcdd26d71" Version="V2">
+                                        <uix:NApplicationCard.Body>
+                                          <ActivityAction x:TypeArguments="x:Object">
+                                            <ActivityAction.Argument>
+                                              <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                                            </ActivityAction.Argument>
+                                            <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_22" />
+                                          </ActivityAction>
+                                        </uix:NApplicationCard.Body>
+                                        <uix:NApplicationCard.OCREngine>
+                                          <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                                            <ActivityFunc.Argument>
+                                              <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                                            </ActivityFunc.Argument>
+                                          </ActivityFunc>
+                                        </uix:NApplicationCard.OCREngine>
+                                        <uix:NApplicationCard.TargetApp>
+                                          <uix:TargetApp Area="0, 0, 0, 0" Version="V3" />
+                                        </uix:NApplicationCard.TargetApp>
+                                      </uix:NApplicationCard>
+                                      <FlowStep.Next>
+                                        <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_1">
+                                          <sap:WorkflowViewStateService.ViewState>
+                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                              <av:Point x:Key="ShapeLocation">1135,575</av:Point>
+                                              <av:Size x:Key="ShapeSize">110,70</av:Size>
+                                              <av:Point x:Key="AnnotationLocation">1290,448</av:Point>
+                                            </scg:Dictionary>
+                                          </sap:WorkflowViewStateService.ViewState>
+                                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" sap2010:Annotation.AnnotationText="Send an error mail if any errors are added to Messages list." DisplayName="Send error mail if errors" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Main\SendErrorMail.xaml">
+                                            <ui:InvokeWorkflowFile.Arguments>
+                                              <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                                            </ui:InvokeWorkflowFile.Arguments>
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                          </ui:InvokeWorkflowFile>
+                                        </FlowStep>
+                                      </FlowStep.Next>
+                                    </FlowStep>
+                                  </FlowStep.Next>
                                 </FlowStep>
                               </FlowStep.Next>
                             </FlowStep>
@@ -441,5 +520,7 @@
     <x:Reference>__ReferenceID4</x:Reference>
     <x:Reference>__ReferenceID5</x:Reference>
     <x:Reference>__ReferenceID6</x:Reference>
+    <x:Reference>__ReferenceID7</x:Reference>
+    <x:Reference>__ReferenceID8</x:Reference>
   </Flowchart>
 </Activity>

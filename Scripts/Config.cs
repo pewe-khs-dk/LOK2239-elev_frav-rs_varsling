@@ -12,6 +12,7 @@ namespace LOK2239
         public string InstitutionId;
         public string EmailAddressSME;
         public string EmailAddressOnError;
+        public string EmailAddressOnDryRun;
         public string PersistenceFolder;
     }
     
@@ -43,6 +44,7 @@ namespace LOK2239
             if (string.IsNullOrEmpty(Values.InstitutionId)) throw new System.Exception($"Missing value {nameof(Values.InstitutionId)} from config JSON");
             if (string.IsNullOrEmpty(Values.EmailAddressSME)) throw new System.Exception($"Missing value {nameof(Values.EmailAddressSME)} from config JSON");
             if (string.IsNullOrEmpty(Values.EmailAddressOnError)) throw new System.Exception($"Missing value {nameof(Values.EmailAddressOnError)} from config JSON");
+            if (string.IsNullOrEmpty(Values.EmailAddressOnDryRun)) throw new System.Exception($"Missing value {nameof(Values.EmailAddressOnDryRun)} from config JSON");
             if (string.IsNullOrEmpty(Values.PersistenceFolder)) throw new System.Exception($"Missing value {nameof(Values.PersistenceFolder)} from config JSON");
         }
     }

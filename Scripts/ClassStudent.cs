@@ -9,10 +9,11 @@ namespace LOK2239
         public string Name { get; set; }
         public StudentState State { get; set; } = StudentState.NoRemarks;
         public float CurrentPercentage { get; set; }
-        public int ModuleCountSincePeriodStart { get; set; }
+        public float ModuleCountSincePeriodStart { get; set; }
         public DateOnly? DateLatestletter { get; set; }
         public DateOnly? DateAbsenceCheckStartDate { get; set; }
         public DateOnly? DateOfLatestProcessing { get; set; }
         public StudentLatestCheck LatestCheck { get; set; }
+        public StudentLatestCheck DateCreation { get; set; }
     }
 }

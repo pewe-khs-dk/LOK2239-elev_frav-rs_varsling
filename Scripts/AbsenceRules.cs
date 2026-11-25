@@ -11,7 +11,7 @@ namespace LOK2239
     public static class AbsenceRules
     {
         /// <summary>Students with this many modules or fewer must have at least SmallModulePercent to count.</summary>
-        public const int SmallModuleLimit = 5;
+        public const float SmallModuleLimit = 5;
         public const float SmallModulePercent = 80f;
         /// <summary>New student (no file): Opgjort percent must be strictly above this.</summary>
         public const float NewStudentPercent = 25f;
@@ -28,24 +28,24 @@ namespace LOK2239
         }
 
         /// <summary>Parses a Lectio module cell in the format "{x}/{moduleCount}" and returns moduleCount.</summary>
-        public static int ParseModuleCount(string text)
+        public static float ParseModuleCount(string text)
         {
             var match = Regex.Match(text ?? "", @"^\s*[\d.,]+\s*/\s*(\d+)(?:[.,]0+)?\s*$");
             if (!match.Success)
                 throw new FormatException($"Invalid module count, expected '{{x}}/{{moduleCount}}': '{text}'");
-            return int.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
+            return float.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture);
         }
 
         /// <summary>Special rule: with SmallModuleLimit modules or fewer the percent must be at least SmallModulePercent.</summary>
-        public static bool PassesSmallModuleRule(float percent, int moduleCount)
+        public static bool PassesSmallModuleRule(float percent, float moduleCount)
             => moduleCount > SmallModuleLimit || percent >= SmallModulePercent;
 
         /// <summary>No prior history: Opgjort percent above 25 (and the special rule).</summary>
-        public static bool IsNewStudentViolation(float percent, int moduleCount)
+        public static bool IsNewStudentViolation(float percent, float moduleCount)
             => PassesSmallModuleRule(percent, moduleCount) && percent > NewStudentPercent;
 
         /// <summary>Prior history: Periode percent since latest letter above 10 (and the special rule).</summary>
-        public static bool IsRepeatViolation(float percent, int moduleCount)
+        public static bool IsRepeatViolation(float percent, float moduleCount)
             => PassesSmallModuleRule(percent, moduleCount) && percent > RepeatPercent;
 
         /// <summary>Timestamp prefix used in log lines and Messages, e.g. "[2026-11-20 14:05]".</summary>
