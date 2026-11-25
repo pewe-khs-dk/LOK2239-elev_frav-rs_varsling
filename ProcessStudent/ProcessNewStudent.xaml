@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessNewStudent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
@@ -44,7 +43,6 @@
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
-      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
@@ -56,9 +54,14 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Private.Uri</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="New student: save only if Opgjort absence is a violation" sap:VirtualizedContainerService.HintSize="1771,1158" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="New student: save only if Opgjort absence is a violation" sap:VirtualizedContainerService.HintSize="1777,1561" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="l:ClassStudent" Name="student" />
       <Variable x:TypeArguments="x:Boolean" Name="isViolation" />
@@ -68,23 +71,28 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_IsViolation = LOK2239.AbsenceRules.IsNewStudentViolation(in_StudentRow.OpgjortAbsencePercentage, in_StudentRow.OpgjortModuleCount)&#xA;out_Student = New LOK2239.ClassStudent With { .Id = in_StudentRow.StudentId, .ClassShortName = in_ClassShortName, .Name = in_StudentRow.StudentName, .CurrentPercentage = in_StudentRow.OpgjortAbsencePercentage, .ModuleCountSincePeriodStart = in_StudentRow.OpgjortModuleCount }" DisplayName="Parse Opgjort Procent/Moduler and apply the new-student rules" sap:VirtualizedContainerService.HintSize="452,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_IsViolation = LOK2239.AbsenceRules.IsNewStudentViolation(in_StudentRow.OpgjortAbsencePercentage, in_StudentRow.OpgjortModuleCount)" DisplayName="Parse Opgjort Procent/Moduler and apply the new-student rules" sap:VirtualizedContainerService.HintSize="452,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="l:ClassAbsenceTableEntry" x:Key="in_StudentRow">[in_StudentRow]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ClassShortName">[in_Class.Name]</InArgument>
         <OutArgument x:TypeArguments="x:Boolean" x:Key="out_IsViolation">[isViolation]</OutArgument>
-        <OutArgument x:TypeArguments="l:ClassStudent" x:Key="out_Student">[student]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <If Condition="[isViolation]" DisplayName="Absence &gt; 25% (or &gt;= 80% with 5 modules or fewer)?" sap:VirtualizedContainerService.HintSize="452,732" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[isViolation]" DisplayName="Absence &gt; 25% (or &gt;= 80% with 5 modules or fewer)?" sap:VirtualizedContainerService.HintSize="452,1135" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,578" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Then - in violation, start watching this student" sap:VirtualizedContainerService.HintSize="450,981" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Write student JSON" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\ProcessStudent\SaveClassStudent.xaml">
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_Student = New LOK2239.ClassStudent With {&#xA;&#x9;.Id = in_StudentRow.StudentId, &#xA;&#x9;.ClassName = in_ClassShortName,&#xA;&#x9;.Name = in_StudentRow.StudentName,&#xA;&#x9;.CurrentPercentage = in_StudentRow.OpgjortAbsencePercentage,&#xA;&#x9;.ModuleCountSincePeriodStart = in_StudentRow.OpgjortModuleCount,&#xA;&#x9;.DateCreation = System.DateOnly.FromDateTime(System.DateTime.Now),&#xA;&#x9;.State = LOK2239.StudentState.NoRemarks,&#xA;&#x9;.ViolationHandlingPending = True&#xA;}&#xA;" DisplayName="In violation, start watching this student" sap:VirtualizedContainerService.HintSize="416,403" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+            <ui:InvokeCode.Arguments>
+              <OutArgument x:TypeArguments="l:ClassStudent" x:Key="out_Student">[student]</OutArgument>
+              <InArgument x:TypeArguments="l:ClassAbsenceTableEntry" x:Key="in_StudentRow">[in_StudentRow]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_ClassName">[in_Class.Name]</InArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Write student JSON" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudent\SaveClassStudent.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
               <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>

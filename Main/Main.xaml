@@ -65,7 +65,6 @@
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>System.Memory.Data</AssemblyReference>
       <AssemblyReference>Microsoft.Extensions.DependencyModel</AssemblyReference>
-      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
       <AssemblyReference>System.Private.Windows.GdiPlus</AssemblyReference>
       <AssemblyReference>System.Drawing.Common</AssemblyReference>
@@ -80,9 +79,10 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Flowchart sap2010:Annotation.AnnotationText="This is the starting point of the process.&#xA;1) Login.&#xA;2) Get hierarchy of Subjects/Classes, loaded into Global.Subjects.&#xA;3) Loop through every subject and process it." DisplayName="MainFlowChart" sap:VirtualizedContainerService.HintSize="1811,843" sap2010:WorkflowViewState.IdRef="Flowchart_1">
+  <Flowchart sap2010:Annotation.AnnotationText="This is the starting point of the process.&#xA;1) Login.&#xA;2) Get hierarchy of Subjects/Classes, loaded into Global.Subjects.&#xA;3) Loop through every subject and process it." DisplayName="MainFlowChart" sap:VirtualizedContainerService.HintSize="1783,843" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -359,7 +359,7 @@
                                                                 </scg:Dictionary>
                                                               </sap:WorkflowViewStateService.ViewState>
                                                               <ui:LogMessage DisplayName="Log ProcessClassMain invocation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN PROCESSING CLASS [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot; / &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)] &quot;]" />
-                                                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process class" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Main\ProcessClass\ProcessClassMain.xaml">
+                                                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process class" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ProcessClass\ProcessClassMain.xaml">
                                                                 <ui:InvokeWorkflowFile.Arguments>
                                                                   <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[currentSubject]</InArgument>
                                                                   <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[currentClass]</InArgument>

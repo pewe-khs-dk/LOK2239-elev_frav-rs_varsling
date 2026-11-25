@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessStudentWithHistory" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessStudentWithHistory" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
     <x:Property Name="in_Class" Type="InArgument(l:Class)" />
@@ -27,6 +26,8 @@
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Collections</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -41,7 +42,6 @@
       <AssemblyReference>System.Linq</AssemblyReference>
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
       <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
@@ -59,9 +59,15 @@
       <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Student with history: check absence since the latest letter" sap:VirtualizedContainerService.HintSize="1771,2885" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Student with history: check absence since the latest letter" sap:VirtualizedContainerService.HintSize="1777,3003" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="studentJson" />
       <Variable x:TypeArguments="l:ClassStudent" Name="student" />
@@ -73,35 +79,36 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadTextFile File="{x:Null}" Content="[studentJson]" DisplayName="Read the student's JSON file" FileName="[in_StudentFile]" sap:VirtualizedContainerService.HintSize="488,124" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_Student = LOK2239.AbsenceRules.FromJson(in_Json, in_ExpectedId)" DisplayName="Load the student from JSON" sap:VirtualizedContainerService.HintSize="488,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:ReadTextFile File="{x:Null}" Content="[studentJson]" DisplayName="Read the student's JSON file" FileName="[in_StudentFile]" sap:VirtualizedContainerService.HintSize="499,124" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_Student = LOK2239.AbsenceRules.FromJson(in_Json, in_ExpectedId)" DisplayName="Load the student from JSON" sap:VirtualizedContainerService.HintSize="499,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_Json">[studentJson]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_ExpectedId">[in_StudentId]</InArgument>
         <OutArgument x:TypeArguments="l:ClassStudent" x:Key="out_Student">[student]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <If Condition="[student.DateLatestletter.HasValue]" DisplayName="Student has received a first letter?" sap:VirtualizedContainerService.HintSize="488,2335" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[student.DateLatestLetter.HasValue]" DisplayName="Student has received a first letter?" sap:VirtualizedContainerService.HintSize="499,2453" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="486,1779" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="497,1897" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" Name="absenceTableList" />
           </Sequence.Variables>
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Assign DisplayName="Period start = day after latest letter" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="Assign_1">
+          <Assign DisplayName="Period start = day after latest letter" sap:VirtualizedContainerService.HintSize="463,175" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="x:String">[periodStart]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[LOK2239.AbsenceRules.FormatLectioDate(student.DateLatestletter.Value.AddDays(1))]</InArgument>
+              <InArgument x:TypeArguments="x:String">[LOK2239.AbsenceRules.FormatLectioDate(student.DateLatestLetter.Value.AddDays(1))]</InArgument>
             </Assign.Value>
           </Assign>
-          <ui:LogMessage DisplayName="Log period check" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Checking absence for student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot; since &quot; &amp; periodStart &amp; &quot;.&quot;)]" />
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Show absence from period start and extract table" sap:VirtualizedContainerService.HintSize="452,234" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Main\ProcessStudent\RefreshAbsenceForPeriod.xaml">
+          <ui:LogMessage DisplayName="Log period check" sap:VirtualizedContainerService.HintSize="463,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Checking absence for student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) in class &quot; &amp; in_Class.Name &amp; &quot; since &quot; &amp; periodStart &amp; &quot;.&quot;)]" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Show absence from period start and extract table" sap:VirtualizedContainerService.HintSize="463,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudent\RefreshAbsenceForPeriod.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
               <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
@@ -109,23 +116,31 @@
               <OutArgument x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" x:Key="out_AbsenceTableList">[absenceTableList]</OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim row As LOK2239.ClassAbsenceTableEntry = Nothing&#xA;If in_Rows Is Nothing Then Throw New InvalidOperationException(&quot;Period absence refresh returned no student list.&quot;)&#xA;For Each entry As LOK2239.ClassAbsenceTableEntry In in_Rows&#xA;  If entry.StudentId = io_Student.Id Then&#xA;    row = entry&#xA;    Exit For&#xA;  End If&#xA;Next&#xA;If row Is Nothing Then Throw New InvalidOperationException(&quot;Student &quot; &amp; io_Student.Name &amp; &quot; (&quot; &amp; io_Student.Id &amp; &quot;) was not found in the period absence list.&quot;)&#xA;Dim percent As Single = row.PeriodeAbsencePercentage&#xA;Dim moduleCount As Single = row.PeriodeModuleCount&#xA;out_IsViolation = LOK2239.AbsenceRules.IsRepeatViolation(percent, moduleCount)&#xA;If out_IsViolation Then&#xA;  io_Student.CurrentPercentage = percent&#xA;  io_Student.ModuleCountSincePeriodStart = moduleCount&#xA;End If" DisplayName="Find this student in the typed period list and apply repeat rules" sap:VirtualizedContainerService.HintSize="452,403" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim row As LOK2239.ClassAbsenceTableEntry = Nothing&#xA;If in_Rows Is Nothing Then Throw New InvalidOperationException(&quot;Period absence refresh returned no student list.&quot;)&#xA;For Each entry As LOK2239.ClassAbsenceTableEntry In in_Rows&#xA;  If entry.StudentId = io_Student.Id Then&#xA;    row = entry&#xA;    Exit For&#xA;  End If&#xA;Next&#xA;If row Is Nothing Then Throw New InvalidOperationException(&quot;Student &quot; &amp; io_Student.Name &amp; &quot; (&quot; &amp; io_Student.Id &amp; &quot;) was not found in the period absence list.&quot;)&#xA;Dim percent As Single = row.PeriodeAbsencePercentage&#xA;Dim moduleCount As Single = row.PeriodeModuleCount&#xA;out_IsViolation = LOK2239.AbsenceRules.IsRepeatViolation(percent, moduleCount)&#xA;If out_IsViolation Then&#xA;  io_Student.CurrentPercentage = percent&#xA;  io_Student.ModuleCountSincePeriodStart = moduleCount&#xA;End If" DisplayName="Find this student in the typed period list and apply repeat rules" sap:VirtualizedContainerService.HintSize="463,403" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
             <ui:InvokeCode.Arguments>
               <InArgument x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" x:Key="in_Rows">[absenceTableList]</InArgument>
               <InArgument x:TypeArguments="l:ClassStudent" x:Key="io_Student">[student]</InArgument>
               <OutArgument x:TypeArguments="x:Boolean" x:Key="out_IsViolation">[isViolation]</OutArgument>
             </ui:InvokeCode.Arguments>
           </ui:InvokeCode>
-          <If Condition="[isViolation]" DisplayName="Absence since letter &gt; 10% (or &gt;= 80% with 5 modules or fewer)?" sap:VirtualizedContainerService.HintSize="452,732" sap2010:WorkflowViewState.IdRef="If_2">
+          <If Condition="[isViolation]" DisplayName="Absence since letter &gt; 10% (or &gt;= 80% with 5 modules or fewer)?" sap:VirtualizedContainerService.HintSize="463,907" sap2010:WorkflowViewState.IdRef="If_2">
             <If.Then>
-              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,578" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="461,753" sap2010:WorkflowViewState.IdRef="Sequence_3">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:LogMessage DisplayName="Log new violation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (LOK2239.AbsenceRules.Timestamp() &amp; &quot;&gt; Student with prior warning has a new violation. &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;): &quot; &amp; student.CurrentPercentage.ToString(&quot;0.0&quot;, System.Globalization.CultureInfo.InvariantCulture) &amp; &quot;% for &quot; &amp; student.ModuleCountSincePeriodStart.ToString() &amp; &quot; modules since &quot; &amp; periodStart &amp; &quot;.&quot;)]" />
-                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Write updated student JSON" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Main\ProcessStudent\SaveClassStudent.xaml">
+                <ui:LogMessage DisplayName="Log new violation" sap:VirtualizedContainerService.HintSize="427,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (LOK2239.AbsenceRules.Timestamp() &amp; &quot;&gt; Student with prior warning has a new violation. &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;): &quot; &amp; student.CurrentPercentage.ToString(&quot;0.0&quot;, System.Globalization.CultureInfo.InvariantCulture) &amp; &quot;% for &quot; &amp; student.ModuleCountSincePeriodStart.ToString() &amp; &quot; modules since &quot; &amp; periodStart &amp; &quot;.&quot;)]" />
+                <Assign sap:VirtualizedContainerService.HintSize="427,175" sap2010:WorkflowViewState.IdRef="Assign_3">
+                  <Assign.To>
+                    <OutArgument x:TypeArguments="x:Boolean">[student.ViolationHandlingPending]</OutArgument>
+                  </Assign.To>
+                  <Assign.Value>
+                    <InArgument x:TypeArguments="x:Boolean">[True]</InArgument>
+                  </Assign.Value>
+                </Assign>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Write updated student JSON" sap:VirtualizedContainerService.HintSize="427,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="ProcessStudent\SaveClassStudent.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
                     <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
@@ -133,7 +148,7 @@
                     <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[student]</InArgument>
                   </ui:InvokeWorkflowFile.Arguments>
                 </ui:InvokeWorkflowFile>
-                <Assign DisplayName="Mark student as saved" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_2">
+                <Assign DisplayName="Mark student as saved" sap:VirtualizedContainerService.HintSize="427,166" sap2010:WorkflowViewState.IdRef="Assign_2">
                   <Assign.To>
                     <OutArgument x:TypeArguments="x:Boolean">[out_Saved]</OutArgument>
                   </Assign.To>
@@ -147,14 +162,14 @@
         </Sequence>
       </If.Then>
       <If.Else>
-        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="486,394" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence DisplayName="Else - student file existed but no letter was ever sent?" sap:VirtualizedContainerService.HintSize="497,394" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log watched student without first letter" sap:VirtualizedContainerService.HintSize="452,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (LOK2239.AbsenceRules.Timestamp() &amp; &quot;&gt; Student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) is being watched but has no first letter. This could be an error or an interrupted previous processing. JSON: &quot; &amp; studentJson)]" />
-          <InvokeMethod DisplayName="Add watched-without-letter message to Messages" sap:VirtualizedContainerService.HintSize="452,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
+          <ui:LogMessage DisplayName="Log watched student without first letter" sap:VirtualizedContainerService.HintSize="463,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (LOK2239.AbsenceRules.Timestamp() &amp; &quot;&gt; Student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) is being watched but has no first letter. This could be an error or an interrupted previous processing. JSON: &quot; &amp; studentJson)]" />
+          <InvokeMethod DisplayName="Add watched-without-letter message to Messages" sap:VirtualizedContainerService.HintSize="463,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
             <InArgument x:TypeArguments="x:String">[LOK2239.AbsenceRules.Timestamp() &amp; "&gt; Student " &amp; student.Name &amp; " (" &amp; student.Id &amp; ") is being watched but has no first letter. This could be an error or an interrupted previous processing. JSON: " &amp; studentJson]</InArgument>
           </InvokeMethod>
         </Sequence>
