@@ -67,7 +67,7 @@
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Student with history: check absence since the latest letter" sap:VirtualizedContainerService.HintSize="1777,3003" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Student with history: check absence since the latest letter" sap:VirtualizedContainerService.HintSize="1777,3064" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="studentJson" />
       <Variable x:TypeArguments="l:ClassStudent" Name="student" />
@@ -87,9 +87,9 @@
         <OutArgument x:TypeArguments="l:ClassStudent" x:Key="out_Student">[student]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <If Condition="[student.DateLatestLetter.HasValue]" DisplayName="Student has received a first letter?" sap:VirtualizedContainerService.HintSize="499,2453" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[student.DateLatestLetter.HasValue]" DisplayName="Student has received a first letter?" sap:VirtualizedContainerService.HintSize="499,2514" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="497,1897" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="497,1958" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" Name="absenceTableList" />
           </Sequence.Variables>
@@ -116,12 +116,17 @@
               <OutArgument x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" x:Key="out_AbsenceTableList">[absenceTableList]</OutArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
-          <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim row As LOK2239.ClassAbsenceTableEntry = Nothing&#xA;If in_Rows Is Nothing Then Throw New InvalidOperationException(&quot;Period absence refresh returned no student list.&quot;)&#xA;For Each entry As LOK2239.ClassAbsenceTableEntry In in_Rows&#xA;  If entry.StudentId = io_Student.Id Then&#xA;    row = entry&#xA;    Exit For&#xA;  End If&#xA;Next&#xA;If row Is Nothing Then Throw New InvalidOperationException(&quot;Student &quot; &amp; io_Student.Name &amp; &quot; (&quot; &amp; io_Student.Id &amp; &quot;) was not found in the period absence list.&quot;)&#xA;Dim percent As Single = row.PeriodeAbsencePercentage&#xA;Dim moduleCount As Single = row.PeriodeModuleCount&#xA;out_IsViolation = LOK2239.AbsenceRules.IsRepeatViolation(percent, moduleCount)&#xA;If out_IsViolation Then&#xA;  io_Student.CurrentPercentage = percent&#xA;  io_Student.ModuleCountSincePeriodStart = moduleCount&#xA;End If" DisplayName="Find this student in the typed period list and apply repeat rules" sap:VirtualizedContainerService.HintSize="463,403" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+          <ui:InvokeCode ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="This both sets isViolation and updates student with latest CurrentPercentage and ModuleCountSincePeriodStart." Code="Dim row As LOK2239.ClassAbsenceTableEntry = Nothing&#xA;If in_Rows Is Nothing Then Throw New InvalidOperationException(&quot;Period absence refresh returned no student list.&quot;)&#xA;For Each entry As LOK2239.ClassAbsenceTableEntry In in_Rows&#xA;  If entry.StudentId = io_Student.Id Then&#xA;    row = entry&#xA;    Exit For&#xA;  End If&#xA;Next&#xA;If row Is Nothing Then Throw New InvalidOperationException(&quot;Student &quot; &amp; io_Student.Name &amp; &quot; (&quot; &amp; io_Student.Id &amp; &quot;) was not found in the period absence list.&quot;)&#xA;Dim percent As Single = row.PeriodeAbsencePercentage&#xA;Dim moduleCount As Single = row.PeriodeModuleCount&#xA;out_IsViolation = LOK2239.AbsenceRules.IsRepeatViolation(percent, moduleCount)&#xA;If out_IsViolation Then&#xA;  io_Student.CurrentPercentage = percent&#xA;  io_Student.ModuleCountSincePeriodStart = moduleCount&#xA;End If" DisplayName="Update student with current absence" sap:VirtualizedContainerService.HintSize="463,464" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
             <ui:InvokeCode.Arguments>
               <InArgument x:TypeArguments="scg:List(l:ClassAbsenceTableEntry)" x:Key="in_Rows">[absenceTableList]</InArgument>
               <InArgument x:TypeArguments="l:ClassStudent" x:Key="io_Student">[student]</InArgument>
               <OutArgument x:TypeArguments="x:Boolean" x:Key="out_IsViolation">[isViolation]</OutArgument>
             </ui:InvokeCode.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
           </ui:InvokeCode>
           <If Condition="[isViolation]" DisplayName="Absence since letter &gt; 10% (or &gt;= 80% with 5 modules or fewer)?" sap:VirtualizedContainerService.HintSize="463,907" sap2010:WorkflowViewState.IdRef="If_2">
             <If.Then>
