@@ -11,6 +11,7 @@ namespace LOK2239
         public float ModuleCountSincePeriodStart { get; set; }
         public DateOnly DateCreation { get; set; }
         public DateOnly? DateLatestLetter { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public StudentState State { get; set; } = StudentState.NoRemarks;
         public bool ViolationHandlingPending { get; set; } // Will be set in first pass (ProcessNewStudent and ProcessStudentWithHistory) and reset after violation is handled
     }
