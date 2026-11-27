@@ -24,16 +24,19 @@
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
       <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
       <AssemblyReference>System.Private.CoreLib</AssemblyReference>
       <AssemblyReference>System.Runtime</AssemblyReference>
-      <AssemblyReference>System.Activities</AssemblyReference>
-      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
       <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
-      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
-      <AssemblyReference>System.Linq</AssemblyReference>
-      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <Sequence DisplayName="Save a class student as JSON" sap:VirtualizedContainerService.HintSize="1777,1241" sap2010:WorkflowViewState.IdRef="Sequence_1">
@@ -48,7 +51,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log student JSON preparation" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Preparing student JSON for class &quot; &amp; in_Class.Name &amp; &quot;.&quot;)]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="If String.IsNullOrWhiteSpace(in_PersistenceFolder) Then Throw New ArgumentException(&quot;PersistenceFolder is required.&quot;)&#xA;If String.IsNullOrWhiteSpace(in_ClassShortName) OrElse in_ClassShortName = &quot;.&quot; OrElse in_ClassShortName = &quot;..&quot; OrElse in_ClassShortName.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) &gt;= 0 OrElse in_ClassShortName.EndsWith(&quot;.&quot;) OrElse in_ClassShortName.EndsWith(&quot; &quot;) Then Throw New ArgumentException(&quot;Class short name is not a valid folder name: &quot; &amp; in_ClassShortName)&#xA;If in_Student Is Nothing Then Throw New ArgumentNullException(NameOf(in_Student))&#xA;If String.IsNullOrEmpty(in_Student.Id) OrElse Not System.Text.RegularExpressions.Regex.IsMatch(in_Student.Id, &quot;^\d+$&quot;) Then Throw New ArgumentException(&quot;Student ID must contain digits only.&quot;)&#xA;out_ClassFolder = System.IO.Path.Combine(in_PersistenceFolder, in_ClassShortName)&#xA;out_FilePath = System.IO.Path.Combine(out_ClassFolder, in_Student.Id &amp; &quot;.json&quot;)&#xA;out_Json = LOK2239.AbsenceRules.ToJson(in_Student)" DisplayName="Prepare student JSON and file path" sap:VirtualizedContainerService.HintSize="450,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="If String.IsNullOrWhiteSpace(in_PersistenceFolder) Then Throw New ArgumentException(&quot;PersistenceFolder is required.&quot;)&#xA;&#xA;If String.IsNullOrWhiteSpace(in_ClassName) OrElse&#xA;&#x9;in_ClassName = &quot;.&quot; OrElse&#xA;&#x9;in_ClassName = &quot;..&quot; OrElse&#xA;&#x9;in_ClassName.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) &gt;=0 &#x9;OrElse&#xA;&#x9;in_ClassName.EndsWith(&quot;.&quot;) OrElse&#xA;&#x9;in_ClassName.EndsWith(&quot; &quot;) Then Throw New ArgumentException(&quot;Class name is not a valid folder name: &quot; &amp; in_ClassName)&#xA;&#x9;&#xA;If in_Student Is Nothing Then Throw New ArgumentNullException(NameOf(in_Student))&#xA;&#x9;&#xA;If String.IsNullOrEmpty(in_Student.Id) OrElse Not System.Text.RegularExpressions.Regex.IsMatch(in_Student.Id, &quot;^\d+$&quot;) Then Throw New ArgumentException(&quot;Student ID must contain digits only.&quot;)&#xA;&#x9;&#xA;out_ClassFolder = System.IO.Path.Combine(in_PersistenceFolder, in_ClassName)&#xA;out_FilePath = System.IO.Path.Combine(out_ClassFolder, in_Student.Id &amp; &quot;.json&quot;)&#xA;out_Json = LOK2239.AbsenceRules.ToJson(in_Student)" DisplayName="Prepare student JSON and file path" sap:VirtualizedContainerService.HintSize="450,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_ClassName">[in_Class.Name]</InArgument>
