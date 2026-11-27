@@ -31,11 +31,58 @@
       <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="TODO: Implement second-pass business logic using in_Student and in_StudentFile. The parent owns per-student error reporting and continuation." DisplayName="Process one watched student: second pass" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Dispatch pending students by state. The parent owns per-student error reporting and continuation." DisplayName="Process one watched student: second pass" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <Switch x:TypeArguments="l:StudentState" Expression="[in_Student.State]" DisplayName="Dispatch student by state" sap2010:WorkflowViewState.IdRef="Switch`1_1" xmlns:ui="http://schemas.uipath.com/workflow/activities">
+      <Sequence x:Key="NoRemarks" DisplayName="Process NoRemarks student" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <ui:InvokeWorkflowFile DisplayName="Process student in NoRemarks state" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_Second_Pass_NoRemarks.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[in_Student]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[in_StudentFile]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Sequence>
+      <Sequence x:Key="Letter1Sent" DisplayName="Process Letter1Sent student" sap2010:WorkflowViewState.IdRef="Sequence_3">
+        <ui:InvokeWorkflowFile DisplayName="Process student in Letter1Sent state" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_Second_Pass_Letter1Sent.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[in_Student]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[in_StudentFile]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Sequence>
+      <Sequence x:Key="Letter2Sent" DisplayName="Process Letter2Sent student" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <ui:InvokeWorkflowFile DisplayName="Process student in Letter2Sent state" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_Second_Pass_Letter2Sent.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[in_Student]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[in_StudentFile]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Sequence>
+      <Sequence x:Key="Letter3Sent" DisplayName="Process Letter3Sent student" sap2010:WorkflowViewState.IdRef="Sequence_5">
+        <ui:InvokeWorkflowFile DisplayName="Process student in Letter3Sent state" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_Second_Pass_Letter3Sent.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[in_Student]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[in_StudentFile]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Sequence>
+      <Sequence x:Key="StudievejlederMailSent" DisplayName="Process StudievejlederMailSent student" sap2010:WorkflowViewState.IdRef="Sequence_6">
+        <ui:InvokeWorkflowFile DisplayName="Process student in StudievejlederMailSent state" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_Second_Pass_StudievejlederMailSent.xaml" UnSafe="False" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5">
+          <ui:InvokeWorkflowFile.Arguments>
+            <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[in_Student]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[in_StudentFile]</InArgument>
+          </ui:InvokeWorkflowFile.Arguments>
+        </ui:InvokeWorkflowFile>
+      </Sequence>
+      <Switch.Default>
+        <Sequence DisplayName="Reject unsupported student state" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <Throw DisplayName="Report unsupported second-pass state" Exception="[New System.InvalidOperationException(&quot;Unsupported second-pass student state: &quot; &amp; in_Student.State.ToString() &amp; &quot;. File: &quot; &amp; in_StudentFile)]" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        </Sequence>
+      </Switch.Default>
+    </Switch>
   </Sequence>
 </Activity>

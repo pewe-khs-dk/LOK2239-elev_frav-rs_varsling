@@ -1,0 +1,15 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessStudents_SecondPass_ProcessStudent_Second_Pass_Letter1Sent" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Student" Type="InArgument(l:ClassStudent)" />
+    <x:Property Name="in_StudentFile" Type="InArgument(x:String)" />
+  </x:Members>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String"><x:String>System</x:String><x:String>LOK2239</x:String></sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference><AssemblyReference>System.Runtime</AssemblyReference><AssemblyReference>System.Collections</AssemblyReference><AssemblyReference>System.Activities</AssemblyReference><AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Second pass: Letter1Sent" sap2010:Annotation.AnnotationText="TODO: Implement handling of pending violations for students in Letter1Sent state." sap2010:WorkflowViewState.IdRef="Sequence_1" />
+</Activity>
