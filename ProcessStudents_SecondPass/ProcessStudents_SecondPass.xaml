@@ -53,6 +53,7 @@
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:List(x:String)" Name="studentFiles" />
       <Variable x:TypeArguments="x:Int32" Name="processedCount" />
+      <Variable x:TypeArguments="x:Int32" Name="skippedCount" />
       <Variable x:TypeArguments="x:Int32" Name="errorCount" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -116,6 +117,9 @@
                     <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFileNameWithoutExtension(studentFile)]</InArgument>
                     <InArgument x:TypeArguments="x:String">[studentFile]</InArgument>
                   </InvokeMethod>
+                  <If Condition="[student.ViolationHandlingPending]" DisplayName="Student has pending violation handling?" sap2010:WorkflowViewState.IdRef="If_2">
+                    <If.Then>
+                      <Sequence DisplayName="Process pending student" sap2010:WorkflowViewState.IdRef="Sequence_6">
                   <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process student second pass" sap:VirtualizedContainerService.HintSize="418,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_SecondPass.xaml">
                     <ui:InvokeWorkflowFile.Arguments>
                       <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[student]</InArgument>
@@ -130,6 +134,18 @@
                       <InArgument x:TypeArguments="x:Int32">[processedCount + 1]</InArgument>
                     </Assign.Value>
                   </Assign>
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Skip student without pending handling" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                        <ui:LogMessage DisplayName="Log student skipped due to no new violations" Level="Info" Message="[&quot;(second pass) Student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) in class &quot; &amp; student.ClassName &amp; &quot; skipped: no new violations (ViolationHandlingPending = False).&quot;]" sap2010:WorkflowViewState.IdRef="LogMessage_8" />
+                        <Assign DisplayName="Count skipped watched students" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign.To><OutArgument x:TypeArguments="x:Int32">[skippedCount]</OutArgument></Assign.To>
+                          <Assign.Value><InArgument x:TypeArguments="x:Int32">[skippedCount + 1]</InArgument></Assign.Value>
+                        </Assign>
+                      </Sequence>
+                    </If.Else>
+                  </If>
                 </Sequence>
               </TryCatch.Try>
               <TryCatch.Catches>
@@ -165,7 +181,7 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <ui:LogMessage DisplayName="Log second-pass totals" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;(second pass) Finished: &quot; &amp; studentFiles.Count.ToString() &amp; &quot; student files found; &quot; &amp; processedCount.ToString() &amp; &quot; processed successfully; &quot; &amp; errorCount.ToString() &amp; &quot; failed.&quot;]" />
+    <ui:LogMessage DisplayName="Log second-pass totals" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;(second pass) Finished: &quot; &amp; studentFiles.Count.ToString() &amp; &quot; student files found; &quot; &amp; skippedCount.ToString() &amp; &quot; skipped (no pending violation handling); &quot; &amp; processedCount.ToString() &amp; &quot; processed successfully; &quot; &amp; errorCount.ToString() &amp; &quot; failed.&quot;]" />
     <ui:LogMessage DisplayName="Log end second pass" sap:VirtualizedContainerService.HintSize="490,166" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END SECOND PASS &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;]" />
   </Sequence>
 </Activity>
