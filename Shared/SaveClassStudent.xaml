@@ -50,7 +50,6 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log student JSON preparation" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Preparing student JSON for class &quot; &amp; in_Class.Name &amp; &quot;.&quot;)]" />
     <ui:InvokeCode ContinueOnError="{x:Null}" Code="If String.IsNullOrWhiteSpace(in_PersistenceFolder) Then Throw New ArgumentException(&quot;PersistenceFolder is required.&quot;)&#xA;If in_Student Is Nothing Then Throw New ArgumentNullException(NameOf(in_Student))&#xA;If String.IsNullOrEmpty(in_Student.Id) OrElse Not System.Text.RegularExpressions.Regex.IsMatch(in_Student.Id, &quot;^\d+$&quot;) Then Throw New ArgumentException(&quot;Student ID must contain digits only.&quot;)&#xA;out_ClassFolder = System.IO.Path.Combine(in_PersistenceFolder, LOK2239.AbsenceRules.GetClassFolderName(in_ClassName))&#xA;out_FilePath = System.IO.Path.Combine(out_ClassFolder, in_Student.Id &amp; &quot;.json&quot;)&#xA;out_Json = LOK2239.AbsenceRules.ToJson(in_Student)" DisplayName="Prepare student JSON and file path" sap:VirtualizedContainerService.HintSize="450,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[in_PersistenceFolder]</InArgument>
@@ -61,9 +60,7 @@
         <OutArgument x:TypeArguments="x:String" x:Key="out_Json">[studentJson]</OutArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:LogMessage DisplayName="Log class folder creation" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Ensuring class persistence folder exists: &quot; &amp; classFolder)]" />
     <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Ensure class persistence folder exists" sap:VirtualizedContainerService.HintSize="450,123" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[classFolder]" />
-    <ui:LogMessage DisplayName="Log student JSON write" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Writing ClassStudent JSON to &quot; &amp; studentFilePath)]" />
     <ui:WriteTextFile File="{x:Null}" Output="{x:Null}" DisplayName="Write ClassStudent JSON" FileName="[studentFilePath]" sap:VirtualizedContainerService.HintSize="450,167" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[studentJson]" />
   </Sequence>
 </Activity>

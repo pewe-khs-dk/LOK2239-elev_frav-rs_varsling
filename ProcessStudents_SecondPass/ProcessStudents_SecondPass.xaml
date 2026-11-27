@@ -1,0 +1,171 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ProcessStudents_SecondPass_ProcessStudents_SecondPass" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_PersistenceFolder" Type="InArgument(x:String)" />
+  </x:Members>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>LOK2239</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Second pass: process all watched students" sap:VirtualizedContainerService.HintSize="1777,3130" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:List(x:String)" Name="studentFiles" />
+      <Variable x:TypeArguments="x:Int32" Name="processedCount" />
+      <Variable x:TypeArguments="x:Int32" Name="errorCount" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log begin second pass" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="LogMessage_6" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN SECOND PASS &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;]" />
+    <ui:LogMessage DisplayName="Log second-pass discovery start" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;(second pass) Finding watched student JSON files under &quot; &amp; in_PersistenceFolder]" />
+    <Assign DisplayName="Snapshot student files beneath class folders" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="scg:List(x:String)">[studentFiles]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="scg:List(x:String)">[System.IO.Directory.GetDirectories(in_PersistenceFolder).SelectMany(Function(classFolder) System.IO.Directory.GetFiles(classFolder, "*.json", System.IO.SearchOption.AllDirectories)).OrderBy(Function(filePath) filePath, System.StringComparer.OrdinalIgnoreCase).ToList()]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log watched student count" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;(second pass) Found &quot; &amp; studentFiles.Count.ToString() &amp; &quot; watched student files.&quot;]" />
+    <If Condition="[studentFiles.Count = 0]" DisplayName="No watched students found?" sap:VirtualizedContainerService.HintSize="490,389" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Report empty watch list" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log empty second pass" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;(second pass) No student JSON files found; no watched students to process.&quot;]" />
+        </Sequence>
+      </If.Then>
+    </If>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Process every watched student" sap:VirtualizedContainerService.HintSize="490,1677" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[studentFiles]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="studentFile" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Process one watched student" sap:VirtualizedContainerService.HintSize="488,1546" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="studentJson" />
+              <Variable x:TypeArguments="l:ClassStudent" Name="student" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch DisplayName="Process watched student and continue on error" sap:VirtualizedContainerService.HintSize="454,1486" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <Sequence DisplayName="Load and dispatch watched student" sap:VirtualizedContainerService.HintSize="452,695" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:ReadTextFile File="{x:Null}" Content="[studentJson]" DisplayName="Read watched student JSON" FileName="[studentFile]" sap:VirtualizedContainerService.HintSize="418,124" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                  <InvokeMethod DisplayName="Deserialize and validate watched student" sap:VirtualizedContainerService.HintSize="418,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="FromJson" TargetType="l:AbsenceRules">
+                    <InvokeMethod.Result>
+                      <OutArgument x:TypeArguments="l:ClassStudent">[student]</OutArgument>
+                    </InvokeMethod.Result>
+                    <InArgument x:TypeArguments="x:String">[studentJson]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[System.IO.Path.GetFileNameWithoutExtension(studentFile)]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[studentFile]</InArgument>
+                  </InvokeMethod>
+                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process student second pass" sap:VirtualizedContainerService.HintSize="418,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudent_SecondPass.xaml">
+                    <ui:InvokeWorkflowFile.Arguments>
+                      <InArgument x:TypeArguments="l:ClassStudent" x:Key="in_Student">[student]</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="in_StudentFile">[studentFile]</InArgument>
+                    </ui:InvokeWorkflowFile.Arguments>
+                  </ui:InvokeWorkflowFile>
+                  <Assign DisplayName="Count completed watched students" sap:VirtualizedContainerService.HintSize="418,166" sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[processedCount]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[processedCount + 1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <ActivityAction x:TypeArguments="s:Exception">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="s:Exception" Name="studentError" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Report watched student error and continue" sap:VirtualizedContainerService.HintSize="452,569" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:LogMessage DisplayName="Log second-pass student error" sap:VirtualizedContainerService.HintSize="418,175" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;(second pass) Student file &quot; &amp; studentFile &amp; &quot; failed: &quot; &amp; studentError.ToString()]" />
+                      <InvokeMethod DisplayName="Add second-pass student error to Messages" sap:VirtualizedContainerService.HintSize="418,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="Add" TargetType="l:Messages">
+                        <InArgument x:TypeArguments="x:String">["(second pass) Student file " &amp; studentFile &amp; " failed: " &amp; studentError.Message]</InArgument>
+                      </InvokeMethod>
+                      <Assign DisplayName="Count failed watched students" sap:VirtualizedContainerService.HintSize="418,166" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:Int32">[errorCount]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:Int32">[errorCount + 1]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log second-pass totals" sap:VirtualizedContainerService.HintSize="490,175" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;(second pass) Finished: &quot; &amp; studentFiles.Count.ToString() &amp; &quot; student files found; &quot; &amp; processedCount.ToString() &amp; &quot; processed successfully; &quot; &amp; errorCount.ToString() &amp; &quot; failed.&quot;]" />
+    <ui:LogMessage DisplayName="Log end second pass" sap:VirtualizedContainerService.HintSize="490,166" sap2010:WorkflowViewState.IdRef="LogMessage_7" Message="[&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END SECOND PASS &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;]" />
+  </Sequence>
+</Activity>

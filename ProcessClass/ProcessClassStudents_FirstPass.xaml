@@ -93,7 +93,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log empty class" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Class is empty, no students found&quot;)]" />
+          <ui:LogMessage DisplayName="Log empty class" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;(first pass) [Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Class is empty, no students found&quot;)]" />
         </Sequence>
       </If.Then>
       <If.Else>
@@ -103,7 +103,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log start of per-student processing" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Processing all &quot; &amp; in_ClassAbsenceList.Count &amp; &quot; students in class &quot; &amp; in_Class.Name &amp; &quot;.&quot;)]" />
+          <ui:LogMessage DisplayName="Log start of per-student processing" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;(first pass) [Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Processing all &quot; &amp; in_ClassAbsenceList.Count &amp; &quot; students in class &quot; &amp; in_Class.Name &amp; &quot;.&quot;)]" />
           <ui:ForEach x:TypeArguments="l:ClassAbsenceTableEntry" CurrentIndex="{x:Null}" DisplayName="Process each student" sap:VirtualizedContainerService.HintSize="488,1385" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_ClassAbsenceList]">
             <ui:ForEach.Body>
               <ActivityAction x:TypeArguments="l:ClassAbsenceTableEntry">
@@ -130,7 +130,7 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process one student" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudent\ProcessStudent.xaml">
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process one student" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudent_FirstPass\ProcessStudent.xaml">
                           <ui:InvokeWorkflowFile.Arguments>
                             <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
                             <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>
@@ -161,9 +161,9 @@
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <ui:LogMessage DisplayName="Log student processing error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Student &quot; &amp; studentRow.StudentId &amp; &quot; in class &quot; &amp; in_Class.Name &amp; &quot; failed: &quot; &amp; studentError.ToString())]" />
+                            <ui:LogMessage DisplayName="Log student processing error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;(first pass) [Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Student &quot; &amp; studentRow.StudentId &amp; &quot; in class &quot; &amp; in_Class.Name &amp; &quot; failed: &quot; &amp; studentError.ToString())]" />
                             <InvokeMethod DisplayName="Add error to Messages and continue" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
-                              <InArgument x:TypeArguments="x:String">["Student " &amp; studentRow.StudentId &amp; " in class " &amp; in_Subject.ShortName &amp; "/" &amp; in_Class.Name &amp; " failed: " &amp; studentError.Message]</InArgument>
+                              <InArgument x:TypeArguments="x:String">["(first pass) Student " &amp; studentRow.StudentId &amp; " in class " &amp; in_Subject.ShortName &amp; "/" &amp; in_Class.Name &amp; " failed: " &amp; studentError.Message]</InArgument>
                             </InvokeMethod>
                             <Assign DisplayName="Count failed students" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="Assign_3">
                               <Assign.To>
@@ -191,7 +191,7 @@
               </ActivityAction>
             </ui:ForEach.Body>
           </ui:ForEach>
-          <ui:LogMessage DisplayName="Log detailed student processing totals" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; in_ClassAbsenceList.Count &amp; &quot; students total; &quot; &amp; savedCount.ToString() &amp; &quot; written to disk (new or repeat violation). Student errors: &quot; &amp; errorCount.ToString() &amp; &quot;.&quot;)]" />
+          <ui:LogMessage DisplayName="Log detailed student processing totals" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;(first pass) [Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (&quot;Class &quot; &amp; in_Class.Name &amp; &quot;: &quot; &amp; in_ClassAbsenceList.Count &amp; &quot; students total; &quot; &amp; savedCount.ToString() &amp; &quot; written to disk (new or repeat violation). Student errors: &quot; &amp; errorCount.ToString() &amp; &quot;.&quot;)]" />
         </Sequence>
       </If.Else>
     </If>

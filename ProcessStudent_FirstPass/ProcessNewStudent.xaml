@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Activity mc:Ignorable="sap sap2010" x:Class="Main_ProcessClass_ProcessNewStudent" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:l="clr-namespace:LOK2239;assembly=LOK2239 elev_fraværs_varsling.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Subject" Type="InArgument(l:Subject)" />
@@ -93,7 +94,7 @@
               <InArgument x:TypeArguments="x:String" x:Key="in_ClassName">[in_Class.Name]</InArgument>
             </ui:InvokeCode.Arguments>
           </ui:InvokeCode>
-          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Write student JSON" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ProcessStudent\SaveClassStudent.xaml">
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Write student JSON" sap:VirtualizedContainerService.HintSize="416,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Shared\SaveClassStudent.xaml">
             <ui:InvokeWorkflowFile.Arguments>
               <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[in_Subject]</InArgument>
               <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[in_Class]</InArgument>

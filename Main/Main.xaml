@@ -317,136 +317,157 @@
                                       <av:PointCollection x:Key="ConnectorLocation">1000,645 1000,770 1135,770</av:PointCollection>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loop through every Subject / Class.&#xA;Call ProcessClassMain for each Class.&#xA;&#xA;Try/catch every Class so we continue on error." DisplayName="Process every subject" sap:VirtualizedContainerService.HintSize="560,2492" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[LOK2239.Root.Subjects]">
-                                    <ui:ForEach.Body>
-                                      <ActivityAction x:TypeArguments="l:Subject">
-                                        <ActivityAction.Argument>
-                                          <DelegateInArgument x:TypeArguments="l:Subject" Name="currentSubject" />
-                                        </ActivityAction.Argument>
-                                        <Sequence DisplayName="Process one subject" sap:VirtualizedContainerService.HintSize="558,2316" sap2010:WorkflowViewState.IdRef="Sequence_20">
-                                          <sap:WorkflowViewStateService.ViewState>
-                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            </scg:Dictionary>
-                                          </sap:WorkflowViewStateService.ViewState>
-                                          <ui:LogMessage DisplayName="Log subject processing start" sap:VirtualizedContainerService.HintSize="524,175" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN PROCESSING SUBJECT [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot;]&quot;]" />
-                                          <TryCatch DisplayName="Process subject and always log its end" sap:VirtualizedContainerService.HintSize="524,1915" sap2010:WorkflowViewState.IdRef="TryCatch_2">
-                                            <TryCatch.Try>
-                                              <Sequence DisplayName="Process every class in this subject" sap:VirtualizedContainerService.HintSize="522,1458" sap2010:WorkflowViewState.IdRef="Sequence_18">
-                                                <sap:WorkflowViewStateService.ViewState>
-                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                  </scg:Dictionary>
-                                                </sap:WorkflowViewStateService.ViewState>
-                                                <ui:ForEach x:TypeArguments="l:Class" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loop through every class in the current subject.&#xA;Call ProcessClassMain per class.&#xA;Try/catch on each class so we can continue in case of errors." DisplayName="Process every class" sap:VirtualizedContainerService.HintSize="488,1398" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[currentSubject.Classes]">
-                                                  <ui:ForEach.Body>
-                                                    <ActivityAction x:TypeArguments="l:Class">
-                                                      <ActivityAction.Argument>
-                                                        <DelegateInArgument x:TypeArguments="l:Class" Name="currentClass" />
-                                                      </ActivityAction.Argument>
-                                                      <Sequence DisplayName="Process a single class" sap:VirtualizedContainerService.HintSize="486,1215" sap2010:WorkflowViewState.IdRef="Sequence_10">
-                                                        <sap:WorkflowViewStateService.ViewState>
-                                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                          </scg:Dictionary>
-                                                        </sap:WorkflowViewStateService.ViewState>
-                                                        <TryCatch DisplayName="Try process class" sap:VirtualizedContainerService.HintSize="452,1155" sap2010:WorkflowViewState.IdRef="TryCatch_1">
-                                                          <TryCatch.Try>
-                                                            <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,403" sap2010:WorkflowViewState.IdRef="Sequence_11">
-                                                              <sap:WorkflowViewStateService.ViewState>
-                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                </scg:Dictionary>
-                                                              </sap:WorkflowViewStateService.ViewState>
-                                                              <ui:LogMessage DisplayName="Log ProcessClassMain invocation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN PROCESSING CLASS [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot; / &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)] &quot;]" />
-                                                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process class" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ProcessClass\ProcessClassMain.xaml">
-                                                                <ui:InvokeWorkflowFile.Arguments>
-                                                                  <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[currentSubject]</InArgument>
-                                                                  <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[currentClass]</InArgument>
-                                                                </ui:InvokeWorkflowFile.Arguments>
-                                                              </ui:InvokeWorkflowFile>
-                                                            </Sequence>
-                                                          </TryCatch.Try>
-                                                          <TryCatch.Catches>
-                                                            <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-                                                              <ActivityAction x:TypeArguments="s:Exception">
-                                                                <ActivityAction.Argument>
-                                                                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-                                                                </ActivityAction.Argument>
-                                                                <Sequence DisplayName="Catch" sap:VirtualizedContainerService.HintSize="450,394" sap2010:WorkflowViewState.IdRef="Sequence_15">
-                                                                  <sap:WorkflowViewStateService.ViewState>
-                                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                    </scg:Dictionary>
-                                                                  </sap:WorkflowViewStateService.ViewState>
-                                                                  <ui:LogMessage DisplayName="Log class error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Error" Message="[&quot;[Subject &quot; &amp; currentSubject.ShortName &amp; &quot; - &quot; &amp; currentSubject.LongName &amp; &quot; | Class &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)] &quot; &amp; (&quot;Failed to process class &quot; &amp; currentClass.Name &amp; &quot;. Continuing with next class. &quot; &amp; exception.ToString())]" />
-                                                                  <InvokeMethod DisplayName="Add class error to Messages" sap:VirtualizedContainerService.HintSize="416,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
-                                                                    <InArgument x:TypeArguments="x:String">["Subject " &amp; currentSubject.ShortName &amp; "/Class " &amp; currentClass.Name &amp; " failed: " &amp; exception.Message]</InArgument>
-                                                                  </InvokeMethod>
-                                                                </Sequence>
-                                                              </ActivityAction>
-                                                            </Catch>
-                                                          </TryCatch.Catches>
-                                                          <TryCatch.Finally>
-                                                            <Sequence DisplayName="Log class processing end" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_16">
-                                                              <sap:WorkflowViewStateService.ViewState>
-                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                </scg:Dictionary>
-                                                              </sap:WorkflowViewStateService.ViewState>
-                                                              <ui:LogMessage DisplayName="Log class processing end" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END PROCESSING CLASS [Subject &quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot; / &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)]&quot;]" />
-                                                            </Sequence>
-                                                          </TryCatch.Finally>
-                                                        </TryCatch>
-                                                      </Sequence>
-                                                    </ActivityAction>
-                                                  </ui:ForEach.Body>
-                                                  <sap:WorkflowViewStateService.ViewState>
-                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
-                                                    </scg:Dictionary>
-                                                  </sap:WorkflowViewStateService.ViewState>
-                                                </ui:ForEach>
-                                              </Sequence>
-                                            </TryCatch.Try>
-                                            <TryCatch.Catches>
-                                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
-                                                <ActivityAction x:TypeArguments="s:Exception">
-                                                  <ActivityAction.Argument>
-                                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="subjectException" />
-                                                  </ActivityAction.Argument>
-                                                  <Sequence DisplayName="Report subject processing error" sap:VirtualizedContainerService.HintSize="522,226" sap2010:WorkflowViewState.IdRef="Sequence_17">
-                                                    <sap:WorkflowViewStateService.ViewState>
-                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                      </scg:Dictionary>
-                                                    </sap:WorkflowViewStateService.ViewState>
-                                                    <ui:LogMessage DisplayName="Log subject processing error" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Error" Message="[&quot;Subject &quot; &amp; currentSubject.ShortName &amp; &quot; - &quot; &amp; currentSubject.LongName &amp; &quot; (&quot; &amp; currentSubject.Id &amp; &quot;)&quot; &amp; &quot; failed. Continuing with next subject. &quot; &amp; subjectException.ToString()]" />
-                                                  </Sequence>
-                                                </ActivityAction>
-                                              </Catch>
-                                            </TryCatch.Catches>
-                                            <TryCatch.Finally>
-                                              <Sequence DisplayName="Finish subject processing" sap:VirtualizedContainerService.HintSize="522,90" sap2010:WorkflowViewState.IdRef="Sequence_19">
-                                                <sap:WorkflowViewStateService.ViewState>
-                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                  </scg:Dictionary>
-                                                </sap:WorkflowViewStateService.ViewState>
-                                              </Sequence>
-                                            </TryCatch.Finally>
-                                          </TryCatch>
-                                          <ui:LogMessage DisplayName="Log subject processing end" sap:VirtualizedContainerService.HintSize="524,166" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END PROCESSING SUBJECT [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot;] &quot;]" />
-                                        </Sequence>
-                                      </ActivityAction>
-                                    </ui:ForEach.Body>
+                                  <Sequence DisplayName="First pass: process every subject and class" sap:VirtualizedContainerService.HintSize="650,2752" sap2010:WorkflowViewState.IdRef="Sequence_23">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                       </scg:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                  </ui:ForEach>
+                                    <ui:ForEach x:TypeArguments="l:Subject" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loop through every Subject / Class.&#xA;Call ProcessClassMain for each Class.&#xA;&#xA;Try/catch every Class so we continue on error." DisplayName="Process every subject" sap:VirtualizedContainerService.HintSize="616,2524" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[LOK2239.Root.Subjects]">
+                                      <ui:ForEach.Body>
+                                        <ActivityAction x:TypeArguments="l:Subject">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="l:Subject" Name="currentSubject" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="Process one subject" sap:VirtualizedContainerService.HintSize="558,2316" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <ui:LogMessage DisplayName="Log subject processing start" sap:VirtualizedContainerService.HintSize="524,175" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN PROCESSING SUBJECT [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot;]&quot;]" />
+                                            <TryCatch DisplayName="Process subject and always log its end" sap:VirtualizedContainerService.HintSize="524,1915" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                                              <TryCatch.Try>
+                                                <Sequence DisplayName="Process every class in this subject" sap:VirtualizedContainerService.HintSize="522,1458" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                  <ui:ForEach x:TypeArguments="l:Class" CurrentIndex="{x:Null}" sap2010:Annotation.AnnotationText="Loop through every class in the current subject.&#xA;Call ProcessClassMain per class.&#xA;Try/catch on each class so we can continue in case of errors." DisplayName="Process every class" sap:VirtualizedContainerService.HintSize="488,1398" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[currentSubject.Classes]">
+                                                    <ui:ForEach.Body>
+                                                      <ActivityAction x:TypeArguments="l:Class">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="l:Class" Name="currentClass" />
+                                                        </ActivityAction.Argument>
+                                                        <Sequence DisplayName="Process a single class" sap:VirtualizedContainerService.HintSize="486,1215" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <TryCatch DisplayName="Try process class" sap:VirtualizedContainerService.HintSize="452,1155" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                                                            <TryCatch.Try>
+                                                              <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="450,403" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                                <ui:LogMessage DisplayName="Log ProcessClassMain invocation" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; BEGIN PROCESSING CLASS [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot; / &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)] &quot;]" />
+                                                                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Process class" sap:VirtualizedContainerService.HintSize="416,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="ProcessClass\ProcessClassMain.xaml">
+                                                                  <ui:InvokeWorkflowFile.Arguments>
+                                                                    <InArgument x:TypeArguments="l:Subject" x:Key="in_Subject">[currentSubject]</InArgument>
+                                                                    <InArgument x:TypeArguments="l:Class" x:Key="in_Class">[currentClass]</InArgument>
+                                                                  </ui:InvokeWorkflowFile.Arguments>
+                                                                </ui:InvokeWorkflowFile>
+                                                              </Sequence>
+                                                            </TryCatch.Try>
+                                                            <TryCatch.Catches>
+                                                              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                                                                <ActivityAction x:TypeArguments="s:Exception">
+                                                                  <ActivityAction.Argument>
+                                                                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                                                                  </ActivityAction.Argument>
+                                                                  <Sequence DisplayName="Catch" sap:VirtualizedContainerService.HintSize="450,394" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                                                    <sap:WorkflowViewStateService.ViewState>
+                                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      </scg:Dictionary>
+                                                                    </sap:WorkflowViewStateService.ViewState>
+                                                                    <ui:LogMessage DisplayName="Log class error" sap:VirtualizedContainerService.HintSize="416,175" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Error" Message="[&quot;[Subject &quot; &amp; currentSubject.ShortName &amp; &quot; - &quot; &amp; currentSubject.LongName &amp; &quot; | Class &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)] &quot; &amp; (&quot;Failed to process class &quot; &amp; currentClass.Name &amp; &quot;. Continuing with next class. &quot; &amp; exception.ToString())]" />
+                                                                    <InvokeMethod DisplayName="Add class error to Messages" sap:VirtualizedContainerService.HintSize="416,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
+                                                                      <InArgument x:TypeArguments="x:String">["Subject " &amp; currentSubject.ShortName &amp; "/Class " &amp; currentClass.Name &amp; " failed: " &amp; exception.Message]</InArgument>
+                                                                    </InvokeMethod>
+                                                                  </Sequence>
+                                                                </ActivityAction>
+                                                              </Catch>
+                                                            </TryCatch.Catches>
+                                                            <TryCatch.Finally>
+                                                              <Sequence DisplayName="Log class processing end" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                                <ui:LogMessage DisplayName="Log class processing end" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END PROCESSING CLASS [Subject &quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot; / &quot; &amp; currentClass.Name &amp; &quot; (&quot; &amp; currentClass.Id &amp; &quot;)]&quot;]" />
+                                                              </Sequence>
+                                                            </TryCatch.Finally>
+                                                          </TryCatch>
+                                                        </Sequence>
+                                                      </ActivityAction>
+                                                    </ui:ForEach.Body>
+                                                    <sap:WorkflowViewStateService.ViewState>
+                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                                      </scg:Dictionary>
+                                                    </sap:WorkflowViewStateService.ViewState>
+                                                  </ui:ForEach>
+                                                </Sequence>
+                                              </TryCatch.Try>
+                                              <TryCatch.Catches>
+                                                <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                                                  <ActivityAction x:TypeArguments="s:Exception">
+                                                    <ActivityAction.Argument>
+                                                      <DelegateInArgument x:TypeArguments="s:Exception" Name="subjectException" />
+                                                    </ActivityAction.Argument>
+                                                    <Sequence DisplayName="Report subject processing error" sap:VirtualizedContainerService.HintSize="522,226" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                                      <sap:WorkflowViewStateService.ViewState>
+                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                        </scg:Dictionary>
+                                                      </sap:WorkflowViewStateService.ViewState>
+                                                      <ui:LogMessage DisplayName="Log subject processing error" sap:VirtualizedContainerService.HintSize="488,166" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Error" Message="[&quot;Subject &quot; &amp; currentSubject.ShortName &amp; &quot; - &quot; &amp; currentSubject.LongName &amp; &quot; (&quot; &amp; currentSubject.Id &amp; &quot;)&quot; &amp; &quot; failed. Continuing with next subject. &quot; &amp; subjectException.ToString()]" />
+                                                    </Sequence>
+                                                  </ActivityAction>
+                                                </Catch>
+                                              </TryCatch.Catches>
+                                              <TryCatch.Finally>
+                                                <Sequence DisplayName="Finish subject processing" sap:VirtualizedContainerService.HintSize="522,90" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                                                  <sap:WorkflowViewStateService.ViewState>
+                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                    </scg:Dictionary>
+                                                  </sap:WorkflowViewStateService.ViewState>
+                                                </Sequence>
+                                              </TryCatch.Finally>
+                                            </TryCatch>
+                                            <ui:LogMessage DisplayName="Log subject processing end" sap:VirtualizedContainerService.HintSize="524,166" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; END PROCESSING SUBJECT [&quot; &amp; currentSubject.ShortName &amp; &quot; &quot; &amp; currentSubject.LongName &amp; &quot;] &quot;]" />
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </ui:ForEach.Body>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:ForEach>
+                                  </Sequence>
                                   <FlowStep.Next>
+                                    <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <av:Point x:Key="ShapeLocation">945,735</av:Point>
+                                          <av:Size x:Key="ShapeSize">110,70</av:Size>
+                                          <av:PointCollection x:Key="ConnectorLocation">1055,770 1135,770</av:PointCollection>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Second pass: process all watched students" sap:VirtualizedContainerService.HintSize="110,70" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="ProcessStudents_SecondPass\ProcessStudents_SecondPass.xaml">
+                                        <ui:InvokeWorkflowFile.Arguments>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_PersistenceFolder">[LOK2239.Config.Values.PersistenceFolder]</InArgument>
+                                        </ui:InvokeWorkflowFile.Arguments>
+                                      </ui:InvokeWorkflowFile>
+                                      <FlowStep.Next>
                                     <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_2">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -497,6 +518,8 @@
                                         </FlowStep>
                                       </FlowStep.Next>
                                     </FlowStep>
+                                      </FlowStep.Next>
+                                    </FlowStep>
                                   </FlowStep.Next>
                                 </FlowStep>
                               </FlowStep.Next>
@@ -522,5 +545,6 @@
     <x:Reference>__ReferenceID6</x:Reference>
     <x:Reference>__ReferenceID7</x:Reference>
     <x:Reference>__ReferenceID8</x:Reference>
+    <x:Reference>__ReferenceID10</x:Reference>
   </Flowchart>
 </Activity>
