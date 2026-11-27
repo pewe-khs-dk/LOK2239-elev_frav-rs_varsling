@@ -32,7 +32,6 @@
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
     <sco:Collection x:TypeArguments="AssemblyReference">
-      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
       <AssemblyReference>NPOI.Core</AssemblyReference>
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
@@ -67,9 +66,10 @@
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>LOK2239 elev_fraværs_varsling.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Student with history: check absence since the latest letter" sap:VirtualizedContainerService.HintSize="1777,3064" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Student with history: check absence since the latest letter" sap:VirtualizedContainerService.HintSize="1777,2830" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="studentJson" />
       <Variable x:TypeArguments="l:ClassStudent" Name="student" />
@@ -82,13 +82,20 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:ReadTextFile File="{x:Null}" Content="[studentJson]" DisplayName="Read the student's JSON file" FileName="[in_StudentFile]" sap:VirtualizedContainerService.HintSize="499,124" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="out_Student = LOK2239.AbsenceRules.FromJson(in_Json, in_ExpectedId)" DisplayName="Load the student from JSON" sap:VirtualizedContainerService.HintSize="499,403" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
-      <ui:InvokeCode.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_Json">[studentJson]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ExpectedId">[in_StudentId]</InArgument>
-        <OutArgument x:TypeArguments="l:ClassStudent" x:Key="out_Student">[student]</OutArgument>
-      </ui:InvokeCode.Arguments>
-    </ui:InvokeCode>
+    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="499,169" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="FromJson" TargetType="l:AbsenceRules">
+      <InvokeMethod.Result>
+        <OutArgument x:TypeArguments="l:ClassStudent">[student]</OutArgument>
+      </InvokeMethod.Result>
+      <InArgument x:TypeArguments="x:String">
+        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="studentJson" />
+      </InArgument>
+      <InArgument x:TypeArguments="x:String">
+        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_StudentId" />
+      </InArgument>
+      <InArgument x:TypeArguments="x:String">
+        <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_StudentFile" />
+      </InArgument>
+    </InvokeMethod>
     <If Condition="[student.DateLatestLetter.HasValue]" DisplayName="Student has received a first letter?" sap:VirtualizedContainerService.HintSize="499,2514" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Then>
         <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="497,1958" sap2010:WorkflowViewState.IdRef="Sequence_2">

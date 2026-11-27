@@ -62,13 +62,13 @@ namespace LOK2239
                 DefaultValueHandling = DefaultValueHandling.Ignore,
             });
 
-        public static ClassStudent FromJson(string json, string expectedId)
+        public static ClassStudent FromJson(string json, string expectedId, string filePath)
         {
             var student = JsonConvert.DeserializeObject<ClassStudent>(json);
             if (student == null || student.Id != expectedId)
-                throw new InvalidOperationException($"Saved student JSON does not match student ID {expectedId}");
+                throw new InvalidOperationException($"Saved student JSON does not match student ID {expectedId}. File: {filePath}");
             if (!Enum.IsDefined(typeof(StudentState), student.State))
-                throw new InvalidOperationException("Saved student JSON contains an unknown state.");
+                throw new InvalidOperationException($"Saved student JSON contains an unknown state. Saved value: {student.State}. File: {filePath}");
             return student;
         }
     }
