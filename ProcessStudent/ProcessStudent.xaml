@@ -72,7 +72,7 @@
         <OutArgument x:TypeArguments="x:String">[studentFile]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[System.IO.Path.Combine(in_PersistenceFolder, in_Class.Name, in_StudentRow.StudentId &amp; ".json")]</InArgument>
+        <InArgument x:TypeArguments="x:String">[System.IO.Path.Combine(in_PersistenceFolder, LOK2239.AbsenceRules.GetClassFolderName(in_Class.Name), in_StudentRow.StudentId &amp; ".json")]</InArgument>
       </Assign.Value>
     </Assign>
     <If Condition="[System.IO.File.Exists(studentFile)]" DisplayName="Does student have prior history (file exists)?" sap:VirtualizedContainerService.HintSize="452,618" sap2010:WorkflowViewState.IdRef="If_1">

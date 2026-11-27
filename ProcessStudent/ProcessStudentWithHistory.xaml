@@ -82,7 +82,7 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:ReadTextFile File="{x:Null}" Content="[studentJson]" DisplayName="Read the student's JSON file" FileName="[in_StudentFile]" sap:VirtualizedContainerService.HintSize="499,124" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <InvokeMethod DisplayName="Invoke Method" sap:VirtualizedContainerService.HintSize="499,169" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="FromJson" TargetType="l:AbsenceRules">
+    <InvokeMethod DisplayName="Load the student from JSON" sap:VirtualizedContainerService.HintSize="499,169" sap2010:WorkflowViewState.IdRef="InvokeMethod_2" MethodName="FromJson" TargetType="l:AbsenceRules">
       <InvokeMethod.Result>
         <OutArgument x:TypeArguments="l:ClassStudent">[student]</OutArgument>
       </InvokeMethod.Result>
@@ -182,7 +182,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log watched student without first letter" sap:VirtualizedContainerService.HintSize="463,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; (LOK2239.AbsenceRules.Timestamp() &amp; &quot;&gt; Student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) is being watched but has no first letter. This could be an error or an interrupted previous processing. JSON: &quot; &amp; studentJson)]" />
+          <ui:LogMessage DisplayName="Log watched student without first letter" sap:VirtualizedContainerService.HintSize="463,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Warn" Message="[&quot;[Subject &quot; &amp; in_Subject.ShortName &amp; &quot; - &quot; &amp; in_Subject.LongName &amp; &quot; | Class &quot; &amp; in_Class.Name &amp; &quot; (&quot; &amp; in_Class.Id &amp; &quot;)] &quot; &amp; &quot;Student &quot; &amp; student.Name &amp; &quot; (&quot; &amp; student.Id &amp; &quot;) was previously recorded with too much absence but was left in that state without being handled (ViolationHandlingPending is currently = true). This could be an error or an interrupted previous processing. JSON: &quot; &amp; studentJson]" />
           <InvokeMethod DisplayName="Add watched-without-letter message to Messages" sap:VirtualizedContainerService.HintSize="463,159" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="Add" TargetType="l:Messages">
             <InArgument x:TypeArguments="x:String">[LOK2239.AbsenceRules.Timestamp() &amp; "&gt; Student " &amp; student.Name &amp; " (" &amp; student.Id &amp; ") is being watched but has no first letter. This could be an error or an interrupted previous processing. JSON: " &amp; studentJson]</InArgument>
           </InvokeMethod>

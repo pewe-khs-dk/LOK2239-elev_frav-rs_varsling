@@ -8,6 +8,7 @@ namespace LOK2239
         
         public static List<string> Add(string message)
         {
+            message = string.Format($"{AbsenceRules.Timestamp()}> {message}");
             List.Add(message);
             return List;
         }

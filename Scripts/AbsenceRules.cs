@@ -54,12 +54,35 @@ namespace LOK2239
         /// <summary>Date in the format Lectio's Periode fields display, e.g. "21/10-2026".</summary>
         public static string FormatLectioDate(DateOnly date) => date.ToString("d/M-yyyy", CultureInfo.InvariantCulture);
 
-        /// <summary>Student JSON without null/default values, so a new file holds only the fields that are set.</summary>
+        /// <summary>Maps a class name to a Windows folder component, without changing its display name.</summary>
+        public static string GetClassFolderName(string className)
+        {
+            var characters = (className ?? "").ToCharArray();
+            var invalidCharacters = System.IO.Path.GetInvalidFileNameChars();
+            for (var index = 0; index < characters.Length; index++)
+            {
+                if (Array.IndexOf(invalidCharacters, characters[index]) >= 0)
+                    characters[index] = '_';
+            }
+
+            var folderName = new string(characters).TrimEnd(' ', '.');
+            if (folderName.Length == 0)
+                return "_";
+
+            // Windows reserves device names even when followed by an extension.
+            var deviceName = folderName.Split('.')[0].TrimEnd(' ');
+            if (Regex.IsMatch(deviceName, @"\A(?:CON|PRN|AUX|NUL|COM[1-9¹²³]|LPT[1-9¹²³]|CONIN\$|CONOUT\$)\z", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
+                folderName = "_" + folderName;
+
+            return folderName;
+        }
+
+        /// <summary>Serializes student JSON using the configured null and default value handling.</summary>
         public static string ToJson(ClassStudent student)
             => JsonConvert.SerializeObject(student, Formatting.Indented, new JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore,
-                DefaultValueHandling = DefaultValueHandling.Ignore,
+                NullValueHandling = NullValueHandling.Include,
+                DefaultValueHandling = DefaultValueHandling.Include,
             });
 
         public static ClassStudent FromJson(string json, string expectedId, string filePath)
